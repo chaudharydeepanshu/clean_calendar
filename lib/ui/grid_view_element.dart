@@ -1,0 +1,57 @@
+import 'package:clean_calendar/state/providers.dart';
+import 'package:clean_calendar/utils/get_suitable_calendar_general_date_widget.dart';
+import 'package:clean_calendar/utils/get_suitable_calendar_streak_date_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class CalendarDateWidget extends StatelessWidget {
+  const CalendarDateWidget(
+      {Key? key,
+      required this.pageViewElementDate,
+      required this.pageViewMonthDate})
+      : super(key: key);
+
+  final DateTime pageViewElementDate;
+  final DateTime pageViewMonthDate;
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        final Widget dateSuitableWidgetProviderValue = ref
+            .watch(dateSuitableWidgetProvider(IndividualDateElementProperties(
+          pageViewElementDate: pageViewElementDate,
+          pageViewMonthDate: pageViewMonthDate,
+        )).select((value) => value));
+
+        Widget calendarDateWidget = dateSuitableWidgetProviderValue;
+        return calendarDateWidget;
+      },
+    );
+  }
+}
+
+Widget getSuitableCalendarDateWidget(
+    {required bool enableDenseViewForDates,
+    required bool enableDenseSplashForDates,
+    required DateTime pageViewElementDate,
+    required DateTime pageViewMonthDate,
+    required List<DateTime> datesForStreaks}) {
+  if (datesForStreaks.contains(pageViewElementDate)) {
+    return getSuitableCalendarStreakDateWidget(
+        enableDenseViewForDates: enableDenseViewForDates,
+        enableDenseSplashForDates: enableDenseSplashForDates,
+        pageViewElementDate: pageViewElementDate,
+        pageViewMonthDate: pageViewMonthDate,
+        datesForStreaks: datesForStreaks);
+  }
+  if (!datesForStreaks.contains(pageViewElementDate)) {
+    return getSuitableCalendarGeneralDateWidget(
+        enableDenseViewForDates: enableDenseViewForDates,
+        enableDenseSplashForDates: enableDenseSplashForDates,
+        pageViewElementDate: pageViewElementDate,
+        pageViewMonthDate: pageViewMonthDate);
+  } else {
+    return const SizedBox();
+  }
+}
