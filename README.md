@@ -83,6 +83,8 @@ class Home extends StatelessWidget {
 
 Support for these are planned:
 
+- Complete documentaion.
+
 - Date selection: Single selection, multiple selection, range selection, multi range selection.
 
 - Option to calendar for view selection by year, month and day.
