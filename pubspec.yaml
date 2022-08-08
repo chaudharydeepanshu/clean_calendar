@@ -3,7 +3,7 @@ description: >-
   A new Flutter calendar package that allows you to create a clean, beautiful and customisable calendar.
   Currently it supports a customisable month view and option to show custom streaks for dates.
   This is only the beginning as it is under active development to include various common features such as events, date selection and many more.
-version: 0.0.1-dev.1
+version: 0.0.1-dev.2
 homepage: https://github.com/chaudharydeepanshu/clean_calendar
 repository: https://github.com/chaudharydeepanshu/clean_calendar
 issue_tracker: https://github.com/chaudharydeepanshu/clean_calendar/issues

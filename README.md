@@ -11,19 +11,21 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-**Note: Clean calendar is very new rigtnow but don't be afraid of the new as it will be maintained mannerly for a very long long time. It is in active development stage.**
+**Note: We know Clean calendar is still very new, but don't be put off by it because it will be well-maintained for a very, very long time. It is in the early stages of development. Additionally, you can contact me via email, discord, or any of the other channels provided on my Github profile if you have any questions or suggestions about this package.**
+
+**Yes, without a doubt, giving a like will encourage me to work on this package more quickly.**
 
 ## Description
 
-A new Flutter calendar package that allows you to create a clean, beautiful and customisable calendar. Currently it supports a customisable month view and option to show custom streaks for dates. This is only the beginning as it is under active development to include various common features such as events, date selection and many more.
+A brand-new Flutter calendar package that enables you to make a simple, lovely, and customizable calendar. It now offers a customizable month view and the choice to display unique streaks for dates. It is actively being developed to add numerous common features, like events, date selection, and many more, so this is just the beginning.
 
 ## Features
 
-- Create custom streaks of dates.
+- Give a list of dates so that the calendar can display them as streaks.
 
 <img src="https://user-images.githubusercontent.com/85361211/183488609-8569b762-dda7-4ae4-929b-73d14ab62ac8.png" width="400" />
 
-- Custom month view calendar.
+- Calendar with custom month view.
 
 | Dark mode Gif  | Light mode Gif |
 | --- | --- |
@@ -33,13 +35,13 @@ A new Flutter calendar package that allows you to create a clean, beautiful and 
 
 ## Getting started
 
-- Add dependency in pubspec.yaml:
+- In pubspec.yaml, add this dependency:
 
 ```yaml
 clean_calendar: 
 ```
 
-- Import the package into your project:
+- Add this package to your project:
 
 ```dart
 import 'package:clean_calendar/clean_calendar.dart';
@@ -82,14 +84,14 @@ class Home extends StatelessWidget {
 
 ## Additional information
 
-Support for these are planned:
+Support is planned for these:
 
-- Complete documentaion.
+- Complete documentation.
 
-- Date selection: Single selection, multiple selection, range selection, multi range selection.
+- Date selection options such as single, multiple, range, and multiple range selections.
 
-- Option to calendar for view selection by year, month and day.
+- A calendar option for choosing a view by year, month, or day.
 
-- Support for events display for dates.
+- Support for dates to be displayed in events style.
 
-- Dry mode which will remove or replace heavy animations and widgets to optimise performance for low end devices.
+- Dry mode, which optimizes performance for low-end devices by removing or substituting heavy animations and widgets.
