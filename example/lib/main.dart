@@ -1,4 +1,6 @@
 import 'package:clean_calendar/clean_calendar.dart';
+import 'package:dynamic_color/dynamic_color.dart';
+import 'package:example/Theme/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,15 +12,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.light(
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData.dark(
-        useMaterial3: true,
-      ),
-      themeMode: ThemeMode.system,
-      home: const Home(),
+    return DynamicColorBuilder(
+      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Course App',
+          theme: AppThemeData.lightThemeData(lightDynamic),
+          darkTheme: AppThemeData.darkThemeData(darkDynamic),
+          themeMode: ThemeMode.system,
+          home: const Home(),
+        );
+      },
     );
   }
 }
