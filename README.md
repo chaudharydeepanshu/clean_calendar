@@ -20,6 +20,7 @@ A new Flutter calendar package that allows you to create a clean, beautiful and 
 ## Features
 
 - Create custom streaks of dates.
+
 <img src="https://user-images.githubusercontent.com/85361211/183488609-8569b762-dda7-4ae4-929b-73d14ab62ac8.png" width="400" />
 
 - Custom month view calendar.
