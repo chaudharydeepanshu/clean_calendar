@@ -67,19 +67,20 @@ class DecorationProperties {
 
 class DatesProperties {
   final DecorationProperties? decorationProperties;
-  final bool? disable;
+
+  // final bool? disable;
 
   DatesProperties({
     this.decorationProperties,
-    this.disable,
+    // this.disable,
   });
 
   // Implement toString to make it easier to see information
   // when using the print statement.
-  @override
-  String toString() {
-    return 'DatesProperties{decorationProperties: $decorationProperties, disable: $disable}';
-  }
+  // @override
+  // String toString() {
+  // return 'DatesProperties{decorationProperties: $decorationProperties, disable: $disable}';
+  // }
 }
 
 class CalendarPropertiesState extends ChangeNotifier {
@@ -153,115 +154,121 @@ class CalendarPropertiesState extends ChangeNotifier {
     final ThemeData theme = Theme.of(context);
 
     _streakDatesProperties = DatesProperties(
-        decorationProperties: DecorationProperties(
-            datesBackgroundColor: streakDatesProperties
-                    ?.decorationProperties?.datesBackgroundColor ??
-                theme.colorScheme.surfaceVariant,
-            datesTextColor:
-                streakDatesProperties?.decorationProperties?.datesTextColor ??
-                    theme.colorScheme.onSurfaceVariant,
-            datesTextStyle:
-                streakDatesProperties?.decorationProperties?.datesTextStyle ??
-                    const TextStyle(),
-            datesBorderColor:
-                streakDatesProperties?.decorationProperties?.datesBorderColor ??
-                    theme.colorScheme.onSurface,
-            datesBorderRadius: streakDatesProperties
-                    ?.decorationProperties?.datesBorderRadius ??
-                12),
-        disable: streakDatesProperties?.disable ?? false);
+      decorationProperties: DecorationProperties(
+          datesBackgroundColor: streakDatesProperties
+                  ?.decorationProperties?.datesBackgroundColor ??
+              theme.colorScheme.surfaceVariant,
+          datesTextColor:
+              streakDatesProperties?.decorationProperties?.datesTextColor ??
+                  theme.colorScheme.onSurfaceVariant,
+          datesTextStyle:
+              streakDatesProperties?.decorationProperties?.datesTextStyle ??
+                  const TextStyle(),
+          datesBorderColor:
+              streakDatesProperties?.decorationProperties?.datesBorderColor ??
+                  theme.colorScheme.onSurface,
+          datesBorderRadius:
+              streakDatesProperties?.decorationProperties?.datesBorderRadius ??
+                  12),
+      // disable: streakDatesProperties?.disable ?? false,
+    );
 
     _currentDateProperties = DatesProperties(
-        decorationProperties: DecorationProperties(
-            datesBackgroundColor: currentDateProperties
-                ?.decorationProperties?.datesBackgroundColor,
-            datesTextColor:
-                currentDateProperties?.decorationProperties?.datesTextColor,
-            datesTextStyle:
-                currentDateProperties?.decorationProperties?.datesTextStyle,
-            datesBorderColor:
-                currentDateProperties?.decorationProperties?.datesBorderColor ??
-                    theme.colorScheme.primary,
-            datesBorderRadius: currentDateProperties
-                    ?.decorationProperties?.datesBorderRadius ??
-                12),
-        disable: currentDateProperties?.disable ?? false);
+      decorationProperties: DecorationProperties(
+          datesBackgroundColor:
+              currentDateProperties?.decorationProperties?.datesBackgroundColor,
+          datesTextColor:
+              currentDateProperties?.decorationProperties?.datesTextColor,
+          datesTextStyle:
+              currentDateProperties?.decorationProperties?.datesTextStyle,
+          datesBorderColor:
+              currentDateProperties?.decorationProperties?.datesBorderColor ??
+                  theme.colorScheme.primary,
+          datesBorderRadius:
+              currentDateProperties?.decorationProperties?.datesBorderRadius ??
+                  12),
+      // disable: currentDateProperties?.disable ?? false,
+    );
 
     _generalDatesProperties = DatesProperties(
-        decorationProperties: DecorationProperties(
-            datesBackgroundColor: generalDatesProperties
-                    ?.decorationProperties?.datesBackgroundColor ??
-                Colors.transparent,
-            datesTextColor:
-                generalDatesProperties?.decorationProperties?.datesTextColor ??
-                    theme.colorScheme.onSurface,
-            datesTextStyle:
-                generalDatesProperties?.decorationProperties?.datesTextStyle ??
-                    const TextStyle(),
-            datesBorderColor: generalDatesProperties
-                    ?.decorationProperties?.datesBorderColor ??
-                theme.colorScheme.onSurface.withOpacity(0.5),
-            datesBorderRadius: generalDatesProperties
-                    ?.decorationProperties?.datesBorderRadius ??
-                12),
-        disable: generalDatesProperties?.disable ?? false);
+      decorationProperties: DecorationProperties(
+          datesBackgroundColor: generalDatesProperties
+                  ?.decorationProperties?.datesBackgroundColor ??
+              Colors.transparent,
+          datesTextColor:
+              generalDatesProperties?.decorationProperties?.datesTextColor ??
+                  theme.colorScheme.onSurface,
+          datesTextStyle:
+              generalDatesProperties?.decorationProperties?.datesTextStyle ??
+                  const TextStyle(),
+          datesBorderColor:
+              generalDatesProperties?.decorationProperties?.datesBorderColor ??
+                  theme.colorScheme.onSurface.withOpacity(0.5),
+          datesBorderRadius:
+              generalDatesProperties?.decorationProperties?.datesBorderRadius ??
+                  12),
+      // disable: generalDatesProperties?.disable ?? false,
+    );
 
     _leadingTrailingDatesProperties = DatesProperties(
-        decorationProperties: DecorationProperties(
-            datesBackgroundColor: leadingTrailingDatesProperties
-                    ?.decorationProperties?.datesBackgroundColor ??
-                theme.colorScheme.surface,
-            datesTextColor: leadingTrailingDatesProperties
-                    ?.decorationProperties?.datesTextColor ??
-                theme.disabledColor,
-            datesTextStyle: leadingTrailingDatesProperties
-                    ?.decorationProperties?.datesTextStyle ??
-                const TextStyle(),
-            datesBorderColor: leadingTrailingDatesProperties
-                    ?.decorationProperties?.datesBorderColor ??
-                theme.dividerColor,
-            datesBorderRadius: leadingTrailingDatesProperties
-                    ?.decorationProperties?.datesBorderRadius ??
-                12),
-        disable: leadingTrailingDatesProperties?.disable ?? false);
+      decorationProperties: DecorationProperties(
+          datesBackgroundColor: leadingTrailingDatesProperties
+                  ?.decorationProperties?.datesBackgroundColor ??
+              theme.colorScheme.surface,
+          datesTextColor: leadingTrailingDatesProperties
+                  ?.decorationProperties?.datesTextColor ??
+              theme.disabledColor,
+          datesTextStyle: leadingTrailingDatesProperties
+                  ?.decorationProperties?.datesTextStyle ??
+              const TextStyle(),
+          datesBorderColor: leadingTrailingDatesProperties
+                  ?.decorationProperties?.datesBorderColor ??
+              theme.dividerColor,
+          datesBorderRadius: leadingTrailingDatesProperties
+                  ?.decorationProperties?.datesBorderRadius ??
+              12),
+      // disable: leadingTrailingDatesProperties?.disable ?? false,
+    );
 
     _selectedDatesProperties = DatesProperties(
-        decorationProperties: DecorationProperties(
-            datesBackgroundColor: selectedDatesProperties
-                    ?.decorationProperties?.datesBackgroundColor ??
-                theme.colorScheme.primary,
-            datesTextColor:
-                selectedDatesProperties?.decorationProperties?.datesTextColor ??
-                    theme.colorScheme.primary,
-            datesTextStyle:
-                selectedDatesProperties?.decorationProperties?.datesTextStyle ??
-                    const TextStyle(),
-            datesBorderColor: selectedDatesProperties
-                    ?.decorationProperties?.datesBorderColor ??
-                theme.colorScheme.primary,
-            datesBorderRadius: selectedDatesProperties
-                    ?.decorationProperties?.datesBorderRadius ??
-                12),
-        disable: selectedDatesProperties?.disable ?? false);
+      decorationProperties: DecorationProperties(
+          datesBackgroundColor: selectedDatesProperties
+                  ?.decorationProperties?.datesBackgroundColor ??
+              theme.colorScheme.primary,
+          datesTextColor:
+              selectedDatesProperties?.decorationProperties?.datesTextColor ??
+                  theme.colorScheme.primary,
+          datesTextStyle:
+              selectedDatesProperties?.decorationProperties?.datesTextStyle ??
+                  const TextStyle(),
+          datesBorderColor:
+              selectedDatesProperties?.decorationProperties?.datesBorderColor ??
+                  theme.colorScheme.primary,
+          datesBorderRadius: selectedDatesProperties
+                  ?.decorationProperties?.datesBorderRadius ??
+              12),
+      // disable: selectedDatesProperties?.disable ?? false,
+    );
 
     _selectedRangeBetweenDatesProperties = DatesProperties(
-        decorationProperties: DecorationProperties(
-            datesBackgroundColor: selectedRangeBetweenDatesProperties
-                    ?.decorationProperties?.datesBackgroundColor ??
-                theme.colorScheme.surfaceVariant,
-            datesTextColor: selectedRangeBetweenDatesProperties
-                    ?.decorationProperties?.datesTextColor ??
-                theme.colorScheme.onSurfaceVariant,
-            datesTextStyle: selectedRangeBetweenDatesProperties
-                    ?.decorationProperties?.datesTextStyle ??
-                const TextStyle(),
-            datesBorderColor: selectedRangeBetweenDatesProperties
-                    ?.decorationProperties?.datesBorderColor ??
-                Colors.transparent,
-            datesBorderRadius: selectedRangeBetweenDatesProperties
-                    ?.decorationProperties?.datesBorderRadius ??
-                12),
-        disable: selectedDatesProperties?.disable ?? false);
+      decorationProperties: DecorationProperties(
+          datesBackgroundColor: selectedRangeBetweenDatesProperties
+                  ?.decorationProperties?.datesBackgroundColor ??
+              theme.colorScheme.surfaceVariant,
+          datesTextColor: selectedRangeBetweenDatesProperties
+                  ?.decorationProperties?.datesTextColor ??
+              theme.colorScheme.onSurfaceVariant,
+          datesTextStyle: selectedRangeBetweenDatesProperties
+                  ?.decorationProperties?.datesTextStyle ??
+              const TextStyle(),
+          datesBorderColor: selectedRangeBetweenDatesProperties
+                  ?.decorationProperties?.datesBorderColor ??
+              Colors.transparent,
+          datesBorderRadius: selectedRangeBetweenDatesProperties
+                  ?.decorationProperties?.datesBorderRadius ??
+              12),
+      // disable: selectedDatesProperties?.disable ?? false,
+    );
 
     _enableDenseViewForDates = enableDenseViewForDates ?? false;
     _enableDenseSplashForDates = enableDenseSplashForDates ?? false;
