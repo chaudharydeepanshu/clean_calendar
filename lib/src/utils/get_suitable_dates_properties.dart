@@ -1,4 +1,4 @@
-import 'package:clean_calendar/state/properties_state.dart';
+import 'package:clean_calendar/src/state/properties_state.dart';
 
 DatesProperties getSuitableDatesProperties({
   required DateTime pageViewElementDate,

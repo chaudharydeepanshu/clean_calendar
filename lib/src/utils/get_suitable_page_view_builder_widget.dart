@@ -1,5 +1,5 @@
-import 'package:clean_calendar/state/properties_state.dart';
-import 'package:clean_calendar/ui/page_view_builders.dart';
+import 'package:clean_calendar/src/state/properties_state.dart';
+import 'package:clean_calendar/src/ui/page_view_builders.dart';
 import 'package:flutter/material.dart';
 
 Widget getSuitablePageViewBuilderWidget(

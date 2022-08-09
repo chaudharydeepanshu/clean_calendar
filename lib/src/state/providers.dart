@@ -1,8 +1,8 @@
-import 'package:clean_calendar/state/gesture_detector_state_provider.dart';
-import 'package:clean_calendar/state/page_controller.dart';
-import 'package:clean_calendar/state/properties_state.dart';
-import 'package:clean_calendar/ui/grid_view_element.dart';
-import 'package:clean_calendar/utils/get_suitable_dates_properties.dart';
+import 'package:clean_calendar/src/state/gesture_detector_state_provider.dart';
+import 'package:clean_calendar/src/state/page_controller.dart';
+import 'package:clean_calendar/src/state/properties_state.dart';
+import 'package:clean_calendar/src/ui/grid_view_element.dart';
+import 'package:clean_calendar/src/utils/get_suitable_dates_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

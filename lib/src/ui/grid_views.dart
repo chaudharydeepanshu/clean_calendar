@@ -1,6 +1,6 @@
-import 'package:clean_calendar/state/gesture_detector_state_provider.dart';
-import 'package:clean_calendar/state/providers.dart';
-import 'package:clean_calendar/ui/grid_view_element.dart';
+import 'package:clean_calendar/src/state/gesture_detector_state_provider.dart';
+import 'package:clean_calendar/src/state/providers.dart';
+import 'package:clean_calendar/src/ui/grid_view_element.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

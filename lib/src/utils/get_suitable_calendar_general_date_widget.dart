@@ -1,4 +1,4 @@
-import 'package:clean_calendar/ui/grid_view_elements/calendar_general_date_widgets.dart';
+import 'package:clean_calendar/src/ui/grid_view_elements/calendar_general_date_widgets.dart';
 import 'package:flutter/material.dart';
 
 Widget getSuitableCalendarGeneralDateWidget(

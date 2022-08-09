@@ -1,6 +1,6 @@
-import 'package:clean_calendar/state/page_controller.dart';
-import 'package:clean_calendar/state/providers.dart';
-import 'package:clean_calendar/ui/calendar_view.dart';
+import 'package:clean_calendar/src/state/page_controller.dart';
+import 'package:clean_calendar/src/state/providers.dart';
+import 'package:clean_calendar/src/ui/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

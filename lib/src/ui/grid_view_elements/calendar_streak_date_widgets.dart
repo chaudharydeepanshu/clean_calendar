@@ -1,6 +1,6 @@
-import 'package:clean_calendar/state/properties_state.dart';
-import 'package:clean_calendar/state/providers.dart';
-import 'package:clean_calendar/utils/space_fixer.dart';
+import 'package:clean_calendar/src/state/properties_state.dart';
+import 'package:clean_calendar/src/state/providers.dart';
+import 'package:clean_calendar/src/utils/space_fixer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

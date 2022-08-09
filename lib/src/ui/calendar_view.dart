@@ -1,11 +1,11 @@
-import 'package:clean_calendar/state/page_controller.dart';
-import 'package:clean_calendar/state/providers.dart';
-import 'package:clean_calendar/utils.dart';
-import 'package:clean_calendar/utils/get_suitable_grid_view_builder_widget.dart';
-import 'package:clean_calendar/utils/get_suitable_page_view_builder_widget.dart';
+import 'package:clean_calendar/src/state/page_controller.dart';
+import 'package:clean_calendar/src/state/properties_state.dart';
+import 'package:clean_calendar/src/state/providers.dart';
+import 'package:clean_calendar/src/utils/get_suitable_grid_view_builder_widget.dart';
+import 'package:clean_calendar/src/utils/get_suitable_page_view_builder_widget.dart';
+import 'package:clean_calendar/src/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:clean_calendar/state/properties_state.dart';
 
 class Calendar extends ConsumerStatefulWidget {
   const Calendar({

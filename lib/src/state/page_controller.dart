@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:clean_calendar/state/properties_state.dart';
-import 'package:clean_calendar/utils.dart';
+import 'package:clean_calendar/src/state/properties_state.dart';
+import 'package:clean_calendar/src/utils.dart';
 import 'package:flutter/material.dart';
 
 // List<DateTime> generateInitialDatesList(

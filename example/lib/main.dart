@@ -43,6 +43,7 @@ class Home extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(12.0),
               child: CleanCalendar(
+                streakDatesProperties: DatesProperties(),
                 enableDenseViewForDates: true,
                 enableDenseSplashForDates: true,
                 datesForStreaks: [
