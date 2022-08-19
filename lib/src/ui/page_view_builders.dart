@@ -70,6 +70,8 @@ class ScrollablePageViewBuilder extends StatelessWidget {
         final PageController pageController =
             readPageControllerStateProviderValue.pageController;
 
+        /// Don't watch pageController as that would reset KeepAlive and watching it is unnecessary
+
         final List<int> listOfIntegersFromStartToAndEndDateWithInitialAs0 =
             ref.watch(pageControllerStateProvider.select((value) =>
                 value.listOfIntegersFromStartToAndEndDateWithInitialAs0));

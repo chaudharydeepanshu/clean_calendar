@@ -76,23 +76,92 @@ class NoSelectionGridViewBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IgnorePointer(
-      child: GridView.builder(
+    return
+        // IgnorePointer(
+        // child: GridView.builder(
+        //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        //     childAspectRatio: 1,
+        //     crossAxisCount: 7,
+        //     mainAxisExtent: 40,
+        //   ),
+        //   itemCount: 42,
+        //   shrinkWrap: true,
+        //   physics: const NeverScrollableScrollPhysics(),
+        //   itemBuilder: (context, index) {
+        //     return CalendarDateWidget(
+        //       pageViewElementDate: pageViewElementsDates[index],
+        //       pageViewMonthDate: pageViewMonthDate,
+        //     );
+        //   },
+        // ),
+
+        IgnorePointer(
+      child: GridView.custom(
+        // shrinkWrap: true,
+        physics: const ClampingScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 1,
           crossAxisCount: 7,
           mainAxisExtent: 40,
         ),
-        itemCount: 42,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          return CalendarDateWidget(
-            pageViewElementDate: pageViewElementsDates[index],
-            pageViewMonthDate: pageViewMonthDate,
-          );
-        },
+
+        childrenDelegate: SliverChildListDelegate(
+          List.generate(
+            42,
+            (index) => CalendarDateWidget(
+              pageViewElementDate: pageViewElementsDates[index],
+              pageViewMonthDate: pageViewMonthDate,
+            ),
+          ),
+          addRepaintBoundaries: false,
+        ),
       ),
+    );
+  }
+}
+
+class DateSingleMultipleSelectionGridViewBuilder extends StatelessWidget {
+  const DateSingleMultipleSelectionGridViewBuilder(
+      {Key? key,
+      required this.pageViewElementsDates,
+      required this.pageViewMonthDate})
+      : super(key: key);
+
+  final List<DateTime> pageViewElementsDates;
+  final DateTime pageViewMonthDate;
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        /// It is important that we create Global key locally as the latest build by PageView builder is not the current page.
+        /// So storing keys in provider based on latest build would result in saving global keys of next page in PageView leading to undesired results.
+        /// To avoid this undesired behaviour we provide this local Global key list to gesture detector functions directly.
+        /// To verify that log the date time inside PageView builder.
+        List<GlobalKey> pageViewElementsGlobalKeys = List<GlobalKey>.generate(
+                42,
+                (index) =>
+                    GlobalKey(debugLabel: "${pageViewElementsDates[index]}"))
+            .toList();
+
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: 1,
+            crossAxisCount: 7,
+            mainAxisExtent: 40,
+          ),
+          itemCount: 42,
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return CalendarDateWidget(
+              key: pageViewElementsGlobalKeys[index],
+              pageViewElementDate: pageViewElementsDates[index],
+              pageViewMonthDate: pageViewMonthDate,
+            );
+          },
+        );
+      },
     );
   }
 }

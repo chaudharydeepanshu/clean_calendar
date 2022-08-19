@@ -1,3 +1,4 @@
+import 'package:clean_calendar/src/state/properties_state.dart';
 import 'package:flutter/material.dart';
 
 class OffsetDetails {
@@ -18,6 +19,11 @@ class OffsetDetails {
 }
 
 class GestureDetectorStateProvider extends ChangeNotifier {
+  GestureDetectorStateProvider(
+      {required this.readCalendarPropertiesStateProviderValue});
+
+  CalendarPropertiesState readCalendarPropertiesStateProviderValue;
+
   late List<GlobalKey> _pageViewElementsGlobalKeys;
   List<GlobalKey> get pageViewElementsGlobalKeys => _pageViewElementsGlobalKeys;
 
@@ -98,6 +104,43 @@ class GestureDetectorStateProvider extends ChangeNotifier {
       _panEndIndex = index;
 
       notifyListeners();
+    }
+  }
+
+  onTapDown(details) async {
+    for (int i = 0; i < _pageViewElementsGlobalKeys.length; i++) {
+      final RenderBox renderBox = _pageViewElementsGlobalKeys[i]
+          .currentContext
+          ?.findRenderObject() as RenderBox;
+      final Offset offset = renderBox.localToGlobal(Offset.zero);
+      final Size size = renderBox.size;
+
+      if (_pageViewElementsOffsetDetails[i].xf == null) {
+        final data = OffsetDetails(
+            xf: offset.dx,
+            xe: offset.dx + size.width,
+            yf: offset.dy,
+            ye: offset.dy + size.height);
+        _pageViewElementsOffsetDetails[i] = data;
+      } else {}
+    }
+
+    final dx = details.globalPosition.dx;
+    final dy = details.globalPosition.dy;
+    final start = _pageViewElementsOffsetDetails.where((e) {
+      return dx > e.xf! && dx < e.xe! && dy > e.yf! && dy < e.ye!;
+    }).toList();
+    await Future.delayed(const Duration(seconds: 0));
+    if (start.isNotEmpty) {
+      final int index = _pageViewElementsOffsetDetails.indexOf(start.first);
+
+      _panStartIndex = index;
+      _panEndIndex = index;
+
+      readCalendarPropertiesStateProviderValue
+          .updateSelectedDates(selectedDates: [panStartDate]);
+      // _panCurrentIndex = null;
+
     }
   }
 

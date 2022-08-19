@@ -25,6 +25,8 @@ class Calendar extends ConsumerStatefulWidget {
     this.initialViewMonthDateTime,
     this.currentDateOfCalendar,
     this.datesForStreaks,
+    this.selectedDates,
+    this.onSelectedDates,
     required this.context,
   }) : super(key: key);
 
@@ -50,6 +52,10 @@ class Calendar extends ConsumerStatefulWidget {
 
   final List<DateTime>? datesForStreaks;
 
+  final List<DateTime>? selectedDates;
+
+  final ValueChanged<List<DateTime>>? onSelectedDates;
+
   final BuildContext context;
 
   @override
@@ -62,26 +68,29 @@ class _CalendarState extends ConsumerState<Calendar> {
     final CalendarPropertiesState readCalendarPropertiesStateProviderValue =
         ref.read(calendarPropertiesStateProvider);
     readCalendarPropertiesStateProviderValue.initializeProperties(
-        streakDatesProperties: widget.streakDatesProperties,
-        currentDateProperties: widget.currentDateProperties,
-        generalDatesProperties: widget.generalDatesProperties,
-        leadingTrailingDatesProperties: widget.leadingTrailingDatesProperties,
-        selectedDatesProperties: widget.selectedDatesProperties,
-        selectedRangeBetweenDatesProperties:
-            widget.selectedRangeBetweenDatesProperties,
-        enableDenseViewForDates: widget.enableDenseViewForDates,
-        enableDenseSplashForDates: widget.enableDenseSplashForDates,
-        startDateOfCalendar: widget.startDateOfCalendar,
-        endDateOfCalendar: widget.endDateOfCalendar,
-        dateSelectionMode: widget.dateSelectionMode,
-        disablePastDates: widget.disablePastDates,
-        initialViewMonthDateTime: widget.initialViewMonthDateTime,
-        currentDateOfCalendar: widget.currentDateOfCalendar,
-        datesForStreaks: widget.datesForStreaks,
-        context: widget.context);
-    final PageControllerState readPageControllerStateProviderValue =
-        ref.read(pageControllerStateProvider);
-    readPageControllerStateProviderValue.initializePageViewVars();
+      streakDatesProperties: widget.streakDatesProperties,
+      currentDateProperties: widget.currentDateProperties,
+      generalDatesProperties: widget.generalDatesProperties,
+      leadingTrailingDatesProperties: widget.leadingTrailingDatesProperties,
+      selectedDatesProperties: widget.selectedDatesProperties,
+      selectedRangeBetweenDatesProperties:
+          widget.selectedRangeBetweenDatesProperties,
+      enableDenseViewForDates: widget.enableDenseViewForDates,
+      enableDenseSplashForDates: widget.enableDenseSplashForDates,
+      startDateOfCalendar: widget.startDateOfCalendar,
+      endDateOfCalendar: widget.endDateOfCalendar,
+      dateSelectionMode: widget.dateSelectionMode,
+      disablePastDates: widget.disablePastDates,
+      initialViewMonthDateTime: widget.initialViewMonthDateTime,
+      currentDateOfCalendar: widget.currentDateOfCalendar,
+      datesForStreaks: widget.datesForStreaks,
+      selectedDates: widget.selectedDates,
+      onSelectedDates: widget.onSelectedDates,
+      context: widget.context,
+    );
+    // final PageControllerState readPageControllerStateProviderValue =
+    //     ref.read(pageControllerStateProvider);
+    // readPageControllerStateProviderValue.initializePageViewVars();
     super.initState();
   }
 
@@ -90,7 +99,9 @@ class _CalendarState extends ConsumerState<Calendar> {
     if (oldWidget != widget) {
       final CalendarPropertiesState readCalendarPropertiesStateProviderValue =
           ref.read(calendarPropertiesStateProvider);
-      readCalendarPropertiesStateProviderValue.initializeProperties(
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        readCalendarPropertiesStateProviderValue.updateProperties(
           streakDatesProperties: widget.streakDatesProperties,
           currentDateProperties: widget.currentDateProperties,
           generalDatesProperties: widget.generalDatesProperties,
@@ -107,7 +118,15 @@ class _CalendarState extends ConsumerState<Calendar> {
           initialViewMonthDateTime: widget.initialViewMonthDateTime,
           currentDateOfCalendar: widget.currentDateOfCalendar,
           datesForStreaks: widget.datesForStreaks,
-          context: widget.context);
+          selectedDates: widget.selectedDates,
+          onSelectedDates: widget.onSelectedDates,
+          context: widget.context,
+        );
+
+        // final PageControllerState readPageControllerStateProviderValue =
+        //     ref.read(pageControllerStateProvider);
+        // readPageControllerStateProviderValue.updatePageViewVars();
+      });
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -268,7 +287,7 @@ class CalendarControlSection extends StatelessWidget {
           Consumer(
             builder: (BuildContext context, WidgetRef ref, Widget? child) {
               final PageControllerState readPageControllerStateProviderValue =
-                  ref.read(pageControllerStateProvider);
+                  ref.watch(pageControllerStateProvider);
               final PageController pageController =
                   readPageControllerStateProviderValue.pageController;
 

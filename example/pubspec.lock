@@ -28,7 +28,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.1-dev.2"
+    version: "0.2.0-dev.1"
   clock:
     dependency: transitive
     description:
@@ -56,7 +56,7 @@ packages:
       name: dynamic_color
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.2"
+    version: "1.5.3"
   fake_async:
     dependency: transitive
     description:
@@ -82,7 +82,7 @@ packages:
       name: flutter_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0-dev.9"
+    version: "1.0.4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -108,7 +108,7 @@ packages:
       name: material_color_utilities
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.5"
+    version: "0.2.0"
   meta:
     dependency: transitive
     description:
@@ -129,7 +129,7 @@ packages:
       name: riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0-dev.9"
+    version: "1.0.3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -141,7 +141,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.0"
+    version: "1.9.1"
   stack_trace:
     dependency: transitive
     description:

@@ -12,12 +12,19 @@ Widget getSuitableGridViewBuilderWidget(
       pageViewElementsDates: pageViewElementsDates,
     );
   }
-  if (dateSelectionMode == DatePickerSelectionMode.range) {
-    return DateRangeSelectionGridViewBuilder(
+  if (dateSelectionMode == DatePickerSelectionMode.single) {
+    return DateSingleMultipleSelectionGridViewBuilder(
       pageViewMonthDate: pageViewMonthDate,
       pageViewElementsDates: pageViewElementsDates,
     );
-  } else {
+  }
+  // if (dateSelectionMode == DatePickerSelectionMode.range) {
+  //   return DateRangeSelectionGridViewBuilder(
+  //     pageViewMonthDate: pageViewMonthDate,
+  //     pageViewElementsDates: pageViewElementsDates,
+  //   );
+  // }
+  else {
     return const SizedBox();
   }
 }

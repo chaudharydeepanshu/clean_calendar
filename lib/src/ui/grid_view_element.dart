@@ -1,3 +1,4 @@
+import 'package:clean_calendar/src/state/properties_state.dart';
 import 'package:clean_calendar/src/state/providers.dart';
 import 'package:clean_calendar/src/utils/get_suitable_calendar_general_date_widget.dart';
 import 'package:clean_calendar/src/utils/get_suitable_calendar_streak_date_widget.dart';
@@ -36,7 +37,9 @@ Widget getSuitableCalendarDateWidget(
     required bool enableDenseSplashForDates,
     required DateTime pageViewElementDate,
     required DateTime pageViewMonthDate,
-    required List<DateTime> datesForStreaks}) {
+    required List<DateTime> datesForStreaks,
+    required CalendarPropertiesState
+        watchCalendarPropertiesStateProviderValue}) {
   if (datesForStreaks.contains(pageViewElementDate)) {
     return getSuitableCalendarStreakDateWidget(
         enableDenseViewForDates: enableDenseViewForDates,
@@ -50,7 +53,9 @@ Widget getSuitableCalendarDateWidget(
         enableDenseViewForDates: enableDenseViewForDates,
         enableDenseSplashForDates: enableDenseSplashForDates,
         pageViewElementDate: pageViewElementDate,
-        pageViewMonthDate: pageViewMonthDate);
+        pageViewMonthDate: pageViewMonthDate,
+        watchCalendarPropertiesStateProviderValue:
+            watchCalendarPropertiesStateProviderValue);
   } else {
     return const SizedBox();
   }

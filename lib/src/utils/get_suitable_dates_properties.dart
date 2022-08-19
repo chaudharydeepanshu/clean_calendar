@@ -5,13 +5,19 @@ DatesProperties getSuitableDatesProperties({
   required DateTime pageViewMonthDate,
   required DateTime currentDateOfCalendar,
   required List<DateTime> datesForStreaks,
+  required List<DateTime> selectedDates,
   required DatesProperties leadingTrailingDatesProperties,
   required DatesProperties streakDatesProperties,
   required DatesProperties generalDatesProperties,
   required DatesProperties currentDateProperties,
+  required DatesProperties selectedDatesProperties,
 }) {
   if (pageViewElementDate.month != pageViewMonthDate.month) {
     return leadingTrailingDatesProperties;
+  }
+
+  if (selectedDates.contains(pageViewElementDate)) {
+    return selectedDatesProperties;
   }
   if (pageViewElementDate ==
       DateTime.utc(currentDateOfCalendar.year, currentDateOfCalendar.month,

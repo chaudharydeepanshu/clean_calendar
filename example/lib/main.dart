@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Course App',
+          title: 'Calendar App',
           theme: AppThemeData.lightThemeData(lightDynamic),
           darkTheme: AppThemeData.darkThemeData(darkDynamic),
           themeMode: ThemeMode.system,
@@ -43,7 +43,6 @@ class Home extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(12.0),
               child: CleanCalendar(
-                streakDatesProperties: DatesProperties(),
                 enableDenseViewForDates: true,
                 enableDenseSplashForDates: true,
                 datesForStreaks: [
@@ -59,6 +58,7 @@ class Home extends StatelessWidget {
                   DateTime(2022, 8, 23),
                   DateTime(2022, 8, 24),
                 ],
+                dateSelectionMode: DatePickerSelectionMode.single,
               ),
             ),
           ],

@@ -5,13 +5,15 @@ import 'package:flutter/material.dart';
 Widget getSuitablePageViewBuilderWidget(
     {required DatePickerSelectionMode dateSelectionMode}) {
   if (dateSelectionMode == DatePickerSelectionMode.single ||
-      dateSelectionMode == DatePickerSelectionMode.disable ||
-      dateSelectionMode == DatePickerSelectionMode.multiple) {
+          dateSelectionMode == DatePickerSelectionMode.disable
+      // || dateSelectionMode == DatePickerSelectionMode.multiple
+      ) {
     return const ScrollablePageViewBuilder();
   }
-  if (dateSelectionMode == DatePickerSelectionMode.range) {
-    return const NonScrollablePageViewBuilder();
-  } else {
+  // if (dateSelectionMode == DatePickerSelectionMode.range) {
+  //   return const NonScrollablePageViewBuilder();
+  // }
+  else {
     return const SizedBox();
   }
 }
