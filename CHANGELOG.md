@@ -1,3 +1,7 @@
+## 0.2.0-dev.2
+
+* Fixed README.md tables structure.
+
 ## 0.2.0-dev.1
 
 * Removed weird logs from package.
