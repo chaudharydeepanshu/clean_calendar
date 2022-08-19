@@ -84,13 +84,13 @@ class Home extends StatelessWidget {
 
 - Customise date boundary behaviour and tap behaviour
 
-| <pre>CleanCalendar(<br>);</pre> | <pre>CleanCalendar(<br>  // To allow date boundary to shrink.<br>  enableDenseViewForDates: true,<br><br>  // To allow date tap splash to shrink.<br>  enableDenseSplashForDates: true,<br>);</pre> |
+| <pre>CleanCalendar(                           <br />)</pre> | <pre>CleanCalendar(<br>  // To allow date boundary to shrink.<br>  enableDenseViewForDates: true,<br><br>  // To allow date tap splash to shrink.<br>  enableDenseSplashForDates: true,<br>)</pre> |
 |:---|:---|
 | <img src="https://user-images.githubusercontent.com/85361211/185585701-00c9b42e-ca15-4884-a151-c795a0e06662.gif" width="470" /> | <img src="https://user-images.githubusercontent.com/85361211/185585710-69037f2c-773f-492a-a9ef-869f5926cf14.gif" width="470" /> |
 
 - Disable and hide different types of dates
 
-| <pre>CleanCalendar(<br>);</pre> | <pre>CleanCalendar(<br />  leadingTrailingDatesProperties: DatesProperties(<br /><br />   // To disable taps on leading and trailing dates.<br />   disable: true,<br /><br />   // To hide leading and trailing dates.<br />   hide: true,<br />  ),<br />)</pre> |
+| <pre>CleanCalendar(                                      <br />)</pre> | <pre>CleanCalendar(<br />  leadingTrailingDatesProperties: DatesProperties(<br /><br />   // To disable taps on leading and trailing dates.<br />   disable: true,<br /><br />   // To hide leading and trailing dates.<br />   hide: true,<br />  ),<br />)</pre> |
 |:---|:---|
 | <img src="https://user-images.githubusercontent.com/85361211/185587354-f7b0d42f-9dd0-41a4-a049-1219e4da42e8.png" width="400" /> | <img src="https://user-images.githubusercontent.com/85361211/185587363-475073da-5bf5-4f26-8f69-606370ae23a8.png" width="400" /> |
 
