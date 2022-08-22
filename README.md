@@ -25,13 +25,17 @@ A brand-new Flutter calendar package that enables you to make a simple, lovely, 
 
 <img src="https://user-images.githubusercontent.com/85361211/183488609-8569b762-dda7-4ae4-929b-73d14ab62ac8.png" width="400" />
 
-- Calendar with custom month view.
+- Calendar with custom monthly view.
 
 | Dark mode Gif  | Light mode Gif |
 | --- | --- |
 | <img src="https://user-images.githubusercontent.com/85361211/183489719-fda17b3e-c2de-4368-b293-73e453b60fcd.gif" width="400" /> | <img src="https://user-images.githubusercontent.com/85361211/183489928-14a32db4-7d41-4b38-bf3b-7b0a6e0037aa.gif" width="400" /> |
 
+- Calendar with custom weekly view.
 
+| Dark mode Gif  | Light mode Gif |
+| --- | --- |
+| <img src="https://user-images.githubusercontent.com/85361211/186000727-3c9f773b-5483-453c-bd61-2c0b16d1a6f2.gif" width="400" /> | <img src="https://user-images.githubusercontent.com/85361211/186000735-83d1fd93-05be-48af-8b52-0a0c949a4cdc.gif" width="400" /> |
 
 ## Getting started
 
@@ -116,6 +120,19 @@ Also, Available for other types of dates : -
 
 - Multiple, range, multiple ranges (coming soon)
 
+## Changing calendar view type
+
+Currently mothly and weekly views are added. You can change them as shown below:
+
+```dart
+CleanCalendar(
+  // Setting DatePickerCalendarView.weekView for weekly view
+  datePickerCalendarView: DatePickerCalendarView.weekView,
+)
+```
+
+**Note:** ```datePickerCalendarView``` defaults to DatePickerCalendarView.monthView.
+
 ## Accessing selected dates
 
 To access selected dates use the ```onSelectedDates``` callback but keep in mind that this callback always provides a list of dates as shown below:
@@ -163,7 +180,7 @@ CleanCalendar(
 )
 ```
 
-**Note:** ```startDateOfCalendar``` defaults to DateTime.utc(0000, 1, 1) and ``` ``` defaults to DateTime.utc(9999, 1, 1).
+**Note:** ```startDateOfCalendar``` defaults to DateTime.utc(0000, 1, 1) and ```endDateOfCalendar``` defaults to DateTime.utc(9999, 1, 1).
 
 ## Providing initial month view for calendar
 
@@ -193,16 +210,40 @@ CleanCalendar(
 
 **Note:** ```currentDateOfCalendar``` defaults to DateTime.now().
 
+## Listening for calendar view week or month change
+
+You can listen and get the current calendar view date on calendar view change. Useful in case you want to change your ui acording to the dates visible to user.
+
+```dart
+CleanCalendar(
+  ...
+  onCalendarViewDate: (DateTime calendarViewDate) {
+    // Called every time view is changed like scrolled etc.
+    print(calendarViewDate);
+  },
+)
+```
+
+**Note:** For now ```onCalendarViewDate``` will only provide the view starting date. Later I may can add an option to get all dates of current view depending on users request. Also, ```onCalendarViewDate``` is called only on change of view like scroll, etc and will not be called on the creation of calendar as at thst time we already know the date.
+
 ## Additional information
 
-Support is planned for these:
+Support is surely planned for these:
 
 - Complete documentation.
 
-- Date selection options such as multiple, range, and multiple range selections.
+- Option to disable user interactions on whole view, past dates, and dates after-before end-start date. (🐇)
 
-- A calendar option for choosing a view by year, month, or day.
+- More customization and premade templates for calendar. (🐢)
 
-- Support for dates to be displayed in events style.
+- More calendar view types. (🐢)
 
-- Dry mode, which optimizes performance for low-end devices by removing or substituting heavy animations and widgets.
+- Date selection options such as multiple, range, and multiple range selections. (🐢)
+
+- A calendar option for choosing a view by year, month, or day. (🐢)
+
+- Support for dates to be displayed in events style. (🐢)
+
+- Dry mode, which optimizes performance for low-end devices by removing or substituting heavy animations and widgets. (🐢)
+
+And, if I'm forgetting something crucial/important/neccessary then please let me know.
