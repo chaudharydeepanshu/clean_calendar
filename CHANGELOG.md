@@ -1,3 +1,10 @@
+## 0.3.0-dev.1
+
+* Added weekly calendar view.
+* Added ```onCalendarViewDate``` callback to listen for change in calendar view date.
+* Updated example to showcase weekly calendar view and ```onCalendarViewDate```.
+* Note - For weekly calendar view the default theme properties for leading-trailing dates is same as general dates default theme properties.
+
 ## 0.2.0-dev.2
 
 * Fixed README.md tables structure.

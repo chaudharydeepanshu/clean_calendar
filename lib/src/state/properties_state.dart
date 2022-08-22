@@ -295,23 +295,23 @@ class CalendarPropertiesState extends ChangeNotifier {
               )
             : DatesProperties(
                 decorationProperties: DecorationProperties(
-                    datesBackgroundColor: generalDatesProperties
+                    datesBackgroundColor: leadingTrailingDatesProperties
                             ?.decorationProperties?.datesBackgroundColor ??
                         Colors.transparent,
-                    datesTextColor: generalDatesProperties
+                    datesTextColor: leadingTrailingDatesProperties
                             ?.decorationProperties?.datesTextColor ??
                         theme.colorScheme.onSurface,
-                    datesTextStyle: generalDatesProperties
+                    datesTextStyle: leadingTrailingDatesProperties
                             ?.decorationProperties?.datesTextStyle ??
                         const TextStyle(),
-                    datesBorderColor: generalDatesProperties
+                    datesBorderColor: leadingTrailingDatesProperties
                             ?.decorationProperties?.datesBorderColor ??
                         theme.colorScheme.onSurface.withOpacity(0.5),
-                    datesBorderRadius: generalDatesProperties
+                    datesBorderRadius: leadingTrailingDatesProperties
                             ?.decorationProperties?.datesBorderRadius ??
                         12),
-                disable: generalDatesProperties?.disable ?? false,
-                hide: generalDatesProperties?.hide ?? false,
+                disable: leadingTrailingDatesProperties?.disable ?? false,
+                hide: leadingTrailingDatesProperties?.hide ?? false,
               );
 
     _selectedDatesProperties = DatesProperties(
@@ -514,23 +514,23 @@ class CalendarPropertiesState extends ChangeNotifier {
               )
             : DatesProperties(
                 decorationProperties: DecorationProperties(
-                    datesBackgroundColor: generalDatesProperties
+                    datesBackgroundColor: leadingTrailingDatesProperties
                             ?.decorationProperties?.datesBackgroundColor ??
                         Colors.transparent,
-                    datesTextColor: generalDatesProperties
+                    datesTextColor: leadingTrailingDatesProperties
                             ?.decorationProperties?.datesTextColor ??
                         theme.colorScheme.onSurface,
-                    datesTextStyle: generalDatesProperties
+                    datesTextStyle: leadingTrailingDatesProperties
                             ?.decorationProperties?.datesTextStyle ??
                         const TextStyle(),
-                    datesBorderColor: generalDatesProperties
+                    datesBorderColor: leadingTrailingDatesProperties
                             ?.decorationProperties?.datesBorderColor ??
                         theme.colorScheme.onSurface.withOpacity(0.5),
-                    datesBorderRadius: generalDatesProperties
+                    datesBorderRadius: leadingTrailingDatesProperties
                             ?.decorationProperties?.datesBorderRadius ??
                         12),
-                disable: generalDatesProperties?.disable ?? false,
-                hide: generalDatesProperties?.hide ?? false,
+                disable: leadingTrailingDatesProperties?.disable ?? false,
+                hide: leadingTrailingDatesProperties?.hide ?? false,
               );
 
     _selectedDatesProperties = DatesProperties(
