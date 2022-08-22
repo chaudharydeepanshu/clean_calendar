@@ -27,6 +27,7 @@ class CleanCalendar extends StatelessWidget {
     this.datesForStreaks,
     this.selectedDates,
     this.onSelectedDates,
+    this.onCalendarViewDate,
   }) : super(key: key);
 
   /// - datePickerCalendarView, It takes calendar view type.
@@ -82,6 +83,9 @@ class CleanCalendar extends StatelessWidget {
   /// - onSelectedDates, A callback to get the current selected dates.
   final ValueChanged<List<DateTime>>? onSelectedDates;
 
+  /// - onCalendarViewDate, A callback to get the current calendar view date.
+  final ValueChanged<DateTime>? onCalendarViewDate;
+
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
@@ -104,6 +108,7 @@ class CleanCalendar extends StatelessWidget {
           datesForStreaks: datesForStreaks,
           selectedDates: selectedDates,
           onSelectedDates: onSelectedDates,
+          onCalendarViewDate: onCalendarViewDate,
           context: context),
     );
   }

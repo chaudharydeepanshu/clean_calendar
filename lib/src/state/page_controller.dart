@@ -62,6 +62,9 @@ class PageControllerState extends ChangeNotifier {
       calendarPropertiesStateProvider
           .select((value) => value.datePickerCalendarView));
 
+  late CalendarPropertiesState readCalendarPropertiesStateProviderValue =
+      ref.read(calendarPropertiesStateProvider);
+
   final AutoDisposeChangeNotifierProviderRef ref;
 
   late PageController _pageController;
@@ -233,6 +236,9 @@ class PageControllerState extends ChangeNotifier {
       _pageViewIndex++;
     }
 
+    readCalendarPropertiesStateProviderValue.updateCalendarViewDate(
+        calendarViewDate: _pageViewDateTime);
+
     notifyListeners();
   }
 
@@ -248,6 +254,10 @@ class PageControllerState extends ChangeNotifier {
           pageViewDateTime.month, pageViewDateTime.day - 7);
       _pageViewIndex--;
     }
+
+    readCalendarPropertiesStateProviderValue.updateCalendarViewDate(
+        calendarViewDate: _pageViewDateTime);
+
     notifyListeners();
   }
 }

@@ -29,6 +29,7 @@ class Calendar extends ConsumerStatefulWidget {
     this.datesForStreaks,
     this.selectedDates,
     this.onSelectedDates,
+    this.onCalendarViewDate,
     required this.context,
   }) : super(key: key);
 
@@ -59,6 +60,7 @@ class Calendar extends ConsumerStatefulWidget {
   final List<DateTime>? selectedDates;
 
   final ValueChanged<List<DateTime>>? onSelectedDates;
+  final ValueChanged<DateTime>? onCalendarViewDate;
 
   final BuildContext context;
 
@@ -91,6 +93,7 @@ class _CalendarState extends ConsumerState<Calendar> {
       datesForStreaks: widget.datesForStreaks,
       selectedDates: widget.selectedDates,
       onSelectedDates: widget.onSelectedDates,
+      onCalendarViewDate: widget.onCalendarViewDate,
       context: widget.context,
     );
     // final PageControllerState readPageControllerStateProviderValue =
@@ -126,6 +129,7 @@ class _CalendarState extends ConsumerState<Calendar> {
           datesForStreaks: widget.datesForStreaks,
           selectedDates: widget.selectedDates,
           onSelectedDates: widget.onSelectedDates,
+          onCalendarViewDate: widget.onCalendarViewDate,
           context: widget.context,
         );
 

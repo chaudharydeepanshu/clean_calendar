@@ -1,3 +1,4 @@
+import 'package:clean_calendar/src/utils.dart';
 import 'package:flutter/material.dart';
 
 List<String> listOfWeekDaysSymbol = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -177,6 +178,9 @@ class CalendarPropertiesState extends ChangeNotifier {
   late ValueChanged<List<DateTime>> _onSelectedDates;
   ValueChanged<List<DateTime>> get onSelectedDates => _onSelectedDates;
 
+  late ValueChanged<DateTime> _onCalendarViewDate;
+  ValueChanged<DateTime> get onCalendarViewDate => _onCalendarViewDate;
+
   late DatePickerCalendarView _datePickerCalendarView;
   DatePickerCalendarView get datePickerCalendarView => _datePickerCalendarView;
 
@@ -199,6 +203,7 @@ class CalendarPropertiesState extends ChangeNotifier {
     required List<DateTime>? datesForStreaks,
     required List<DateTime>? selectedDates,
     required ValueChanged<List<DateTime>>? onSelectedDates,
+    required ValueChanged<DateTime>? onCalendarViewDate,
     required BuildContext context,
   }) {
     final ThemeData theme = Theme.of(context);
@@ -390,6 +395,11 @@ class CalendarPropertiesState extends ChangeNotifier {
     _onSelectedDates = onSelectedDates ??
         (List<DateTime> selectedDates) {
           // print(selectedDates);
+        };
+
+    _onCalendarViewDate = onCalendarViewDate ??
+        (DateTime calendarViewDate) {
+          // print(calendarViewDate);
         };
   }
 
@@ -412,6 +422,7 @@ class CalendarPropertiesState extends ChangeNotifier {
     required List<DateTime>? datesForStreaks,
     required List<DateTime>? selectedDates,
     required ValueChanged<List<DateTime>>? onSelectedDates,
+    required ValueChanged<DateTime>? onCalendarViewDate,
     required BuildContext context,
   }) {
     final ThemeData theme = Theme.of(context);
@@ -605,6 +616,11 @@ class CalendarPropertiesState extends ChangeNotifier {
           // print(selectedDates);
         };
 
+    _onCalendarViewDate = onCalendarViewDate ??
+        (DateTime calendarViewDate) {
+          // print(calendarViewDate);
+        };
+
     notifyListeners();
   }
 
@@ -612,5 +628,15 @@ class CalendarPropertiesState extends ChangeNotifier {
     _selectedDates = selectedDates;
     _onSelectedDates.call(_selectedDates);
     notifyListeners();
+  }
+
+  updateCalendarViewDate({required DateTime calendarViewDate}) {
+    if (_datePickerCalendarView == DatePickerCalendarView.monthView) {
+      _onCalendarViewDate
+          .call(DateTime.utc(calendarViewDate.year, calendarViewDate.month, 1));
+    } else {
+      _onCalendarViewDate
+          .call(getFirstDayOfWeek(currentDateTime: calendarViewDate));
+    }
   }
 }

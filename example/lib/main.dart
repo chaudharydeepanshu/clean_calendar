@@ -79,6 +79,9 @@ class Home extends StatelessWidget {
                 DateTime(2022, 8, 24),
               ],
               dateSelectionMode: DatePickerSelectionMode.single,
+              onCalendarViewDate: (DateTime calendarViewDate) {
+                // print(calendarViewDate);
+              },
             ),
           ],
         ),
