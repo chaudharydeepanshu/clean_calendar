@@ -250,4 +250,4 @@ Support is surely planned for these:
 
 - Dry mode, which optimizes performance for low-end devices by removing or substituting heavy animations and widgets. (🐢)
 
-And, if I'm forgetting something crucial/important/neccessary then please let me know.
+And, if I'm forgetting something crucial/important/necessary then please let me know.
