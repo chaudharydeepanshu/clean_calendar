@@ -11,11 +11,15 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-**Note: We know Clean calendar is still very new, but don't be put off by it because it will be well-maintained for a very, very long time. It is in the early stages of development. Additionally, you can contact me via email, discord, or any of the other channels provided on my Github profile if you have any questions or suggestions about this package.**
+[![pub package](https://img.shields.io/pub/v/clean_calendar.svg)](https://pub.dev/packages/clean_calendar) [![wakatime](https://wakatime.com/badge/user/83f3b15d-49de-4c01-b8de-bbc132f11be1/project/310945fd-a5ea-459c-a522-8048d1a86a33.svg)](https://wakatime.com/badge/user/83f3b15d-49de-4c01-b8de-bbc132f11be1/project/310945fd-a5ea-459c-a522-8048d1a86a33)
 
-**Yes, without a doubt, giving a like will encourage me to work on this package more quickly.**
+## Word from creator
 
-## Description
+**Hello👋, Yeah I know Clean calendar is still very new, but don't be put off by it because it will be well-maintained for a very, very long time. It is in the early stages of development. And additionally, you can contact me via email, discord, or any of the other channels provided on my Github profile if you have any questions or suggestions about this package.**
+
+**Yes, without a doubt, giving a 👍 or ⭐ will encourage me to work on this package more quickly 🐰.**
+
+## Package description
 
 A brand-new Flutter calendar package that enables you to make a simple, lovely, and customizable calendar. It now offers a customizable month view and the choice to display unique streaks for dates. It is actively being developed to add numerous common features, like events, date selection, and many more, so this is just the beginning.
 
