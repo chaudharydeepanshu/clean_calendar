@@ -1,4 +1,3 @@
-import 'package:clean_calendar/src/utils/logger.dart';
 import 'package:flutter/material.dart';
 
 Offset getWidgetCenterOffsetInfo(GlobalKey widgetKey) {

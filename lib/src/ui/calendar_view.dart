@@ -1,6 +1,7 @@
 import 'package:clean_calendar/src/state/page_controller.dart';
 import 'package:clean_calendar/src/state/properties_state.dart';
 import 'package:clean_calendar/src/state/providers.dart';
+import 'package:clean_calendar/src/utils/get_suitable_calendar_view_grid_view_builder_widget.dart';
 import 'package:clean_calendar/src/utils/get_suitable_grid_view_builder_widget.dart';
 import 'package:clean_calendar/src/utils/get_suitable_page_view_builder_widget.dart';
 import 'package:clean_calendar/src/utils.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class Calendar extends ConsumerStatefulWidget {
   const Calendar({
     Key? key,
+    this.datePickerCalendarView,
     this.streakDatesProperties,
     this.currentDateProperties,
     this.generalDatesProperties,
@@ -29,6 +31,8 @@ class Calendar extends ConsumerStatefulWidget {
     this.onSelectedDates,
     required this.context,
   }) : super(key: key);
+
+  final DatePickerCalendarView? datePickerCalendarView;
 
   final DatesProperties? streakDatesProperties;
   final DatesProperties? currentDateProperties;
@@ -68,6 +72,7 @@ class _CalendarState extends ConsumerState<Calendar> {
     final CalendarPropertiesState readCalendarPropertiesStateProviderValue =
         ref.read(calendarPropertiesStateProvider);
     readCalendarPropertiesStateProviderValue.initializeProperties(
+      datePickerCalendarView: widget.datePickerCalendarView,
       streakDatesProperties: widget.streakDatesProperties,
       currentDateProperties: widget.currentDateProperties,
       generalDatesProperties: widget.generalDatesProperties,
@@ -102,6 +107,7 @@ class _CalendarState extends ConsumerState<Calendar> {
 
       WidgetsBinding.instance.addPostFrameCallback((_) {
         readCalendarPropertiesStateProviderValue.updateProperties(
+          datePickerCalendarView: widget.datePickerCalendarView,
           streakDatesProperties: widget.streakDatesProperties,
           currentDateProperties: widget.currentDateProperties,
           generalDatesProperties: widget.generalDatesProperties,
@@ -171,10 +177,10 @@ class CalendarDatesPageView extends StatelessWidget {
 }
 
 class CalendarDatesSection extends ConsumerStatefulWidget {
-  const CalendarDatesSection({Key? key, required this.pageViewMonthDate})
+  const CalendarDatesSection({Key? key, required this.pageViewDate})
       : super(key: key);
 
-  final DateTime pageViewMonthDate;
+  final DateTime pageViewDate;
 
   @override
   ConsumerState<CalendarDatesSection> createState() =>
@@ -183,26 +189,20 @@ class CalendarDatesSection extends ConsumerStatefulWidget {
 
 class _CalendarDatesSectionState extends ConsumerState<CalendarDatesSection> {
   late List<DateTime> pageViewElementsDates;
-  late DateTime pageViewMonthDate;
+  late DateTime pageViewDate;
 
   @override
   void initState() {
-    pageViewElementsDates =
-        getDatesForACalendarMonthAsUTC(dateTime: widget.pageViewMonthDate);
-
-    pageViewMonthDate = widget.pageViewMonthDate;
+    pageViewDate = widget.pageViewDate;
 
     super.initState();
   }
 
   @override
   void didUpdateWidget(covariant CalendarDatesSection oldWidget) {
-    if (oldWidget.pageViewMonthDate != widget.pageViewMonthDate) {
+    if (oldWidget.pageViewDate != widget.pageViewDate) {
       setState(() {
-        pageViewElementsDates =
-            getDatesForACalendarMonthAsUTC(dateTime: widget.pageViewMonthDate);
-
-        pageViewMonthDate = widget.pageViewMonthDate;
+        pageViewDate = widget.pageViewDate;
       });
     }
 
@@ -213,11 +213,60 @@ class _CalendarDatesSectionState extends ConsumerState<CalendarDatesSection> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        final DatePickerCalendarView datePickerCalendarView = ref.watch(
+            calendarPropertiesStateProvider
+                .select((value) => value.datePickerCalendarView));
+        return getSuitableCalendarViewGridViewBuilderWidget(
+            pageViewDate: pageViewDate,
+            datePickerCalendarView: datePickerCalendarView);
+      },
+    );
+  }
+}
+
+class WeekViewCalendarDatesSection extends StatelessWidget {
+  const WeekViewCalendarDatesSection({Key? key, required this.pageViewDate})
+      : super(key: key);
+
+  final DateTime pageViewDate;
+
+  @override
+  Widget build(BuildContext context) {
+    final List<DateTime> pageViewElementsDates =
+        getDatesForACalendarWeekAsUTC(dateTime: pageViewDate);
+
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
         final DatePickerSelectionMode dateSelectionMode = ref.watch(
             calendarPropertiesStateProvider
                 .select((value) => value.dateSelectionMode));
-        return getSuitableGridViewBuilderWidget(
-            pageViewMonthDate: pageViewMonthDate,
+        return getSuitableWeekViewGridViewBuilderWidget(
+            pageViewDate: pageViewDate,
+            pageViewElementsDates: pageViewElementsDates,
+            dateSelectionMode: dateSelectionMode);
+      },
+    );
+  }
+}
+
+class MonthViewCalendarDatesSection extends StatelessWidget {
+  const MonthViewCalendarDatesSection({Key? key, required this.pageViewDate})
+      : super(key: key);
+
+  final DateTime pageViewDate;
+
+  @override
+  Widget build(BuildContext context) {
+    final List<DateTime> pageViewElementsDates =
+        getDatesForACalendarMonthAsUTC(dateTime: pageViewDate);
+
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        final DatePickerSelectionMode dateSelectionMode = ref.watch(
+            calendarPropertiesStateProvider
+                .select((value) => value.dateSelectionMode));
+        return getSuitableMonthViewGridViewBuilderWidget(
+            pageViewMonthDate: pageViewDate,
             pageViewElementsDates: pageViewElementsDates,
             dateSelectionMode: dateSelectionMode);
       },

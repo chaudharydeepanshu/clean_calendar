@@ -35,7 +35,7 @@ dependencies:
   clean_calendar:
     path: ../
 
-  dynamic_color: ^1.5.2
+  dynamic_color: ^1.5.3
 
 
   # The following adds the Cupertino Icons font to your application.

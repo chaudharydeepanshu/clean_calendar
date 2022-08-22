@@ -2,6 +2,7 @@ import 'package:clean_calendar/src/state/gesture_detector_state_provider.dart';
 import 'package:clean_calendar/src/state/page_controller.dart';
 import 'package:clean_calendar/src/state/properties_state.dart';
 import 'package:clean_calendar/src/ui/grid_view_element.dart';
+import 'package:clean_calendar/src/utils.dart';
 import 'package:clean_calendar/src/utils/get_suitable_dates_on_tap.dart';
 import 'package:clean_calendar/src/utils/get_suitable_dates_properties.dart';
 import 'package:flutter/material.dart';
@@ -161,5 +162,30 @@ final isPageViewInitialViewProvider = StateProvider.autoDispose<bool>((ref) {
       calendarPropertiesStateProvider
           .select((value) => value.initialViewMonthDateTime));
 
-  return pageViewDateTime.isAtSameMomentAs(initialViewMonthDateTime);
+  final DatePickerCalendarView datePickerCalendarView = ref.watch(
+      calendarPropertiesStateProvider
+          .select((value) => value.datePickerCalendarView));
+
+  if (datePickerCalendarView == DatePickerCalendarView.monthView) {
+    return DateTime(pageViewDateTime.year, pageViewDateTime.month)
+        .isAtSameMomentAs(DateTime(
+            initialViewMonthDateTime.year, initialViewMonthDateTime.month));
+  }
+  if (datePickerCalendarView == DatePickerCalendarView.weekView) {
+    DateTime firstDayOfWeekAsUTC =
+        getFirstDayOfWeek(currentDateTime: initialViewMonthDateTime);
+    DateTime lastDayOfWeekAsUTC =
+        getLastDayOfWeek(currentDateTime: initialViewMonthDateTime);
+
+    if ((pageViewDateTime.isAfter(firstDayOfWeekAsUTC) &&
+            pageViewDateTime.isBefore(lastDayOfWeekAsUTC)) ||
+        pageViewDateTime.isAtSameMomentAs(firstDayOfWeekAsUTC) ||
+        pageViewDateTime.isAtSameMomentAs(lastDayOfWeekAsUTC)) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
 });

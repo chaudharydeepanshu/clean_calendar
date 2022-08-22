@@ -12,12 +12,11 @@ DatesProperties getSuitableDatesProperties({
   required DatesProperties currentDateProperties,
   required DatesProperties selectedDatesProperties,
 }) {
-  if (pageViewElementDate.month != pageViewMonthDate.month) {
-    return leadingTrailingDatesProperties;
-  }
-
   if (selectedDates.contains(pageViewElementDate)) {
     return selectedDatesProperties;
+  }
+  if (pageViewElementDate.month != pageViewMonthDate.month) {
+    return leadingTrailingDatesProperties;
   }
   if (pageViewElementDate ==
       DateTime.utc(currentDateOfCalendar.year, currentDateOfCalendar.month,

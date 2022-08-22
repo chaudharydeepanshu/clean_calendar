@@ -18,6 +18,28 @@ List<String> listOfMonthsSymbol = [
 ];
 
 /// - DatePickerSelectionMode, Provides different modes for date selection.
+enum DatePickerCalendarView {
+  /// - DatePickerCalendarView.monthView, Shows calendar as month view.
+  monthView,
+
+  /// - DatePickerCalendarView.weekView, Shows calendar as week view.
+  weekView,
+
+  /// - DateRangePickerSelection.multiple, Allows multiple date selection,
+  /// selecting a new date will not remove the selection for previous dates,
+  /// allows to select as many dates as possible.
+  // multiple,
+
+  /// - DateRangePickerSelection.range, Allows to select a single range of
+  /// dates.
+  // range,
+
+  /// - DateRangePickerSelection.multiRange, Allows to select a multiple ranges
+  /// of dates.
+  // multiRange,
+}
+
+/// - DatePickerSelectionMode, Provides different modes for date selection.
 enum DatePickerSelectionMode {
   /// - DateRangePickerSelectionMode.single, Allows to select a single date,
   /// selecting a new date will remove the selection for previous date and
@@ -44,10 +66,19 @@ enum DatePickerSelectionMode {
 }
 
 class DecorationProperties {
+  /// - datesBackgroundColor, changes the dates background color
   final Color? datesBackgroundColor;
+
+  /// - datesTextColor, changes the dates text color
   final Color? datesTextColor;
+
+  /// - datesTextStyle, changes the dates text style
   final TextStyle? datesTextStyle;
+
+  /// - datesBorderColor, changes the dates border color
   final Color? datesBorderColor;
+
+  /// - datesBorderRadius, changes the dates border radius
   final double? datesBorderRadius;
 
   DecorationProperties({
@@ -67,9 +98,13 @@ class DecorationProperties {
 }
 
 class DatesProperties {
+  /// - decorationProperties, changes the dates decorationProperties
   final DecorationProperties? decorationProperties;
 
+  /// - disable, disable dates
   final bool? disable;
+
+  /// - hide, hide dates
   final bool? hide;
 
   DatesProperties({
@@ -142,7 +177,11 @@ class CalendarPropertiesState extends ChangeNotifier {
   late ValueChanged<List<DateTime>> _onSelectedDates;
   ValueChanged<List<DateTime>> get onSelectedDates => _onSelectedDates;
 
+  late DatePickerCalendarView _datePickerCalendarView;
+  DatePickerCalendarView get datePickerCalendarView => _datePickerCalendarView;
+
   initializeProperties({
+    required DatePickerCalendarView? datePickerCalendarView,
     required DatesProperties? streakDatesProperties,
     required DatesProperties? currentDateProperties,
     required DatesProperties? generalDatesProperties,
@@ -163,6 +202,9 @@ class CalendarPropertiesState extends ChangeNotifier {
     required BuildContext context,
   }) {
     final ThemeData theme = Theme.of(context);
+
+    _datePickerCalendarView =
+        datePickerCalendarView ?? DatePickerCalendarView.monthView;
 
     _streakDatesProperties = DatesProperties(
       decorationProperties: DecorationProperties(
@@ -224,26 +266,48 @@ class CalendarPropertiesState extends ChangeNotifier {
       hide: generalDatesProperties?.hide ?? false,
     );
 
-    _leadingTrailingDatesProperties = DatesProperties(
-      decorationProperties: DecorationProperties(
-          datesBackgroundColor: leadingTrailingDatesProperties
-                  ?.decorationProperties?.datesBackgroundColor ??
-              theme.colorScheme.surface,
-          datesTextColor: leadingTrailingDatesProperties
-                  ?.decorationProperties?.datesTextColor ??
-              theme.disabledColor,
-          datesTextStyle: leadingTrailingDatesProperties
-                  ?.decorationProperties?.datesTextStyle ??
-              const TextStyle(),
-          datesBorderColor: leadingTrailingDatesProperties
-                  ?.decorationProperties?.datesBorderColor ??
-              theme.dividerColor,
-          datesBorderRadius: leadingTrailingDatesProperties
-                  ?.decorationProperties?.datesBorderRadius ??
-              12),
-      disable: leadingTrailingDatesProperties?.disable ?? false,
-      hide: leadingTrailingDatesProperties?.hide ?? false,
-    );
+    _leadingTrailingDatesProperties =
+        _datePickerCalendarView == DatePickerCalendarView.monthView
+            ? DatesProperties(
+                decorationProperties: DecorationProperties(
+                    datesBackgroundColor: leadingTrailingDatesProperties
+                            ?.decorationProperties?.datesBackgroundColor ??
+                        theme.colorScheme.surface,
+                    datesTextColor: leadingTrailingDatesProperties
+                            ?.decorationProperties?.datesTextColor ??
+                        theme.disabledColor,
+                    datesTextStyle: leadingTrailingDatesProperties
+                            ?.decorationProperties?.datesTextStyle ??
+                        const TextStyle(),
+                    datesBorderColor: leadingTrailingDatesProperties
+                            ?.decorationProperties?.datesBorderColor ??
+                        theme.dividerColor,
+                    datesBorderRadius: leadingTrailingDatesProperties
+                            ?.decorationProperties?.datesBorderRadius ??
+                        12),
+                disable: leadingTrailingDatesProperties?.disable ?? false,
+                hide: leadingTrailingDatesProperties?.hide ?? false,
+              )
+            : DatesProperties(
+                decorationProperties: DecorationProperties(
+                    datesBackgroundColor: generalDatesProperties
+                            ?.decorationProperties?.datesBackgroundColor ??
+                        Colors.transparent,
+                    datesTextColor: generalDatesProperties
+                            ?.decorationProperties?.datesTextColor ??
+                        theme.colorScheme.onSurface,
+                    datesTextStyle: generalDatesProperties
+                            ?.decorationProperties?.datesTextStyle ??
+                        const TextStyle(),
+                    datesBorderColor: generalDatesProperties
+                            ?.decorationProperties?.datesBorderColor ??
+                        theme.colorScheme.onSurface.withOpacity(0.5),
+                    datesBorderRadius: generalDatesProperties
+                            ?.decorationProperties?.datesBorderRadius ??
+                        12),
+                disable: generalDatesProperties?.disable ?? false,
+                hide: generalDatesProperties?.hide ?? false,
+              );
 
     _selectedDatesProperties = DatesProperties(
       decorationProperties: DecorationProperties(
@@ -299,12 +363,15 @@ class CalendarPropertiesState extends ChangeNotifier {
             : _startDateOfCalendar!)
         : currentDateOfCalendar != null
             ? (_startDateOfCalendar!.isBefore(DateTime.utc(
-                    currentDateOfCalendar.year, currentDateOfCalendar.month, 1))
-                ? DateTime.utc(
-                    currentDateOfCalendar.year, currentDateOfCalendar.month, 1)
+                    currentDateOfCalendar.year,
+                    currentDateOfCalendar.month,
+                    currentDateOfCalendar.day))
+                ? DateTime.utc(currentDateOfCalendar.year,
+                    currentDateOfCalendar.month, currentDateOfCalendar.day)
                 : _startDateOfCalendar!)
             : _startDateOfCalendar!.isBefore(DateTime.now())
-                ? DateTime.utc(DateTime.now().year, DateTime.now().month, 1)
+                ? DateTime.utc(DateTime.now().year, DateTime.now().month,
+                    DateTime.now().day)
                 : _startDateOfCalendar!;
     _currentDateOfCalendar = currentDateOfCalendar ?? DateTime.now();
     _datesForStreaks = datesForStreaks != null
@@ -327,6 +394,7 @@ class CalendarPropertiesState extends ChangeNotifier {
   }
 
   updateProperties({
+    required DatePickerCalendarView? datePickerCalendarView,
     required DatesProperties? streakDatesProperties,
     required DatesProperties? currentDateProperties,
     required DatesProperties? generalDatesProperties,
@@ -347,6 +415,9 @@ class CalendarPropertiesState extends ChangeNotifier {
     required BuildContext context,
   }) {
     final ThemeData theme = Theme.of(context);
+
+    _datePickerCalendarView =
+        datePickerCalendarView ?? DatePickerCalendarView.monthView;
 
     _streakDatesProperties = DatesProperties(
       decorationProperties: DecorationProperties(
@@ -408,26 +479,48 @@ class CalendarPropertiesState extends ChangeNotifier {
       hide: generalDatesProperties?.hide ?? false,
     );
 
-    _leadingTrailingDatesProperties = DatesProperties(
-      decorationProperties: DecorationProperties(
-          datesBackgroundColor: leadingTrailingDatesProperties
-                  ?.decorationProperties?.datesBackgroundColor ??
-              theme.colorScheme.surface,
-          datesTextColor: leadingTrailingDatesProperties
-                  ?.decorationProperties?.datesTextColor ??
-              theme.disabledColor,
-          datesTextStyle: leadingTrailingDatesProperties
-                  ?.decorationProperties?.datesTextStyle ??
-              const TextStyle(),
-          datesBorderColor: leadingTrailingDatesProperties
-                  ?.decorationProperties?.datesBorderColor ??
-              theme.dividerColor,
-          datesBorderRadius: leadingTrailingDatesProperties
-                  ?.decorationProperties?.datesBorderRadius ??
-              12),
-      disable: leadingTrailingDatesProperties?.disable ?? false,
-      hide: leadingTrailingDatesProperties?.hide ?? false,
-    );
+    _leadingTrailingDatesProperties =
+        _datePickerCalendarView == DatePickerCalendarView.monthView
+            ? DatesProperties(
+                decorationProperties: DecorationProperties(
+                    datesBackgroundColor: leadingTrailingDatesProperties
+                            ?.decorationProperties?.datesBackgroundColor ??
+                        theme.colorScheme.surface,
+                    datesTextColor: leadingTrailingDatesProperties
+                            ?.decorationProperties?.datesTextColor ??
+                        theme.disabledColor,
+                    datesTextStyle: leadingTrailingDatesProperties
+                            ?.decorationProperties?.datesTextStyle ??
+                        const TextStyle(),
+                    datesBorderColor: leadingTrailingDatesProperties
+                            ?.decorationProperties?.datesBorderColor ??
+                        theme.dividerColor,
+                    datesBorderRadius: leadingTrailingDatesProperties
+                            ?.decorationProperties?.datesBorderRadius ??
+                        12),
+                disable: leadingTrailingDatesProperties?.disable ?? false,
+                hide: leadingTrailingDatesProperties?.hide ?? false,
+              )
+            : DatesProperties(
+                decorationProperties: DecorationProperties(
+                    datesBackgroundColor: generalDatesProperties
+                            ?.decorationProperties?.datesBackgroundColor ??
+                        Colors.transparent,
+                    datesTextColor: generalDatesProperties
+                            ?.decorationProperties?.datesTextColor ??
+                        theme.colorScheme.onSurface,
+                    datesTextStyle: generalDatesProperties
+                            ?.decorationProperties?.datesTextStyle ??
+                        const TextStyle(),
+                    datesBorderColor: generalDatesProperties
+                            ?.decorationProperties?.datesBorderColor ??
+                        theme.colorScheme.onSurface.withOpacity(0.5),
+                    datesBorderRadius: generalDatesProperties
+                            ?.decorationProperties?.datesBorderRadius ??
+                        12),
+                disable: generalDatesProperties?.disable ?? false,
+                hide: generalDatesProperties?.hide ?? false,
+              );
 
     _selectedDatesProperties = DatesProperties(
       decorationProperties: DecorationProperties(
@@ -483,12 +576,15 @@ class CalendarPropertiesState extends ChangeNotifier {
             : _startDateOfCalendar!)
         : currentDateOfCalendar != null
             ? (_startDateOfCalendar!.isBefore(DateTime.utc(
-                    currentDateOfCalendar.year, currentDateOfCalendar.month, 1))
-                ? DateTime.utc(
-                    currentDateOfCalendar.year, currentDateOfCalendar.month, 1)
+                    currentDateOfCalendar.year,
+                    currentDateOfCalendar.month,
+                    currentDateOfCalendar.day))
+                ? DateTime.utc(currentDateOfCalendar.year,
+                    currentDateOfCalendar.month, currentDateOfCalendar.day)
                 : _startDateOfCalendar!)
             : _startDateOfCalendar!.isBefore(DateTime.now())
-                ? DateTime.utc(DateTime.now().year, DateTime.now().month, 1)
+                ? DateTime.utc(DateTime.now().year, DateTime.now().month,
+                    DateTime.now().day)
                 : _startDateOfCalendar!;
     _currentDateOfCalendar = currentDateOfCalendar ?? DateTime.now();
     _datesForStreaks = datesForStreaks != null

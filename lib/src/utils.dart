@@ -95,6 +95,23 @@ List<DateTime> getDatesForACalendarMonthAsUTC({required DateTime dateTime}) {
   return calendarMonthDaysAsUTC;
 }
 
+List<DateTime> getDatesForACalendarWeekAsUTC({required DateTime dateTime}) {
+  List<DateTime> calendarWeekDaysAsUTC = [];
+
+  DateTime currentDateTime =
+      DateTime.utc(dateTime.year, dateTime.month, dateTime.day);
+
+  DateTime firstDayOfWeekAsUTC =
+      getFirstDayOfWeek(currentDateTime: currentDateTime);
+  DateTime lastDayOfWeekAsUTC =
+      getLastDayOfWeek(currentDateTime: currentDateTime);
+
+  calendarWeekDaysAsUTC = getDaysInBetweenIncludingStartEndDate(
+      startDateTime: firstDayOfWeekAsUTC, endDateTime: lastDayOfWeekAsUTC);
+
+  return calendarWeekDaysAsUTC;
+}
+
 int calculateMonthsFromYear0000(DateTime dateTime) {
   /// Each year has 12 months and total years from 0000 are dateTime.year.
   /// Now to calculate months multiply 12 with total years and add the months of the dateTime on top of that.
@@ -126,4 +143,96 @@ int getMonthsCountBetweenDatesExcludingEndMonth(
           calculateMonthsFromYear0000(newStartDateTime);
 
   return differenceInMonthsIncludingStartAndEnd;
+}
+
+DateTime getFirstDayOfWeek({required DateTime currentDateTime}) {
+  // Converting date provided to UTC
+  // So that all things like DST don't affect subtraction and addition on date
+  DateTime dateTimeInUTC = DateTime.utc(
+      currentDateTime.year, currentDateTime.month, currentDateTime.day);
+
+  // Getting weekday for the date
+  // For reference Sunday weekday is 7 and Friday weekday is 5
+  int currentWeekDayInUTC = dateTimeInUTC.weekday;
+
+  // Getting Date for nearest Sunday from the provided date
+  // By going back a number of weekdays from the current date to reach Sunday
+  DateTime firstDayOfWeekInUTC;
+  // If current date is not Sunday subtract days to reach Sunday
+  if (currentWeekDayInUTC != DateTime.sunday) {
+    firstDayOfWeekInUTC =
+        dateTimeInUTC.subtract(Duration(days: currentWeekDayInUTC));
+  }
+  // If current date is Sunday use it as the first day of week
+  else {
+    firstDayOfWeekInUTC = dateTimeInUTC;
+  }
+
+  // Converting back the date for Sunday from UTC type to Local
+  // You can also use UTC type depending on your use case
+  DateTime firstDayOfWeekInLocal = DateTime(firstDayOfWeekInUTC.year,
+      firstDayOfWeekInUTC.month, firstDayOfWeekInUTC.day);
+
+  if (currentDateTime.isUtc) {
+    return firstDayOfWeekInUTC;
+  } else {
+    return firstDayOfWeekInLocal;
+  }
+}
+
+DateTime getLastDayOfWeek({required DateTime currentDateTime}) {
+  // Converting date provided to UTC
+  // So that all things like DST don't affect subtraction and addition on date
+  DateTime dateTimeInUTC = DateTime.utc(
+      currentDateTime.year, currentDateTime.month, currentDateTime.day);
+
+  // Getting weekday for the date
+  // For reference Sunday weekday is 0 and Friday weekday is 5
+  int currentWeekDayInUTC = dateTimeInUTC.weekday;
+
+  // Getting Date for nearest Saturday from the provided date
+  // By going forward a number of weekdays from the current date to reach Saturday
+  DateTime lastDayOfWeekInUTC;
+  // If current date is not Sunday add days enough to reach Saturday
+  if (currentWeekDayInUTC != DateTime.sunday) {
+    lastDayOfWeekInUTC = dateTimeInUTC
+        .add(Duration(days: DateTime.saturday - currentWeekDayInUTC));
+  }
+  // If current date is Sunday add days UpTo saturday
+  else {
+    lastDayOfWeekInUTC =
+        dateTimeInUTC.add(const Duration(days: DateTime.saturday));
+  }
+
+  // Converting back the date for Sunday from UTC type to Local
+  // You can also use UTC type depending on your use case
+  DateTime lastDayOfWeekInLocal = DateTime(lastDayOfWeekInUTC.year,
+      lastDayOfWeekInUTC.month, lastDayOfWeekInUTC.day);
+
+  if (currentDateTime.isUtc) {
+    return lastDayOfWeekInUTC;
+  } else {
+    return lastDayOfWeekInLocal;
+  }
+}
+
+int getWeeks({required DateTime start, required DateTime end}) {
+  start = getFirstDayOfWeek(currentDateTime: start);
+  end = getFirstDayOfWeek(currentDateTime: end);
+  int days = differenceInCalendarDays(start: start, end: end);
+  int noOfWeeks;
+  if (days < 7) {
+    noOfWeeks = 1;
+  } else {
+    noOfWeeks = (days / 7).floor() + 1; // Adding 1 to be inclusive}
+  }
+  return noOfWeeks;
+}
+
+int differenceInCalendarDays({required DateTime end, required DateTime start}) {
+  // Normalize [DateTime] objects to UTC and to discard time information.
+  end = DateTime.utc(end.year, end.month, end.day);
+  start = DateTime.utc(start.year, start.month, start.day);
+
+  return end.difference(start).inDays;
 }

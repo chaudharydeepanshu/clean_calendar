@@ -1,5 +1,6 @@
 import 'package:clean_calendar/src/state/properties_state.dart';
 import 'package:clean_calendar/src/state/providers.dart';
+import 'package:clean_calendar/src/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -57,6 +58,10 @@ class PageControllerState extends ChangeNotifier {
   late DateTime endDateOfCalendar = ref.watch(calendarPropertiesStateProvider
       .select((value) => value.endDateOfCalendar));
 
+  late DatePickerCalendarView datePickerCalendarView = ref.watch(
+      calendarPropertiesStateProvider
+          .select((value) => value.datePickerCalendarView));
+
   final AutoDisposeChangeNotifierProviderRef ref;
 
   late PageController _pageController;
@@ -79,119 +84,170 @@ class PageControllerState extends ChangeNotifier {
   }
 
   initializePageViewVars() {
-    _pageViewDateTime = DateTime.utc(
-        initialViewMonthDateTime.year, initialViewMonthDateTime.month, 1);
+    if (datePickerCalendarView == DatePickerCalendarView.monthView) {
+      _pageViewDateTime = DateTime.utc(
+          initialViewMonthDateTime.year, initialViewMonthDateTime.month, 1);
 
-    int monthsCountBeforeInitialDateToStartDate =
-        DateUtils.monthDelta(startDateOfCalendar, _pageViewDateTime);
+      int monthsCountBeforeInitialDateToStartDate =
+          DateUtils.monthDelta(startDateOfCalendar, _pageViewDateTime);
 
-    int monthsCountAfterInitialDateToStartDate =
-        DateUtils.monthDelta(_pageViewDateTime, endDateOfCalendar);
+      int monthsCountAfterInitialDateToStartDate =
+          DateUtils.monthDelta(_pageViewDateTime, endDateOfCalendar);
 
-    int startIndex = -1 * monthsCountBeforeInitialDateToStartDate;
+      int startIndex = -1 * monthsCountBeforeInitialDateToStartDate;
 
-    int endIndex = monthsCountAfterInitialDateToStartDate;
+      int endIndex = monthsCountAfterInitialDateToStartDate;
 
-    listOfIntegersFromStartToAndEndDateWithInitialAs0 = [
-      for (var i = startIndex; i <= endIndex; i += 1) i
-    ];
+      listOfIntegersFromStartToAndEndDateWithInitialAs0 = [
+        for (var i = startIndex; i <= endIndex; i += 1) i
+      ];
 
-    // log(listOfIntegersFromStartToAndEndDateWithInitialAs0.toString());
+      // log(listOfIntegersFromStartToAndEndDateWithInitialAs0.toString());
 
-    initialIndex =
-        monthsCountBeforeInitialDateToStartDate; //(list.length / 2).floor();
+      initialIndex =
+          monthsCountBeforeInitialDateToStartDate; //(list.length / 2).floor();
 
-    _pageViewIndex = initialIndex;
+      _pageViewIndex = initialIndex;
 
-    // Setting viewportFraction to 0.99 to preload before and after pages.
-    _pageController =
-        PageController(initialPage: _pageViewIndex, viewportFraction: 1);
+      // Setting viewportFraction to 0.99 to preload before and after pages.
+      _pageController =
+          PageController(initialPage: _pageViewIndex, viewportFraction: 1);
 
-    _pageController.addListener(() {
-      // Get index according to the direction
-      // _pageController.page! > _initialIndex => swiping to the right, going to the left / previous element
-      // _pageController.page! < _initialIndex => swiping to the left, going to the right / next element
-      final index = _pageController.page! > _pageViewIndex
-          ? _pageController.page!.floor()
-          : _pageController.page!.ceil();
+      _pageController.addListener(() {
+        // Get index according to the direction
+        // _pageController.page! > _initialIndex => swiping to the right, going to the left / previous element
+        // _pageController.page! < _initialIndex => swiping to the left, going to the right / next element
+        final index = _pageController.page! > _pageViewIndex
+            ? _pageController.page!.floor()
+            : _pageController.page!.ceil();
 
-      if (index == _pageViewIndex) {
-        return;
-      }
-      if (index < _pageViewIndex) {
-        _prev();
-      } else if (index > _pageViewIndex) {
-        _next();
-      }
-    });
+        if (index == _pageViewIndex) {
+          return;
+        }
+        if (index < _pageViewIndex) {
+          _prev();
+        } else if (index > _pageViewIndex) {
+          _next();
+        }
+      });
 
-    // print("_initialIndex: $initialIndex");
+      ref.listen(calendarPropertiesStateProvider,
+          (CalendarPropertiesState? previousCalendarPropertiesState,
+              CalendarPropertiesState newCalendarPropertiesState) {
+        if (startDateOfCalendar !=
+                newCalendarPropertiesState.startDateOfCalendar ||
+            endDateOfCalendar != newCalendarPropertiesState.endDateOfCalendar ||
+            initialViewMonthDateTime !=
+                newCalendarPropertiesState.initialViewMonthDateTime) {
+          DateTime pageViewDateTime = DateTime.utc(
+              newCalendarPropertiesState.initialViewMonthDateTime.year,
+              newCalendarPropertiesState.initialViewMonthDateTime.month,
+              1);
+          int monthsCountBeforeInitialDateToStartDate = DateUtils.monthDelta(
+              newCalendarPropertiesState.startDateOfCalendar, pageViewDateTime);
+          // print("initialIndex: $monthsCountBeforeInitialDateToStartDate");
+          _pageController.jumpToPage(monthsCountBeforeInitialDateToStartDate);
+        }
+      });
+    }
+    if (datePickerCalendarView == DatePickerCalendarView.weekView) {
+      _pageViewDateTime = DateTime.utc(initialViewMonthDateTime.year,
+          initialViewMonthDateTime.month, initialViewMonthDateTime.day);
 
-    // ref.listen(
-    //     calendarPropertiesStateProvider
-    //         .select((value) => value.startDateOfCalendar),
-    //     (DateTime? previousDateTime, DateTime newDateTime) {
-    //   print("previousDateTime: $previousDateTime");
-    //   print("newDateTime: $newDateTime");
-    //
-    //   // final readCalendarPropertiesStateProviderValue =
-    //   //     ref.read(calendarPropertiesStateProvider);
-    //   //
-    //   // DateTime pageViewDateTime = DateTime.utc(
-    //   //     readCalendarPropertiesStateProviderValue
-    //   //         .initialViewMonthDateTime.year,
-    //   //     readCalendarPropertiesStateProviderValue
-    //   //         .initialViewMonthDateTime.month,
-    //   //     1);
-    //   // int monthsCountBeforeInitialDateToStartDate =
-    //   //     DateUtils.monthDelta(newDateTime, pageViewDateTime);
-    //   // print("initialIndex: $monthsCountBeforeInitialDateToStartDate");
-    //   // _pageController.jumpToPage(monthsCountBeforeInitialDateToStartDate);
-    //
-    //   // print("initialIndex: $initialIndex");
-    //   // _pageController.jumpToPage(initialIndex);
-    // });
+      int weeksCountBeforeInitialDateToStartDate =
+          getWeeks(start: startDateOfCalendar, end: _pageViewDateTime);
 
-    ref.listen(calendarPropertiesStateProvider,
-        (CalendarPropertiesState? previousCalendarPropertiesState,
-            CalendarPropertiesState newCalendarPropertiesState) {
-      // print(
-      //     "previousCalendarPropertiesState: ${previousCalendarPropertiesState?.startDateOfCalendar}");
-      // print(
-      //     "newCalendarPropertiesState: ${newCalendarPropertiesState.startDateOfCalendar}");
-      // print("startDateOfCalendar: $startDateOfCalendar");
-      if (startDateOfCalendar !=
-              newCalendarPropertiesState.startDateOfCalendar ||
-          endDateOfCalendar != newCalendarPropertiesState.endDateOfCalendar ||
-          initialViewMonthDateTime !=
-              newCalendarPropertiesState.initialViewMonthDateTime) {
-        DateTime pageViewDateTime = DateTime.utc(
-            newCalendarPropertiesState.initialViewMonthDateTime.year,
-            newCalendarPropertiesState.initialViewMonthDateTime.month,
-            1);
-        int monthsCountBeforeInitialDateToStartDate = DateUtils.monthDelta(
-            newCalendarPropertiesState.startDateOfCalendar, pageViewDateTime);
-        // print("initialIndex: $monthsCountBeforeInitialDateToStartDate");
-        _pageController.jumpToPage(monthsCountBeforeInitialDateToStartDate);
-      }
-    });
+      int weekCountAfterInitialDateToStartDate =
+          getWeeks(start: _pageViewDateTime, end: endDateOfCalendar);
+
+      int startIndex = -1 * weeksCountBeforeInitialDateToStartDate;
+
+      int endIndex = weekCountAfterInitialDateToStartDate;
+
+      listOfIntegersFromStartToAndEndDateWithInitialAs0 = [
+        for (var i = startIndex; i <= endIndex; i += 1) i
+      ];
+
+      // log(listOfIntegersFromStartToAndEndDateWithInitialAs0.toString());
+
+      initialIndex =
+          weeksCountBeforeInitialDateToStartDate; //(list.length / 2).floor();
+
+      _pageViewIndex = initialIndex;
+
+      // Setting viewportFraction to 0.99 to preload before and after pages.
+      _pageController =
+          PageController(initialPage: _pageViewIndex, viewportFraction: 1);
+
+      _pageController.addListener(() {
+        // Get index according to the direction
+        // _pageController.page! > _initialIndex => swiping to the right, going to the left / previous element
+        // _pageController.page! < _initialIndex => swiping to the left, going to the right / next element
+        final index = _pageController.page! > _pageViewIndex
+            ? _pageController.page!.floor()
+            : _pageController.page!.ceil();
+
+        if (index == _pageViewIndex) {
+          return;
+        }
+        if (index < _pageViewIndex) {
+          _prev();
+        } else if (index > _pageViewIndex) {
+          _next();
+        }
+      });
+
+      ref.listen(calendarPropertiesStateProvider,
+          (CalendarPropertiesState? previousCalendarPropertiesState,
+              CalendarPropertiesState newCalendarPropertiesState) {
+        if (startDateOfCalendar !=
+                newCalendarPropertiesState.startDateOfCalendar ||
+            endDateOfCalendar != newCalendarPropertiesState.endDateOfCalendar ||
+            initialViewMonthDateTime !=
+                newCalendarPropertiesState.initialViewMonthDateTime) {
+          DateTime pageViewDateTime = DateTime.utc(
+              newCalendarPropertiesState.initialViewMonthDateTime.year,
+              newCalendarPropertiesState.initialViewMonthDateTime.month,
+              newCalendarPropertiesState.initialViewMonthDateTime.day);
+          int monthsCountBeforeInitialDateToStartDate = DateUtils.monthDelta(
+              newCalendarPropertiesState.startDateOfCalendar, pageViewDateTime);
+          // print("initialIndex: $monthsCountBeforeInitialDateToStartDate");
+          _pageController.jumpToPage(monthsCountBeforeInitialDateToStartDate);
+        }
+      });
+    }
 
     notifyListeners();
   }
 
   // Update list and jump to the middle element
   void _next() {
-    _pageViewDateTime =
-        DateTime.utc(pageViewDateTime.year, pageViewDateTime.month + 1, 1);
-    _pageViewIndex++;
+    if (datePickerCalendarView == DatePickerCalendarView.monthView) {
+      _pageViewDateTime =
+          DateTime.utc(pageViewDateTime.year, pageViewDateTime.month + 1, 1);
+      _pageViewIndex++;
+    }
+    if (datePickerCalendarView == DatePickerCalendarView.weekView) {
+      _pageViewDateTime = DateTime.utc(pageViewDateTime.year,
+          pageViewDateTime.month, pageViewDateTime.day + 7);
+      _pageViewIndex++;
+    }
+
     notifyListeners();
   }
 
   // Update list and jump to the middle element
   void _prev() {
-    _pageViewDateTime =
-        DateTime.utc(pageViewDateTime.year, pageViewDateTime.month - 1, 1);
-    _pageViewIndex--;
+    if (datePickerCalendarView == DatePickerCalendarView.monthView) {
+      _pageViewDateTime =
+          DateTime.utc(pageViewDateTime.year, pageViewDateTime.month - 1, 1);
+      _pageViewIndex--;
+    }
+    if (datePickerCalendarView == DatePickerCalendarView.weekView) {
+      _pageViewDateTime = DateTime.utc(pageViewDateTime.year,
+          pageViewDateTime.month, pageViewDateTime.day - 7);
+      _pageViewIndex--;
+    }
     notifyListeners();
   }
 }

@@ -9,6 +9,7 @@ class CleanCalendar extends StatelessWidget {
   /// - CleanCalendar, Shows a simple Calendar.
   const CleanCalendar({
     Key? key,
+    this.datePickerCalendarView,
     this.streakDatesProperties,
     this.currentDateProperties,
     this.generalDatesProperties,
@@ -27,6 +28,9 @@ class CleanCalendar extends StatelessWidget {
     this.selectedDates,
     this.onSelectedDates,
   }) : super(key: key);
+
+  /// - datePickerCalendarView, It takes calendar view type.
+  final DatePickerCalendarView? datePickerCalendarView;
 
   /// - streakDatesProperties, It takes customisation properties for streak dates.
   final DatesProperties? streakDatesProperties;
@@ -82,6 +86,7 @@ class CleanCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderScope(
       child: Calendar(
+          datePickerCalendarView: datePickerCalendarView,
           streakDatesProperties: streakDatesProperties,
           currentDateProperties: currentDateProperties,
           generalDatesProperties: generalDatesProperties,

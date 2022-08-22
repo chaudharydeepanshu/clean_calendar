@@ -9,11 +9,11 @@ class CalendarDateWidget extends StatelessWidget {
   const CalendarDateWidget(
       {Key? key,
       required this.pageViewElementDate,
-      required this.pageViewMonthDate})
+      required this.pageViewDate})
       : super(key: key);
 
   final DateTime pageViewElementDate;
-  final DateTime pageViewMonthDate;
+  final DateTime pageViewDate;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class CalendarDateWidget extends StatelessWidget {
         final Widget dateSuitableWidgetProviderValue = ref
             .watch(dateSuitableWidgetProvider(IndividualDateElementProperties(
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewMonthDate: pageViewDate,
         )).select((value) => value));
 
         Widget calendarDateWidget = dateSuitableWidgetProviderValue;
