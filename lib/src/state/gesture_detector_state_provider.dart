@@ -140,7 +140,6 @@ class GestureDetectorStateProvider extends ChangeNotifier {
       readCalendarPropertiesStateProviderValue
           .updateSelectedDates(selectedDates: [panStartDate]);
       // _panCurrentIndex = null;
-
     }
   }
 

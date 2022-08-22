@@ -7,9 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CalendarDateWidget extends StatelessWidget {
   const CalendarDateWidget(
-      {Key? key,
-      required this.pageViewElementDate,
-      required this.pageViewDate})
+      {Key? key, required this.pageViewElementDate, required this.pageViewDate})
       : super(key: key);
 
   final DateTime pageViewElementDate;

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 const turquoise = Color(0xFF0081A7);
 const pink = Color(0xFFFFC8DD);
 
-
 CustomColors lightCustomColors = const CustomColors(
   sourceTurquoise: Color(0xFF0081A7),
   turquoise: Color(0xFF006685),
@@ -30,8 +29,6 @@ CustomColors darkCustomColors = const CustomColors(
   pinkContainer: Color(0xFF792952),
   onPinkContainer: Color(0xFFFFD8E6),
 );
-
-
 
 /// Defines a set of custom colors, each comprised of 4 complementary tones.
 ///
@@ -99,8 +96,10 @@ class CustomColors extends ThemeExtension<CustomColors> {
       sourceTurquoise: Color.lerp(sourceTurquoise, other.sourceTurquoise, t),
       turquoise: Color.lerp(turquoise, other.turquoise, t),
       onTurquoise: Color.lerp(onTurquoise, other.onTurquoise, t),
-      turquoiseContainer: Color.lerp(turquoiseContainer, other.turquoiseContainer, t),
-      onTurquoiseContainer: Color.lerp(onTurquoiseContainer, other.onTurquoiseContainer, t),
+      turquoiseContainer:
+          Color.lerp(turquoiseContainer, other.turquoiseContainer, t),
+      onTurquoiseContainer:
+          Color.lerp(onTurquoiseContainer, other.onTurquoiseContainer, t),
       sourcePink: Color.lerp(sourcePink, other.sourcePink, t),
       pink: Color.lerp(pink, other.pink, t),
       onPink: Color.lerp(onPink, other.onPink, t),
@@ -125,7 +124,8 @@ class CustomColors extends ThemeExtension<CustomColors> {
       turquoise: turquoise!.harmonizeWith(dynamic.primary),
       onTurquoise: onTurquoise!.harmonizeWith(dynamic.primary),
       turquoiseContainer: turquoiseContainer!.harmonizeWith(dynamic.primary),
-      onTurquoiseContainer: onTurquoiseContainer!.harmonizeWith(dynamic.primary),
+      onTurquoiseContainer:
+          onTurquoiseContainer!.harmonizeWith(dynamic.primary),
     );
   }
 }

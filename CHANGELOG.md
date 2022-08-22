@@ -1,3 +1,7 @@
+## 0.3.0-dev.2
+
+* Ran ```flutter format .``` to fix analyzer formatting issues.
+
 ## 0.3.0-dev.1
 
 * Added weekly calendar view.
