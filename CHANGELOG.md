@@ -1,3 +1,7 @@
+## 0.3.1-dev.1
+
+* Fixed lots of performance issues due to unnecessary rebuilds.
+
 ## 0.3.0-dev.2
 
 * Ran ```flutter format .``` to fix analyzer formatting issues.

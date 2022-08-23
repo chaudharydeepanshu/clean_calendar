@@ -90,6 +90,25 @@ class DecorationProperties {
     this.datesBorderRadius,
   });
 
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DecorationProperties &&
+          runtimeType == other.runtimeType &&
+          datesBackgroundColor == other.datesBackgroundColor &&
+          datesTextColor == other.datesTextColor &&
+          datesTextStyle == other.datesTextStyle &&
+          datesBorderColor == other.datesBorderColor &&
+          datesBorderRadius == other.datesBorderRadius;
+
+  @override
+  int get hashCode =>
+      datesBackgroundColor.hashCode ^
+      datesTextColor.hashCode ^
+      datesTextStyle.hashCode ^
+      datesBorderColor.hashCode ^
+      datesBorderRadius.hashCode;
+
   // Implement toString to make it easier to see information
   // when using the print statement.
   @override
@@ -113,6 +132,19 @@ class DatesProperties {
     this.disable,
     this.hide,
   });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DatesProperties &&
+          runtimeType == other.runtimeType &&
+          decorationProperties == other.decorationProperties &&
+          disable == other.disable &&
+          hide == other.hide;
+
+  @override
+  int get hashCode =>
+      decorationProperties.hashCode ^ disable.hashCode ^ hide.hashCode;
 
   // Implement toString to make it easier to see information
   // when using the print statement.
@@ -378,7 +410,8 @@ class CalendarPropertiesState extends ChangeNotifier {
                 ? DateTime.utc(DateTime.now().year, DateTime.now().month,
                     DateTime.now().day)
                 : _startDateOfCalendar!;
-    _currentDateOfCalendar = currentDateOfCalendar ?? DateTime.now();
+    _currentDateOfCalendar =
+        currentDateOfCalendar ?? DateUtils.dateOnly(DateTime.now());
     _datesForStreaks = datesForStreaks != null
         ? List.generate(
             datesForStreaks.length,
@@ -597,7 +630,8 @@ class CalendarPropertiesState extends ChangeNotifier {
                 ? DateTime.utc(DateTime.now().year, DateTime.now().month,
                     DateTime.now().day)
                 : _startDateOfCalendar!;
-    _currentDateOfCalendar = currentDateOfCalendar ?? DateTime.now();
+    _currentDateOfCalendar =
+        currentDateOfCalendar ?? DateUtils.dateOnly(DateTime.now());
     _datesForStreaks = datesForStreaks != null
         ? List.generate(
             datesForStreaks.length,

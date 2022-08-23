@@ -17,7 +17,7 @@ class NonScrollablePageViewBuilder extends StatelessWidget {
             calendarPropertiesStateProvider
                 .select((value) => value.datePickerCalendarView));
 
-        return getSuitableCalendarViewNonScrollablePageViewBuilderWidget(
+        return GetSuitableCalendarViewNonScrollablePageViewBuilderWidget(
             datePickerCalendarView: datePickerCalendarView);
       },
     );
@@ -148,7 +148,7 @@ class ScrollablePageViewBuilder extends StatelessWidget {
             calendarPropertiesStateProvider
                 .select((value) => value.datePickerCalendarView));
 
-        return getSuitableCalendarViewScrollablePageViewBuilderWidget(
+        return GetSuitableCalendarViewScrollablePageViewBuilderWidget(
             datePickerCalendarView: datePickerCalendarView);
       },
     );

@@ -1,5 +1,7 @@
+import 'package:clean_calendar/src/models/date_widget_ontap_defining_property_class.dart';
 import 'package:clean_calendar/src/state/properties_state.dart';
 import 'package:clean_calendar/src/state/providers.dart';
+import 'package:clean_calendar/src/utils/get_suitable_dates_on_tap.dart';
 import 'package:clean_calendar/src/utils/get_widget_center_offset_info.dart';
 import 'package:clean_calendar/src/utils/simulate_tap_on_an_offset.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +21,18 @@ class CalendarGeneralDenseDate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        final Function()? dateSuitableDatesOnTapProviderValue = ref.watch(
-            dateSuitableDatesOnTapProvider(IndividualDateElementProperties(
-                    pageViewElementDate: pageViewElementDate,
-                    pageViewMonthDate: pageViewMonthDate))
-                .select((value) => value));
+        final DateWidgetOnTapDefiningProperties
+            dateWidgetOnTapDefiningProperties =
+            ref.watch(dateSuitableDatesOnTapProvider.select((value) => value));
+
+        final Function()? dateSuitableDatesOnTap = getSuitableDatesOnTap(
+          readCalendarPropertiesStateProviderValue:
+              dateWidgetOnTapDefiningProperties
+                  .readCalendarPropertiesStateProviderValue,
+          dateSelectionMode:
+              dateWidgetOnTapDefiningProperties.dateSelectionMode,
+          pageViewElementDate: pageViewElementDate,
+        );
 
         final DatesProperties dateSuitablePropertiesProviderValue = ref.watch(
             dateSuitablePropertiesProvider(IndividualDateElementProperties(
@@ -57,7 +66,7 @@ class CalendarGeneralDenseDate extends StatelessWidget {
                       )
                     : null,
                 splashFactory: InkRipple.splashFactory,
-                onTap: disable ? null : dateSuitableDatesOnTapProviderValue,
+                onTap: disable ? null : dateSuitableDatesOnTap,
                 child: Row(
                   children: [
                     const Expanded(
@@ -212,11 +221,18 @@ class CalendarGeneralDenseSplashDate extends StatelessWidget {
 
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        final Function()? dateSuitableDatesOnTapProviderValue = ref.watch(
-            dateSuitableDatesOnTapProvider(IndividualDateElementProperties(
-                    pageViewElementDate: pageViewElementDate,
-                    pageViewMonthDate: pageViewMonthDate))
-                .select((value) => value));
+        final DateWidgetOnTapDefiningProperties
+            dateWidgetOnTapDefiningProperties =
+            ref.watch(dateSuitableDatesOnTapProvider.select((value) => value));
+
+        final Function()? dateSuitableDatesOnTap = getSuitableDatesOnTap(
+          readCalendarPropertiesStateProviderValue:
+              dateWidgetOnTapDefiningProperties
+                  .readCalendarPropertiesStateProviderValue,
+          dateSelectionMode:
+              dateWidgetOnTapDefiningProperties.dateSelectionMode,
+          pageViewElementDate: pageViewElementDate,
+        );
 
         final DatesProperties dateSuitablePropertiesProviderValue = ref.watch(
             dateSuitablePropertiesProvider(IndividualDateElementProperties(
@@ -277,7 +293,7 @@ class CalendarGeneralDenseSplashDate extends StatelessWidget {
                             )
                           : null,
                       splashFactory: InkRipple.splashFactory,
-                      onTap: dateSuitableDatesOnTapProviderValue,
+                      onTap: dateSuitableDatesOnTap,
                       child: SizedBox(
                         width: 40,
                         child: Container(
@@ -458,11 +474,18 @@ class CalendarGeneralExpandedDate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        final Function()? dateSuitableDatesOnTapProviderValue = ref.watch(
-            dateSuitableDatesOnTapProvider(IndividualDateElementProperties(
-                    pageViewElementDate: pageViewElementDate,
-                    pageViewMonthDate: pageViewMonthDate))
-                .select((value) => value));
+        final DateWidgetOnTapDefiningProperties
+            dateWidgetOnTapDefiningProperties =
+            ref.watch(dateSuitableDatesOnTapProvider.select((value) => value));
+
+        final Function()? dateSuitableDatesOnTap = getSuitableDatesOnTap(
+          readCalendarPropertiesStateProviderValue:
+              dateWidgetOnTapDefiningProperties
+                  .readCalendarPropertiesStateProviderValue,
+          dateSelectionMode:
+              dateWidgetOnTapDefiningProperties.dateSelectionMode,
+          pageViewElementDate: pageViewElementDate,
+        );
 
         final DatesProperties dateSuitablePropertiesProviderValue = ref.watch(
             dateSuitablePropertiesProvider(IndividualDateElementProperties(
@@ -496,7 +519,7 @@ class CalendarGeneralExpandedDate extends StatelessWidget {
                       )
                     : null,
                 splashFactory: InkRipple.splashFactory,
-                onTap: disable ? null : dateSuitableDatesOnTapProviderValue,
+                onTap: disable ? null : dateSuitableDatesOnTap,
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Container(

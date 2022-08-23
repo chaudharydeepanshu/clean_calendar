@@ -173,7 +173,7 @@ class CalendarDatesPageView extends StatelessWidget {
             calendarPropertiesStateProvider
                 .select((value) => value.dateSelectionMode));
 
-        return getSuitablePageViewBuilderWidget(
+        return GetSuitablePageViewBuilderWidget(
             dateSelectionMode: dateSelectionMode);
       },
     );
@@ -220,7 +220,7 @@ class _CalendarDatesSectionState extends ConsumerState<CalendarDatesSection> {
         final DatePickerCalendarView datePickerCalendarView = ref.watch(
             calendarPropertiesStateProvider
                 .select((value) => value.datePickerCalendarView));
-        return getSuitableCalendarViewGridViewBuilderWidget(
+        return GetSuitableCalendarViewGridViewBuilderWidget(
             pageViewDate: pageViewDate,
             datePickerCalendarView: datePickerCalendarView);
       },
@@ -244,7 +244,7 @@ class WeekViewCalendarDatesSection extends StatelessWidget {
         final DatePickerSelectionMode dateSelectionMode = ref.watch(
             calendarPropertiesStateProvider
                 .select((value) => value.dateSelectionMode));
-        return getSuitableWeekViewGridViewBuilderWidget(
+        return GetSuitableWeekViewGridViewBuilderWidget(
             pageViewDate: pageViewDate,
             pageViewElementsDates: pageViewElementsDates,
             dateSelectionMode: dateSelectionMode);
@@ -269,7 +269,7 @@ class MonthViewCalendarDatesSection extends StatelessWidget {
         final DatePickerSelectionMode dateSelectionMode = ref.watch(
             calendarPropertiesStateProvider
                 .select((value) => value.dateSelectionMode));
-        return getSuitableMonthViewGridViewBuilderWidget(
+        return GetSuitableMonthViewGridViewBuilderWidget(
             pageViewMonthDate: pageViewDate,
             pageViewElementsDates: pageViewElementsDates,
             dateSelectionMode: dateSelectionMode);

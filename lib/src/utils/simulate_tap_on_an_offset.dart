@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 
-simulateTapOnAnOffset(Offset offset) {
+void simulateTapOnAnOffset(Offset offset) {
   GestureBinding.instance.handlePointerEvent(PointerDownEvent(
     position: offset,
   ));
