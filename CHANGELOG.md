@@ -1,3 +1,7 @@
+## 0.4.1
+
+* Moved to stable flutter SDK.
+
 ## 0.3.1-dev.1
 
 * Fixed lots of performance issues due to unnecessary rebuilds.

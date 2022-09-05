@@ -1,12 +1,12 @@
 name: clean_calendar
 description: A brand-new Flutter calendar package that enables you to make a simple, lovely, and customizable calendar.
-version: 0.3.1-dev.1
+version: 0.4.1
 homepage: https://github.com/chaudharydeepanshu/clean_calendar
 repository: https://github.com/chaudharydeepanshu/clean_calendar
 issue_tracker: https://github.com/chaudharydeepanshu/clean_calendar/issues
 
 environment:
-  sdk: '>=2.18.0-165.1.beta <3.0.0'
+  sdk: '>=2.18.0 <3.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
@@ -18,7 +18,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
