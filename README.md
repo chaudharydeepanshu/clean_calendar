@@ -137,6 +137,34 @@ CleanCalendar(
 
 **Note:** ```datePickerCalendarView``` defaults to DatePickerCalendarView.monthView.
 
+## Changing calendar start weekday
+
+You can change the claendar start weekday as shown below:
+
+```dart
+CleanCalendar(
+  // Setting start weekday
+  startWeekday: WeekDay.monday,
+)
+```
+
+**Note:** ```startWeekday``` defaults to WeekDay.sunday.
+
+## Changing weekday and month symbols
+
+You can change the claendar months and weekdays symbols as shown below:
+
+```dart
+CleanCalendar(
+  // Setting custom weekday symbols
+  weekdaysSymbol: const ["m", "t", "w", "t", "f", "s", "s"],
+  // Setting custom month symbols
+  monthsSymbol: const ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+)
+```
+
+**Note:** ```weekdaysSymbol``` defaults to ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"] and ```monthsSymbol``` defaults to ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].
+
 ## Accessing selected dates
 
 To access selected dates use the ```onSelectedDates``` callback but keep in mind that this callback always provides a list of dates as shown below:
