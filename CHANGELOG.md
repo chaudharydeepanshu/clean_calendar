@@ -1,6 +1,11 @@
+## 0.5.3
+
+* Fixes few overflow and ink issues.
+* Added note about dense mode under customisations in documentation.
+
 ## 0.5.2
 
-* Updated documentation for weekdaysSymbol, monthsSymbol and startWeekday
+* Updated documentation for weekdaysSymbol, monthsSymbol and startWeekday.
 
 ## 0.5.1
 

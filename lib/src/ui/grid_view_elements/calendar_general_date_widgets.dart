@@ -315,6 +315,7 @@ class CalendarGeneralDenseSplashDate extends StatelessWidget {
                               child: Text(
                                 key: widgetKey,
                                 pageViewElementDate.day.toString(),
+                                overflow: TextOverflow.ellipsis,
                                 style: datesTextStyle != null
                                     ? datesTextStyle.copyWith(
                                         color: datesTextColor,

@@ -875,7 +875,8 @@ class CalendarStreakBetweenDenseSplashDate extends StatelessWidget {
                       child: Container(
                         margin: const EdgeInsets.only(top: 4, bottom: 4),
                         width: 40,
-                        child: Ink(
+                        child: Container(
+                          //Replace here with Ink after this fix https://github.com/flutter/flutter/issues/73315
                           decoration: BoxDecoration(
                             border: datesBorderColor != null
                                 ? Border.symmetric(

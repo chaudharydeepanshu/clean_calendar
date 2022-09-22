@@ -351,6 +351,8 @@ class CalendarWeekdaySymbol extends StatelessWidget {
     return Center(
       child: Text(
         symbol.toString(),
+        maxLines: 1,
+        overflow: TextOverflow.clip,
       ),
     );
   }
@@ -366,77 +368,87 @@ class CalendarControlSection extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Consumer(
-            builder: (BuildContext context, WidgetRef ref, Widget? child) {
-              final DateTime pageViewDateTime = ref.watch(
-                  pageControllerStateProvider
-                      .select((value) => value.pageViewDateTime));
-              final List<String> monthsSymbol = ref.watch(
-                  calendarPropertiesStateProvider
-                      .select((value) => value.monthsSymbol));
-              return Text(
-                "${monthsSymbol[pageViewDateTime.month - 1]} ${pageViewDateTime.year}",
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleSmall,
-              );
-            },
+          Flexible(
+            child: Consumer(
+              builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                final DateTime pageViewDateTime = ref.watch(
+                    pageControllerStateProvider
+                        .select((value) => value.pageViewDateTime));
+                final List<String> monthsSymbol = ref.watch(
+                    calendarPropertiesStateProvider
+                        .select((value) => value.monthsSymbol));
+                return Text(
+                  "${monthsSymbol[pageViewDateTime.month - 1]} ${pageViewDateTime.year}",
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.titleSmall,
+                );
+              },
+            ),
           ),
-          Consumer(
-            builder: (BuildContext context, WidgetRef ref, Widget? child) {
-              final PageControllerState readPageControllerStateProviderValue =
-                  ref.watch(pageControllerStateProvider);
-              final PageController pageController =
-                  readPageControllerStateProviderValue.pageController;
+          Flexible(
+            child: Consumer(
+              builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                final PageControllerState readPageControllerStateProviderValue =
+                    ref.watch(pageControllerStateProvider);
+                final PageController pageController =
+                    readPageControllerStateProviderValue.pageController;
 
-              final bool isPageViewInitialView = ref.watch(
-                  isPageViewInitialViewProvider.select((value) => value));
+                final bool isPageViewInitialView = ref.watch(
+                    isPageViewInitialViewProvider.select((value) => value));
 
-              return Row(
-                children: [
-                  !isPageViewInitialView
-                      ? IconButton(
-                          onPressed: () {
-                            final PageControllerState
-                                readPageControllerStateProviderValue =
-                                ref.read(pageControllerStateProvider);
-                            pageController.animateToPage(
-                                readPageControllerStateProviderValue
-                                    .initialIndex,
-                                duration: kTabScrollDuration,
-                                curve: Curves.ease);
-                          },
-                          padding: EdgeInsets.zero,
-                          // iconSize: 12,
-                          icon: const Icon(
-                            Icons.calendar_today,
-                          ),
-                        )
-                      : const SizedBox(),
-                  IconButton(
-                    onPressed: () {
-                      pageController.previousPage(
-                          duration: kTabScrollDuration, curve: Curves.ease);
-                    },
-                    padding: EdgeInsets.zero,
-                    iconSize: 12,
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
+                return Row(
+                  children: [
+                    !isPageViewInitialView
+                        ? Expanded(
+                            child: IconButton(
+                              onPressed: () {
+                                final PageControllerState
+                                    readPageControllerStateProviderValue =
+                                    ref.read(pageControllerStateProvider);
+                                pageController.animateToPage(
+                                    readPageControllerStateProviderValue
+                                        .initialIndex,
+                                    duration: kTabScrollDuration,
+                                    curve: Curves.ease);
+                              },
+                              padding: EdgeInsets.zero,
+                              // iconSize: 12,
+                              icon: const Icon(
+                                Icons.calendar_today,
+                              ),
+                            ),
+                          )
+                        : Expanded(child: const SizedBox()),
+                    Expanded(
+                      child: IconButton(
+                        onPressed: () {
+                          pageController.previousPage(
+                              duration: kTabScrollDuration, curve: Curves.ease);
+                        },
+                        padding: EdgeInsets.zero,
+                        iconSize: 12,
+                        icon: const Icon(
+                          Icons.arrow_back_ios,
+                        ),
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      pageController.nextPage(
-                          duration: kTabScrollDuration, curve: Curves.ease);
-                    },
-                    padding: EdgeInsets.zero,
-                    iconSize: 12,
-                    icon: const Icon(
-                      Icons.arrow_forward_ios,
+                    Expanded(
+                      child: IconButton(
+                        onPressed: () {
+                          pageController.nextPage(
+                              duration: kTabScrollDuration, curve: Curves.ease);
+                        },
+                        padding: EdgeInsets.zero,
+                        iconSize: 12,
+                        icon: const Icon(
+                          Icons.arrow_forward_ios,
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              );
-            },
+                  ],
+                );
+              },
+            ),
           ),
         ],
       ),
