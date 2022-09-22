@@ -96,6 +96,8 @@ class Home extends StatelessWidget {
 |:---|:---|
 | <img src="https://user-images.githubusercontent.com/85361211/185585701-00c9b42e-ca15-4884-a151-c795a0e06662.gif" width="470" /> | <img src="https://user-images.githubusercontent.com/85361211/185585710-69037f2c-773f-492a-a9ef-869f5926cf14.gif" width="470" /> |
 
+Note: This dense mode could lead to overflow if the available width to calendar is smaller than 280px so it is advised to disable them in smaller space than 280px.
+
 - Disable and hide different types of dates
 
 | <pre>CleanCalendar(                                      <br />)</pre> | <pre>CleanCalendar(<br />  leadingTrailingDatesProperties: DatesProperties(<br /><br />   // To disable taps on leading and trailing dates.<br />   disable: true,<br /><br />   // To hide leading and trailing dates.<br />   hide: true,<br />  ),<br />)</pre> |
