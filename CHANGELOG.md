@@ -1,3 +1,7 @@
+## 0.5.2
+
+* Updated documentation for weekdaysSymbol, monthsSymbol and startWeekday
+
 ## 0.5.1
 
 * Added support for custom month symbols. [#2](https://github.com/chaudharydeepanshu/clean_calendar/issues/2)
