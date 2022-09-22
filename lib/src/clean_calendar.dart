@@ -28,7 +28,14 @@ class CleanCalendar extends StatelessWidget {
     this.selectedDates,
     this.onSelectedDates,
     this.onCalendarViewDate,
-  }) : super(key: key);
+    this.startWeekday,
+    this.weekdaysSymbol,
+    this.monthsSymbol,
+  })  : assert(weekdaysSymbol == null || weekdaysSymbol.length == 7,
+            'either weekdaysSymbol should be null or its length should be 7'),
+        assert(monthsSymbol == null || monthsSymbol.length == 12,
+            'either monthsSymbol should be null or its length should be 12'),
+        super(key: key);
 
   /// - datePickerCalendarView, It takes calendar view type.
   final DatePickerCalendarView? datePickerCalendarView;
@@ -86,6 +93,23 @@ class CleanCalendar extends StatelessWidget {
   /// - onCalendarViewDate, A callback to get the current calendar view date.
   final ValueChanged<DateTime>? onCalendarViewDate;
 
+  /// - startWeekday, It takes the weekday from which the calendar view should start.
+  ///
+  /// Defaults to sunday.
+  final WeekDay? startWeekday;
+
+  /// - weekdaysSymbol, It takes the weekdays symbol list.
+  ///
+  /// Provide list from Monday to Sunday.
+  /// Defaults to ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+  final List<String>? weekdaysSymbol;
+
+  /// - monthsSymbol, It takes the months symbol list.
+  ///
+  /// Provide list from January to December.
+  /// Defaults to ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  final List<String>? monthsSymbol;
+
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
@@ -109,6 +133,9 @@ class CleanCalendar extends StatelessWidget {
           selectedDates: selectedDates,
           onSelectedDates: onSelectedDates,
           onCalendarViewDate: onCalendarViewDate,
+          startWeekday: startWeekday,
+          weekdaysSymbol: weekdaysSymbol,
+          monthsSymbol: monthsSymbol,
           context: context),
     );
   }

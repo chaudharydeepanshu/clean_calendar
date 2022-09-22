@@ -5,4 +5,5 @@ export 'src/state/properties_state.dart'
         DatesProperties,
         DecorationProperties,
         DatePickerSelectionMode,
-        DatePickerCalendarView;
+        DatePickerCalendarView,
+        WeekDay;

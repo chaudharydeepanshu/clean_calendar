@@ -1,3 +1,9 @@
+## 0.5.1
+
+* Added support for custom month symbols. [#2](https://github.com/chaudharydeepanshu/clean_calendar/issues/2)
+* Added support for custom weekday symbols. [#2](https://github.com/chaudharydeepanshu/clean_calendar/issues/2)
+* Added support for setting start weekday for both month and week view. [#2](https://github.com/chaudharydeepanshu/clean_calendar/issues/2)
+
 ## 0.4.1
 
 * Moved to stable flutter SDK.

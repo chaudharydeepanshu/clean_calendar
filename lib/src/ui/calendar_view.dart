@@ -8,6 +8,8 @@ import 'package:clean_calendar/src/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../utils/get_weekdays_list.dart';
+
 class Calendar extends ConsumerStatefulWidget {
   const Calendar({
     Key? key,
@@ -30,6 +32,9 @@ class Calendar extends ConsumerStatefulWidget {
     this.selectedDates,
     this.onSelectedDates,
     this.onCalendarViewDate,
+    this.startWeekday,
+    this.weekdaysSymbol,
+    this.monthsSymbol,
     required this.context,
   }) : super(key: key);
 
@@ -61,6 +66,12 @@ class Calendar extends ConsumerStatefulWidget {
 
   final ValueChanged<List<DateTime>>? onSelectedDates;
   final ValueChanged<DateTime>? onCalendarViewDate;
+
+  final WeekDay? startWeekday;
+
+  final List<String>? weekdaysSymbol;
+
+  final List<String>? monthsSymbol;
 
   final BuildContext context;
 
@@ -94,6 +105,9 @@ class _CalendarState extends ConsumerState<Calendar> {
       selectedDates: widget.selectedDates,
       onSelectedDates: widget.onSelectedDates,
       onCalendarViewDate: widget.onCalendarViewDate,
+      startWeekday: widget.startWeekday,
+      weekdaysSymbol: widget.weekdaysSymbol,
+      monthsSymbol: widget.monthsSymbol,
       context: widget.context,
     );
     // final PageControllerState readPageControllerStateProviderValue =
@@ -130,6 +144,9 @@ class _CalendarState extends ConsumerState<Calendar> {
           selectedDates: widget.selectedDates,
           onSelectedDates: widget.onSelectedDates,
           onCalendarViewDate: widget.onCalendarViewDate,
+          startWeekday: widget.startWeekday,
+          weekdaysSymbol: widget.weekdaysSymbol,
+          monthsSymbol: widget.monthsSymbol,
           context: widget.context,
         );
 
@@ -220,24 +237,31 @@ class _CalendarDatesSectionState extends ConsumerState<CalendarDatesSection> {
         final DatePickerCalendarView datePickerCalendarView = ref.watch(
             calendarPropertiesStateProvider
                 .select((value) => value.datePickerCalendarView));
+
+        final int startWeekDay = ref.watch(calendarPropertiesStateProvider
+            .select((value) => value.startWeekday));
         return GetSuitableCalendarViewGridViewBuilderWidget(
-            pageViewDate: pageViewDate,
-            datePickerCalendarView: datePickerCalendarView);
+          pageViewDate: pageViewDate,
+          datePickerCalendarView: datePickerCalendarView,
+          startWeekday: startWeekDay,
+        );
       },
     );
   }
 }
 
 class WeekViewCalendarDatesSection extends StatelessWidget {
-  const WeekViewCalendarDatesSection({Key? key, required this.pageViewDate})
+  const WeekViewCalendarDatesSection(
+      {Key? key, required this.pageViewDate, required this.startWeekday})
       : super(key: key);
 
   final DateTime pageViewDate;
+  final int startWeekday;
 
   @override
   Widget build(BuildContext context) {
-    final List<DateTime> pageViewElementsDates =
-        getDatesForACalendarWeekAsUTC(dateTime: pageViewDate);
+    final List<DateTime> pageViewElementsDates = getDatesForACalendarWeekAsUTC(
+        dateTime: pageViewDate, startWeekday: startWeekday);
 
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
@@ -254,15 +278,17 @@ class WeekViewCalendarDatesSection extends StatelessWidget {
 }
 
 class MonthViewCalendarDatesSection extends StatelessWidget {
-  const MonthViewCalendarDatesSection({Key? key, required this.pageViewDate})
+  const MonthViewCalendarDatesSection(
+      {Key? key, required this.pageViewDate, required this.startWeekday})
       : super(key: key);
 
   final DateTime pageViewDate;
+  final int startWeekday;
 
   @override
   Widget build(BuildContext context) {
-    final List<DateTime> pageViewElementsDates =
-        getDatesForACalendarMonthAsUTC(dateTime: pageViewDate);
+    final List<DateTime> pageViewElementsDates = getDatesForACalendarMonthAsUTC(
+        dateTime: pageViewDate, startWeekday: startWeekday);
 
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
@@ -283,18 +309,33 @@ class CalendarHeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        childAspectRatio: 1,
-        crossAxisCount: 7,
-        mainAxisExtent: 40,
-      ),
-      itemCount: listOfWeekDaysSymbol.length,
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemBuilder: (context, index) => CalendarWeekdaySymbol(
-        symbol: listOfWeekDaysSymbol[index],
-      ),
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        final int startWeekday = ref.watch(calendarPropertiesStateProvider
+            .select((value) => value.startWeekday));
+
+        final List<String> weekdaysSymbol = ref.watch(
+            calendarPropertiesStateProvider
+                .select((value) => value.weekdaysSymbol));
+        List<String> weekdaysListBasedOnStartWeekday =
+            getWeekdaysListBasedOnStartWeekday(
+                startWeekday: startWeekday,
+                listOfWeekDaysSymbol: weekdaysSymbol);
+
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: 1,
+            crossAxisCount: 7,
+            mainAxisExtent: 40,
+          ),
+          itemCount: weekdaysListBasedOnStartWeekday.length,
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemBuilder: (context, index) => CalendarWeekdaySymbol(
+            symbol: weekdaysListBasedOnStartWeekday[index],
+          ),
+        );
+      },
     );
   }
 }
@@ -330,8 +371,11 @@ class CalendarControlSection extends StatelessWidget {
               final DateTime pageViewDateTime = ref.watch(
                   pageControllerStateProvider
                       .select((value) => value.pageViewDateTime));
+              final List<String> monthsSymbol = ref.watch(
+                  calendarPropertiesStateProvider
+                      .select((value) => value.monthsSymbol));
               return Text(
-                "${listOfMonthsSymbol[pageViewDateTime.month - 1]} ${pageViewDateTime.year}",
+                "${monthsSymbol[pageViewDateTime.month - 1]} ${pageViewDateTime.year}",
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleSmall,
               );

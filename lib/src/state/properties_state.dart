@@ -1,7 +1,7 @@
 import 'package:clean_calendar/src/utils.dart';
 import 'package:flutter/material.dart';
 
-List<String> listOfWeekDaysSymbol = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+List<String> listOfWeekDaysSymbol = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
 List<String> listOfMonthsSymbol = [
   "January",
@@ -17,6 +17,17 @@ List<String> listOfMonthsSymbol = [
   "November",
   "December"
 ];
+
+/// - WeekDay, Provides different weekdays.
+enum WeekDay {
+  sunday,
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+}
 
 /// - DatePickerSelectionMode, Provides different modes for date selection.
 enum DatePickerCalendarView {
@@ -216,6 +227,15 @@ class CalendarPropertiesState extends ChangeNotifier {
   late DatePickerCalendarView _datePickerCalendarView;
   DatePickerCalendarView get datePickerCalendarView => _datePickerCalendarView;
 
+  late int? _startWeekday;
+  int get startWeekday => _startWeekday ?? 7;
+
+  late List<String>? _weekdaysSymbol;
+  List<String> get weekdaysSymbol => _weekdaysSymbol ?? listOfWeekDaysSymbol;
+
+  late List<String>? _monthsSymbol;
+  List<String> get monthsSymbol => _monthsSymbol ?? listOfMonthsSymbol;
+
   initializeProperties({
     required DatePickerCalendarView? datePickerCalendarView,
     required DatesProperties? streakDatesProperties,
@@ -236,6 +256,9 @@ class CalendarPropertiesState extends ChangeNotifier {
     required List<DateTime>? selectedDates,
     required ValueChanged<List<DateTime>>? onSelectedDates,
     required ValueChanged<DateTime>? onCalendarViewDate,
+    required WeekDay? startWeekday,
+    required List<String>? weekdaysSymbol,
+    required List<String>? monthsSymbol,
     required BuildContext context,
   }) {
     final ThemeData theme = Theme.of(context);
@@ -434,6 +457,26 @@ class CalendarPropertiesState extends ChangeNotifier {
         (DateTime calendarViewDate) {
           // print(calendarViewDate);
         };
+
+    if (startWeekday == WeekDay.monday) {
+      _startWeekday = 1;
+    } else if (startWeekday == WeekDay.tuesday) {
+      _startWeekday = 2;
+    } else if (startWeekday == WeekDay.wednesday) {
+      _startWeekday = 3;
+    } else if (startWeekday == WeekDay.thursday) {
+      _startWeekday = 4;
+    } else if (startWeekday == WeekDay.friday) {
+      _startWeekday = 5;
+    } else if (startWeekday == WeekDay.saturday) {
+      _startWeekday = 6;
+    } else {
+      _startWeekday = 7;
+    }
+
+    _weekdaysSymbol = weekdaysSymbol ?? listOfWeekDaysSymbol;
+
+    _monthsSymbol = monthsSymbol ?? listOfMonthsSymbol;
   }
 
   updateProperties({
@@ -456,6 +499,9 @@ class CalendarPropertiesState extends ChangeNotifier {
     required List<DateTime>? selectedDates,
     required ValueChanged<List<DateTime>>? onSelectedDates,
     required ValueChanged<DateTime>? onCalendarViewDate,
+    required WeekDay? startWeekday,
+    required List<String>? weekdaysSymbol,
+    required List<String>? monthsSymbol,
     required BuildContext context,
   }) {
     final ThemeData theme = Theme.of(context);
@@ -654,6 +700,26 @@ class CalendarPropertiesState extends ChangeNotifier {
         (DateTime calendarViewDate) {
           // print(calendarViewDate);
         };
+
+    if (startWeekday == WeekDay.monday) {
+      _startWeekday = 1;
+    } else if (startWeekday == WeekDay.tuesday) {
+      _startWeekday = 2;
+    } else if (startWeekday == WeekDay.wednesday) {
+      _startWeekday = 3;
+    } else if (startWeekday == WeekDay.thursday) {
+      _startWeekday = 4;
+    } else if (startWeekday == WeekDay.friday) {
+      _startWeekday = 5;
+    } else if (startWeekday == WeekDay.saturday) {
+      _startWeekday = 6;
+    } else {
+      _startWeekday = 7;
+    }
+
+    _weekdaysSymbol = weekdaysSymbol ?? listOfWeekDaysSymbol;
+
+    _monthsSymbol = monthsSymbol ?? listOfMonthsSymbol;
 
     notifyListeners();
   }

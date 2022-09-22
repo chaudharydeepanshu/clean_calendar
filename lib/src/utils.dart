@@ -60,7 +60,8 @@ List<DateTime> getDaysInBetweenIncludingStartEndDate(
   return daysInFormat;
 }
 
-List<DateTime> getDatesForACalendarMonthAsUTC({required DateTime dateTime}) {
+List<DateTime> getDatesForACalendarMonthAsUTC(
+    {required DateTime dateTime, required int startWeekday}) {
   List<DateTime> calendarMonthDaysAsUTC = [];
 
   DateTime currentDateTime = DateTime.utc(dateTime.year, dateTime.month, 1);
@@ -79,8 +80,17 @@ List<DateTime> getDatesForACalendarMonthAsUTC({required DateTime dateTime}) {
 
   int firstDayOfMonthWeekDay = firstDayOfMonthAsUTC.weekday;
 
+  int diffBetweenWeekdays = firstDayOfMonthWeekDay - startWeekday;
+
+  int daysLeftBeforeMonthStartDate = diffBetweenWeekdays > 0
+      ? diffBetweenWeekdays
+      : diffBetweenWeekdays < 0
+          ? 7 + diffBetweenWeekdays
+          : 0;
+
   for (int i = 1;
-      i <= firstDayOfMonthWeekDay && firstDayOfMonthWeekDay != 7;
+      i <= daysLeftBeforeMonthStartDate &&
+          firstDayOfMonthWeekDay != startWeekday;
       i++) {
     calendarMonthDaysAsUTC.insert(
         0, firstDayOfMonthAsUTC.subtract(Duration(days: i)));
@@ -95,22 +105,85 @@ List<DateTime> getDatesForACalendarMonthAsUTC({required DateTime dateTime}) {
   return calendarMonthDaysAsUTC;
 }
 
-List<DateTime> getDatesForACalendarWeekAsUTC({required DateTime dateTime}) {
+// List<DateTime> getDatesForACalendarMonthAsUTC({required DateTime dateTime}) {
+//   List<DateTime> calendarMonthDaysAsUTC = [];
+//
+//   DateTime currentDateTime = DateTime.utc(dateTime.year, dateTime.month, 1);
+//
+//   DateTime firstDayOfMonthAsUTC =
+//       DateTime.utc(currentDateTime.year, currentDateTime.month, 1);
+//   DateTime lastDayOfMonthAsUTC =
+//       DateTime.utc(currentDateTime.year, currentDateTime.month + 1, 0);
+//
+//   List<DateTime> datesFirstToLastDayOfMonthAsUTC =
+//       getDaysInBetweenIncludingStartEndDate(
+//           startDateTime: firstDayOfMonthAsUTC,
+//           endDateTime: lastDayOfMonthAsUTC);
+//
+//   calendarMonthDaysAsUTC = List.from(datesFirstToLastDayOfMonthAsUTC);
+//
+//   int firstDayOfMonthWeekDay = firstDayOfMonthAsUTC.weekday;
+//
+//   for (int i = 1;
+//       i <= firstDayOfMonthWeekDay && firstDayOfMonthWeekDay != 7;
+//       i++) {
+//     calendarMonthDaysAsUTC.insert(
+//         0, firstDayOfMonthAsUTC.subtract(Duration(days: i)));
+//   }
+//
+//   int daysLeftAfterMonthEndDate = 42 - calendarMonthDaysAsUTC.length;
+//
+//   for (int i = 1; i <= daysLeftAfterMonthEndDate; i++) {
+//     calendarMonthDaysAsUTC.add(lastDayOfMonthAsUTC.add(Duration(days: i)));
+//   }
+//
+//   return calendarMonthDaysAsUTC;
+// }
+
+List<DateTime> getDatesForACalendarWeekAsUTC(
+    {required DateTime dateTime, required int startWeekday}) {
   List<DateTime> calendarWeekDaysAsUTC = [];
 
   DateTime currentDateTime =
       DateTime.utc(dateTime.year, dateTime.month, dateTime.day);
 
+  int currentDateTimeWeekday = currentDateTime.weekday;
+
+  int diffBetweenWeekdays = currentDateTimeWeekday - startWeekday;
+
+  int daysBeforeCurrentDateTime = diffBetweenWeekdays > 0
+      ? diffBetweenWeekdays
+      : diffBetweenWeekdays < 0
+          ? 7 + diffBetweenWeekdays
+          : 0;
+
   DateTime firstDayOfWeekAsUTC =
-      getFirstDayOfWeek(currentDateTime: currentDateTime);
-  DateTime lastDayOfWeekAsUTC =
-      getLastDayOfWeek(currentDateTime: currentDateTime);
+      currentDateTime.subtract(Duration(days: daysBeforeCurrentDateTime));
+
+  DateTime lastDayOfWeekAsUTC = currentDateTime.add(const Duration(days: 7));
 
   calendarWeekDaysAsUTC = getDaysInBetweenIncludingStartEndDate(
       startDateTime: firstDayOfWeekAsUTC, endDateTime: lastDayOfWeekAsUTC);
 
   return calendarWeekDaysAsUTC;
 }
+
+// List<DateTime> getDatesForACalendarWeekAsUTC({required DateTime dateTime}) {
+//   List<DateTime> calendarWeekDaysAsUTC = [];
+//
+//   DateTime currentDateTime =
+//       DateTime.utc(dateTime.year, dateTime.month, dateTime.day);
+//
+//   DateTime firstDayOfWeekAsUTC =
+//       getFirstDayOfWeek(currentDateTime: currentDateTime);
+//   DateTime lastDayOfWeekAsUTC =
+//       getLastDayOfWeek(currentDateTime: currentDateTime);
+//
+//   calendarWeekDaysAsUTC = getDaysInBetweenIncludingStartEndDate(
+//       startDateTime: firstDayOfWeekAsUTC, endDateTime: lastDayOfWeekAsUTC);
+//
+//   return calendarWeekDaysAsUTC;
+// }
 
 int calculateMonthsFromYear0000(DateTime dateTime) {
   /// Each year has 12 months and total years from 0000 are dateTime.year.
