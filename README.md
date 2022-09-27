@@ -116,6 +116,12 @@ Also, Available for other types of dates : -
 |:---|:---|:---|
 | <img src="https://user-images.githubusercontent.com/85361211/185591984-0165f037-8a18-4547-be63-b60bff7de382.png" width="400" /> | <img src="https://user-images.githubusercontent.com/85361211/185591992-2f5c81ab-7db7-4fbd-b85d-9b10a4ca6c01.png" width="400" /> | <img src="https://user-images.githubusercontent.com/85361211/185591997-1fc13884-9741-47c9-af4c-264c70d96e66.png" width="400" /> |
 
+- Customise weekdays looks by changing its properties
+
+| <pre>CleanCalendar(<br />  weekdaysProperties: WeekdaysProperties(<br />    generalWeekdaysDecoration:<br />        WeekdaysDecoration(weekdayTextColor: Colors.red),<br />    sundayDecoration: WeekdaysDecoration(<br />        weekdayTextColor: Colors.green,<br />        weekdayTextStyle:<br />            Theme.of(context).textTheme.headlineMedium),<br />    saturdayDecoration: WeekdaysDecoration(<br />        weekdayTextColor: Colors.green,<br />        weekdayTextStyle:<br />            Theme.of(context).textTheme.headlineMedium),<br />  ),<br />)</pre> |
+|:---|
+| <img src="https://user-images.githubusercontent.com/85361211/192656691-d492a13d-5f45-4bbc-ba33-28f7039b2c9f.jpeg" width="400" />  |
+
 ## Date Selection
 
 - Single date selection with customization
@@ -159,13 +165,13 @@ You can change the claendar months and weekdays symbols as shown below:
 ```dart
 CleanCalendar(
   // Setting custom weekday symbols
-  weekdaysSymbol: const ["m", "t", "w", "t", "f", "s", "s"],
+  weekdaysSymbol: const Weekdays(sunday: "s", monday: "m", tuesday: "t", wednesday: "w", thursday: "t", friday: "f", saturday: "s"),
   // Setting custom month symbols
-  monthsSymbol: const ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  monthsSymbol: const Months(january: "Jan", february: "Feb", march: "Mar", april: "Apr", may: "May", june: "Jun", july: "Jul", august: "Aug", september: "Sep", october: "Oct", november: "Nov", december: "Dec"),
 )
 ```
 
-**Note:** ```weekdaysSymbol``` defaults to ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"] and ```monthsSymbol``` defaults to ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].
+**Note:** ```weekdaysSymbol``` defaults to Mo, Tu, We, Th, Fr, Sa, Su from monday to sunday and ```monthsSymbol``` defaults to January, February, March, April, May, June, July, August, September, October, November, December.
 
 ## Accessing selected dates
 
