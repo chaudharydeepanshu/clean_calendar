@@ -43,15 +43,14 @@ class CalendarGeneralDenseDate extends StatelessWidget {
         DatesProperties datesProperties = dateSuitablePropertiesProviderValue;
 
         Color? datesBackgroundColor =
-            datesProperties.decorationProperties?.datesBackgroundColor;
-        Color? datesTextColor =
-            datesProperties.decorationProperties?.datesTextColor;
+            datesProperties.datesDecoration?.datesBackgroundColor;
+        Color? datesTextColor = datesProperties.datesDecoration?.datesTextColor;
         TextStyle? datesTextStyle =
-            datesProperties.decorationProperties?.datesTextStyle;
+            datesProperties.datesDecoration?.datesTextStyle;
         Color? datesBorderColor =
-            datesProperties.decorationProperties?.datesBorderColor;
+            datesProperties.datesDecoration?.datesBorderColor;
         double? datesBorderRadius =
-            datesProperties.decorationProperties?.datesBorderRadius;
+            datesProperties.datesDecoration?.datesBorderRadius;
         bool hide = datesProperties.hide ?? false;
         bool disable = datesProperties.disable ?? false;
 
@@ -243,15 +242,14 @@ class CalendarGeneralDenseSplashDate extends StatelessWidget {
         DatesProperties datesProperties = dateSuitablePropertiesProviderValue;
 
         Color? datesBackgroundColor =
-            datesProperties.decorationProperties?.datesBackgroundColor;
-        Color? datesTextColor =
-            datesProperties.decorationProperties?.datesTextColor;
+            datesProperties.datesDecoration?.datesBackgroundColor;
+        Color? datesTextColor = datesProperties.datesDecoration?.datesTextColor;
         TextStyle? datesTextStyle =
-            datesProperties.decorationProperties?.datesTextStyle;
+            datesProperties.datesDecoration?.datesTextStyle;
         Color? datesBorderColor =
-            datesProperties.decorationProperties?.datesBorderColor;
+            datesProperties.datesDecoration?.datesBorderColor;
         double? datesBorderRadius =
-            datesProperties.decorationProperties?.datesBorderRadius;
+            datesProperties.datesDecoration?.datesBorderRadius;
         bool hide = datesProperties.hide ?? false;
         bool disable = datesProperties.disable ?? false;
 
@@ -497,15 +495,14 @@ class CalendarGeneralExpandedDate extends StatelessWidget {
         DatesProperties datesProperties = dateSuitablePropertiesProviderValue;
 
         Color? datesBackgroundColor =
-            datesProperties.decorationProperties?.datesBackgroundColor;
-        Color? datesTextColor =
-            datesProperties.decorationProperties?.datesTextColor;
+            datesProperties.datesDecoration?.datesBackgroundColor;
+        Color? datesTextColor = datesProperties.datesDecoration?.datesTextColor;
         TextStyle? datesTextStyle =
-            datesProperties.decorationProperties?.datesTextStyle;
+            datesProperties.datesDecoration?.datesTextStyle;
         Color? datesBorderColor =
-            datesProperties.decorationProperties?.datesBorderColor;
+            datesProperties.datesDecoration?.datesBorderColor;
         double? datesBorderRadius =
-            datesProperties.decorationProperties?.datesBorderRadius;
+            datesProperties.datesDecoration?.datesBorderRadius;
         bool hide = datesProperties.hide ?? false;
         bool disable = datesProperties.disable ?? false;
 

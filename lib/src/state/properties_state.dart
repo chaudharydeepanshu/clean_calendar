@@ -1,8 +1,7 @@
+import 'package:clean_calendar/clean_calendar.dart';
 import 'package:clean_calendar/src/utils.dart';
 import 'package:clean_calendar/src/utils/get_end_weekday_from_start_weekday.dat.dart';
 import 'package:flutter/material.dart';
-
-List<String> listOfWeekDaysSymbol = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
 List<String> listOfMonthsSymbol = [
   "January",
@@ -78,23 +77,23 @@ enum DatePickerSelectionMode {
   // multiRange,
 }
 
-class DecorationProperties {
-  /// - datesBackgroundColor, changes the dates background color
+class DatesDecoration {
+  /// - datesBackgroundColor, changes the dates background color.
   final Color? datesBackgroundColor;
 
-  /// - datesTextColor, changes the dates text color
+  /// - datesTextColor, changes the dates text color.
   final Color? datesTextColor;
 
-  /// - datesTextStyle, changes the dates text style
+  /// - datesTextStyle, changes the dates text style.
   final TextStyle? datesTextStyle;
 
-  /// - datesBorderColor, changes the dates border color
+  /// - datesBorderColor, changes the dates border color.
   final Color? datesBorderColor;
 
-  /// - datesBorderRadius, changes the dates border radius
+  /// - datesBorderRadius, changes the dates border radius.
   final double? datesBorderRadius;
 
-  DecorationProperties({
+  DatesDecoration({
     this.datesBackgroundColor,
     this.datesTextColor,
     this.datesTextStyle,
@@ -105,7 +104,7 @@ class DecorationProperties {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DecorationProperties &&
+      other is DatesDecoration &&
           runtimeType == other.runtimeType &&
           datesBackgroundColor == other.datesBackgroundColor &&
           datesTextColor == other.datesTextColor &&
@@ -125,22 +124,22 @@ class DecorationProperties {
   // when using the print statement.
   @override
   String toString() {
-    return 'DatesProperties{datesBackgroundColor: $datesBackgroundColor, datesTextColor: $datesTextColor, datesTextStyle: $datesTextStyle, datesBorderColor: $datesBorderColor, datesBorderRadius: $datesBorderRadius}';
+    return 'DatesDecoration{datesBackgroundColor: $datesBackgroundColor, datesTextColor: $datesTextColor, datesTextStyle: $datesTextStyle, datesBorderColor: $datesBorderColor, datesBorderRadius: $datesBorderRadius}';
   }
 }
 
 class DatesProperties {
-  /// - decorationProperties, changes the dates decorationProperties
-  final DecorationProperties? decorationProperties;
+  /// - datesDecoration, changes the dates decoration.
+  final DatesDecoration? datesDecoration;
 
-  /// - disable, disable dates
+  /// - disable, disable dates.
   final bool? disable;
 
-  /// - hide, hide dates
+  /// - hide, hide dates.
   final bool? hide;
 
   DatesProperties({
-    this.decorationProperties,
+    this.datesDecoration,
     this.disable,
     this.hide,
   });
@@ -150,23 +149,126 @@ class DatesProperties {
       identical(this, other) ||
       other is DatesProperties &&
           runtimeType == other.runtimeType &&
-          decorationProperties == other.decorationProperties &&
+          datesDecoration == other.datesDecoration &&
           disable == other.disable &&
           hide == other.hide;
 
   @override
   int get hashCode =>
-      decorationProperties.hashCode ^ disable.hashCode ^ hide.hashCode;
+      datesDecoration.hashCode ^ disable.hashCode ^ hide.hashCode;
 
   // Implement toString to make it easier to see information
   // when using the print statement.
   @override
   String toString() {
-    return 'DatesProperties{decorationProperties: $decorationProperties, disable: $disable}';
+    return 'DatesProperties{decorationProperties: $datesDecoration, disable: $disable}';
+  }
+}
+
+class WeekdaysDecoration {
+  /// - weekdayTextColor, changes the weekday text color.
+  final Color? weekdayTextColor;
+
+  /// - weekdayTextStyle, changes the weekday text style.
+  final TextStyle? weekdayTextStyle;
+
+  WeekdaysDecoration({
+    this.weekdayTextColor,
+    this.weekdayTextStyle,
+  });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is WeekdaysDecoration &&
+          runtimeType == other.runtimeType &&
+          weekdayTextColor == other.weekdayTextColor &&
+          weekdayTextStyle == other.weekdayTextStyle;
+
+  @override
+  int get hashCode => weekdayTextColor.hashCode ^ weekdayTextStyle.hashCode;
+
+  // Implement toString to make it easier to see information
+  // when using the print statement.
+  @override
+  String toString() {
+    return 'WeekdaysDecoration{weekdayTextColor: $weekdayTextColor, weekdayTextStyle: $weekdayTextStyle}';
+  }
+}
+
+class WeekdaysProperties {
+  /// - generalWeekdaysDecoration, changes the decoration of all weekdays except for which user has provided specific weekday decoration.
+  final WeekdaysDecoration? generalWeekdaysDecoration;
+
+  /// - firstWeekdayDecoration, changes the decoration of only first weekday.
+  final WeekdaysDecoration? sundayDecoration;
+
+  /// - secondWeekdayDecoration, changes the decoration of only second weekday.
+  final WeekdaysDecoration? mondayDecoration;
+
+  /// - thirdWeekdayDecoration, changes the decoration of only third weekday.
+  final WeekdaysDecoration? tuesdayDecoration;
+
+  /// - forthWeekdayDecoration, changes the decoration of only forth weekday.
+  final WeekdaysDecoration? wednesdayDecoration;
+
+  /// - fifthWeekdayDecoration, changes the decoration of only fifth weekday.
+  final WeekdaysDecoration? thursdayDecoration;
+
+  /// - sixthWeekdayDecoration, changes the decoration of only sixth weekday.
+  final WeekdaysDecoration? fridayDecoration;
+
+  /// - seventhWeekdayDecoration, changes the decoration of only seventh weekday.
+  final WeekdaysDecoration? saturdayDecoration;
+
+  WeekdaysProperties({
+    this.generalWeekdaysDecoration,
+    this.sundayDecoration,
+    this.mondayDecoration,
+    this.tuesdayDecoration,
+    this.wednesdayDecoration,
+    this.thursdayDecoration,
+    this.fridayDecoration,
+    this.saturdayDecoration,
+  });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is WeekdaysProperties &&
+          runtimeType == other.runtimeType &&
+          generalWeekdaysDecoration == other.generalWeekdaysDecoration &&
+          sundayDecoration == other.sundayDecoration &&
+          mondayDecoration == other.mondayDecoration &&
+          tuesdayDecoration == other.tuesdayDecoration &&
+          wednesdayDecoration == other.wednesdayDecoration &&
+          thursdayDecoration == other.thursdayDecoration &&
+          fridayDecoration == other.fridayDecoration &&
+          saturdayDecoration == other.saturdayDecoration;
+
+  @override
+  int get hashCode =>
+      generalWeekdaysDecoration.hashCode ^
+      sundayDecoration.hashCode ^
+      mondayDecoration.hashCode ^
+      tuesdayDecoration.hashCode ^
+      wednesdayDecoration.hashCode ^
+      thursdayDecoration.hashCode ^
+      fridayDecoration.hashCode ^
+      saturdayDecoration.hashCode;
+
+  // Implement toString to make it easier to see information
+  // when using the print statement.
+  @override
+  String toString() {
+    return 'WeekdaysProperties{generalWeekdaysDecoration: $generalWeekdaysDecoration, sundayDecoration: $sundayDecoration, mondayDecoration: $mondayDecoration, tuesdayDecoration: $tuesdayDecoration, wednesdayDecoration: $wednesdayDecoration, thursdayDecoration: $thursdayDecoration, fridayDecoration: $fridayDecoration, saturdayDecoration: $saturdayDecoration}';
   }
 }
 
 class CalendarPropertiesState extends ChangeNotifier {
+  late WeekdaysProperties _weekdaysProperties;
+  WeekdaysProperties get weekdaysProperties => _weekdaysProperties;
+
   late DatesProperties _streakDatesProperties;
   DatesProperties get streakDatesProperties => _streakDatesProperties;
 
@@ -235,14 +337,38 @@ class CalendarPropertiesState extends ChangeNotifier {
       getEndWeekdayFromStartWeekday(startWeekday: startWeekday);
   int get endWeekday => _endWeekday;
 
-  late List<String>? _weekdaysSymbol;
-  List<String> get weekdaysSymbol => _weekdaysSymbol ?? listOfWeekDaysSymbol;
+  late Weekdays? _weekdaysSymbol;
+  Weekdays get weekdaysSymbol =>
+      _weekdaysSymbol ??
+      const Weekdays(
+          sunday: "Su",
+          monday: "Mo",
+          tuesday: "Tu",
+          wednesday: "We",
+          thursday: "Th",
+          friday: "Fr",
+          saturday: "Sa");
 
-  late List<String>? _monthsSymbol;
-  List<String> get monthsSymbol => _monthsSymbol ?? listOfMonthsSymbol;
+  late Months? _monthsSymbol;
+  Months get monthsSymbol =>
+      _monthsSymbol ??
+      const Months(
+          january: "January",
+          february: "February",
+          march: "March",
+          april: "April",
+          may: "May",
+          june: "June",
+          july: "July",
+          august: "August",
+          september: "September",
+          october: "October",
+          november: "November",
+          december: "December");
 
   initializeProperties({
     required DatePickerCalendarView? datePickerCalendarView,
+    required WeekdaysProperties? weekdaysProperties,
     required DatesProperties? streakDatesProperties,
     required DatesProperties? currentDateProperties,
     required DatesProperties? generalDatesProperties,
@@ -262,8 +388,8 @@ class CalendarPropertiesState extends ChangeNotifier {
     required ValueChanged<List<DateTime>>? onSelectedDates,
     required ValueChanged<DateTime>? onCalendarViewDate,
     required WeekDay? startWeekday,
-    required List<String>? weekdaysSymbol,
-    required List<String>? monthsSymbol,
+    required Weekdays? weekdaysSymbol,
+    required Months? monthsSymbol,
     required BuildContext context,
   }) {
     final ThemeData theme = Theme.of(context);
@@ -271,62 +397,140 @@ class CalendarPropertiesState extends ChangeNotifier {
     _datePickerCalendarView =
         datePickerCalendarView ?? DatePickerCalendarView.monthView;
 
+    _weekdaysProperties = WeekdaysProperties(
+      generalWeekdaysDecoration: WeekdaysDecoration(
+        weekdayTextColor:
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+                theme.colorScheme.onSurface,
+        weekdayTextStyle:
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+                const TextStyle(),
+      ),
+      sundayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.sundayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.sundayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+      mondayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.mondayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.mondayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+      tuesdayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.tuesdayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.tuesdayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+      wednesdayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.wednesdayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.wednesdayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+      thursdayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.thursdayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.thursdayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+      fridayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.fridayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.fridayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+      saturdayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.saturdayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.saturdayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+    );
+
     _streakDatesProperties = DatesProperties(
-      decorationProperties: DecorationProperties(
-          datesBackgroundColor: streakDatesProperties
-                  ?.decorationProperties?.datesBackgroundColor ??
-              theme.colorScheme.surfaceVariant,
+      datesDecoration: DatesDecoration(
+          datesBackgroundColor:
+              streakDatesProperties?.datesDecoration?.datesBackgroundColor ??
+                  theme.colorScheme.surfaceVariant,
           datesTextColor:
-              streakDatesProperties?.decorationProperties?.datesTextColor ??
+              streakDatesProperties?.datesDecoration?.datesTextColor ??
                   theme.colorScheme.onSurfaceVariant,
           datesTextStyle:
-              streakDatesProperties?.decorationProperties?.datesTextStyle ??
+              streakDatesProperties?.datesDecoration?.datesTextStyle ??
                   const TextStyle(),
           datesBorderColor:
-              streakDatesProperties?.decorationProperties?.datesBorderColor ??
+              streakDatesProperties?.datesDecoration?.datesBorderColor ??
                   theme.colorScheme.onSurface,
           datesBorderRadius:
-              streakDatesProperties?.decorationProperties?.datesBorderRadius ??
-                  12),
+              streakDatesProperties?.datesDecoration?.datesBorderRadius ?? 12),
       disable: streakDatesProperties?.disable ?? false,
       hide: streakDatesProperties?.hide ?? false,
     );
 
     _currentDateProperties = DatesProperties(
-      decorationProperties: DecorationProperties(
+      datesDecoration: DatesDecoration(
           datesBackgroundColor:
-              currentDateProperties?.decorationProperties?.datesBackgroundColor,
+              currentDateProperties?.datesDecoration?.datesBackgroundColor,
           datesTextColor:
-              currentDateProperties?.decorationProperties?.datesTextColor,
+              currentDateProperties?.datesDecoration?.datesTextColor,
           datesTextStyle:
-              currentDateProperties?.decorationProperties?.datesTextStyle,
+              currentDateProperties?.datesDecoration?.datesTextStyle,
           datesBorderColor:
-              currentDateProperties?.decorationProperties?.datesBorderColor ??
+              currentDateProperties?.datesDecoration?.datesBorderColor ??
                   theme.colorScheme.primary,
           datesBorderRadius:
-              currentDateProperties?.decorationProperties?.datesBorderRadius ??
-                  12),
+              currentDateProperties?.datesDecoration?.datesBorderRadius ?? 12),
       disable: currentDateProperties?.disable ?? false,
       hide: currentDateProperties?.hide ?? false,
     );
 
     _generalDatesProperties = DatesProperties(
-      decorationProperties: DecorationProperties(
-          datesBackgroundColor: generalDatesProperties
-                  ?.decorationProperties?.datesBackgroundColor ??
-              Colors.transparent,
+      datesDecoration: DatesDecoration(
+          datesBackgroundColor:
+              generalDatesProperties?.datesDecoration?.datesBackgroundColor ??
+                  Colors.transparent,
           datesTextColor:
-              generalDatesProperties?.decorationProperties?.datesTextColor ??
+              generalDatesProperties?.datesDecoration?.datesTextColor ??
                   theme.colorScheme.onSurface,
           datesTextStyle:
-              generalDatesProperties?.decorationProperties?.datesTextStyle ??
+              generalDatesProperties?.datesDecoration?.datesTextStyle ??
                   const TextStyle(),
           datesBorderColor:
-              generalDatesProperties?.decorationProperties?.datesBorderColor ??
+              generalDatesProperties?.datesDecoration?.datesBorderColor ??
                   theme.colorScheme.onSurface.withOpacity(0.5),
           datesBorderRadius:
-              generalDatesProperties?.decorationProperties?.datesBorderRadius ??
-                  12),
+              generalDatesProperties?.datesDecoration?.datesBorderRadius ?? 12),
       disable: generalDatesProperties?.disable ?? false,
       hide: generalDatesProperties?.hide ?? false,
     );
@@ -334,83 +538,83 @@ class CalendarPropertiesState extends ChangeNotifier {
     _leadingTrailingDatesProperties =
         _datePickerCalendarView == DatePickerCalendarView.monthView
             ? DatesProperties(
-                decorationProperties: DecorationProperties(
+                datesDecoration: DatesDecoration(
                     datesBackgroundColor: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesBackgroundColor ??
+                            ?.datesDecoration?.datesBackgroundColor ??
                         theme.colorScheme.surface,
                     datesTextColor: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesTextColor ??
+                            ?.datesDecoration?.datesTextColor ??
                         theme.disabledColor,
                     datesTextStyle: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesTextStyle ??
+                            ?.datesDecoration?.datesTextStyle ??
                         const TextStyle(),
                     datesBorderColor: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesBorderColor ??
+                            ?.datesDecoration?.datesBorderColor ??
                         theme.dividerColor,
                     datesBorderRadius: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesBorderRadius ??
+                            ?.datesDecoration?.datesBorderRadius ??
                         12),
                 disable: leadingTrailingDatesProperties?.disable ?? false,
                 hide: leadingTrailingDatesProperties?.hide ?? false,
               )
             : DatesProperties(
-                decorationProperties: DecorationProperties(
+                datesDecoration: DatesDecoration(
                     datesBackgroundColor: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesBackgroundColor ??
+                            ?.datesDecoration?.datesBackgroundColor ??
                         Colors.transparent,
                     datesTextColor: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesTextColor ??
+                            ?.datesDecoration?.datesTextColor ??
                         theme.colorScheme.onSurface,
                     datesTextStyle: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesTextStyle ??
+                            ?.datesDecoration?.datesTextStyle ??
                         const TextStyle(),
                     datesBorderColor: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesBorderColor ??
+                            ?.datesDecoration?.datesBorderColor ??
                         theme.colorScheme.onSurface.withOpacity(0.5),
                     datesBorderRadius: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesBorderRadius ??
+                            ?.datesDecoration?.datesBorderRadius ??
                         12),
                 disable: leadingTrailingDatesProperties?.disable ?? false,
                 hide: leadingTrailingDatesProperties?.hide ?? false,
               );
 
     _selectedDatesProperties = DatesProperties(
-      decorationProperties: DecorationProperties(
-          datesBackgroundColor: selectedDatesProperties
-                  ?.decorationProperties?.datesBackgroundColor ??
-              theme.colorScheme.primary,
+      datesDecoration: DatesDecoration(
+          datesBackgroundColor:
+              selectedDatesProperties?.datesDecoration?.datesBackgroundColor ??
+                  theme.colorScheme.primary,
           datesTextColor:
-              selectedDatesProperties?.decorationProperties?.datesTextColor ??
+              selectedDatesProperties?.datesDecoration?.datesTextColor ??
                   theme.colorScheme.onPrimary,
           datesTextStyle:
-              selectedDatesProperties?.decorationProperties?.datesTextStyle ??
+              selectedDatesProperties?.datesDecoration?.datesTextStyle ??
                   const TextStyle(),
           datesBorderColor:
-              selectedDatesProperties?.decorationProperties?.datesBorderColor ??
+              selectedDatesProperties?.datesDecoration?.datesBorderColor ??
                   theme.colorScheme.primary,
-          datesBorderRadius: selectedDatesProperties
-                  ?.decorationProperties?.datesBorderRadius ??
-              12),
+          datesBorderRadius:
+              selectedDatesProperties?.datesDecoration?.datesBorderRadius ??
+                  12),
       disable: selectedDatesProperties?.disable ?? false,
       hide: selectedDatesProperties?.hide ?? false,
     );
 
     _selectedRangeBetweenDatesProperties = DatesProperties(
-      decorationProperties: DecorationProperties(
+      datesDecoration: DatesDecoration(
           datesBackgroundColor: selectedRangeBetweenDatesProperties
-                  ?.decorationProperties?.datesBackgroundColor ??
+                  ?.datesDecoration?.datesBackgroundColor ??
               theme.colorScheme.surfaceVariant,
           datesTextColor: selectedRangeBetweenDatesProperties
-                  ?.decorationProperties?.datesTextColor ??
+                  ?.datesDecoration?.datesTextColor ??
               theme.colorScheme.onSurfaceVariant,
           datesTextStyle: selectedRangeBetweenDatesProperties
-                  ?.decorationProperties?.datesTextStyle ??
+                  ?.datesDecoration?.datesTextStyle ??
               const TextStyle(),
           datesBorderColor: selectedRangeBetweenDatesProperties
-                  ?.decorationProperties?.datesBorderColor ??
+                  ?.datesDecoration?.datesBorderColor ??
               Colors.transparent,
           datesBorderRadius: selectedRangeBetweenDatesProperties
-                  ?.decorationProperties?.datesBorderRadius ??
+                  ?.datesDecoration?.datesBorderRadius ??
               12),
       disable: selectedDatesProperties?.disable ?? false,
       hide: selectedDatesProperties?.hide ?? false,
@@ -479,13 +683,35 @@ class CalendarPropertiesState extends ChangeNotifier {
       _startWeekday = 7;
     }
 
-    _weekdaysSymbol = weekdaysSymbol ?? listOfWeekDaysSymbol;
+    _weekdaysSymbol = weekdaysSymbol ??
+        const Weekdays(
+            sunday: "Su",
+            monday: "Mo",
+            tuesday: "Tu",
+            wednesday: "We",
+            thursday: "Th",
+            friday: "Fr",
+            saturday: "Sa");
 
-    _monthsSymbol = monthsSymbol ?? listOfMonthsSymbol;
+    _monthsSymbol = monthsSymbol ??
+        const Months(
+            january: "January",
+            february: "February",
+            march: "March",
+            april: "April",
+            may: "May",
+            june: "June",
+            july: "July",
+            august: "August",
+            september: "September",
+            october: "October",
+            november: "November",
+            december: "December");
   }
 
   updateProperties({
     required DatePickerCalendarView? datePickerCalendarView,
+    required WeekdaysProperties? weekdaysProperties,
     required DatesProperties? streakDatesProperties,
     required DatesProperties? currentDateProperties,
     required DatesProperties? generalDatesProperties,
@@ -505,8 +731,8 @@ class CalendarPropertiesState extends ChangeNotifier {
     required ValueChanged<List<DateTime>>? onSelectedDates,
     required ValueChanged<DateTime>? onCalendarViewDate,
     required WeekDay? startWeekday,
-    required List<String>? weekdaysSymbol,
-    required List<String>? monthsSymbol,
+    required Weekdays? weekdaysSymbol,
+    required Months? monthsSymbol,
     required BuildContext context,
   }) {
     final ThemeData theme = Theme.of(context);
@@ -514,62 +740,140 @@ class CalendarPropertiesState extends ChangeNotifier {
     _datePickerCalendarView =
         datePickerCalendarView ?? DatePickerCalendarView.monthView;
 
+    _weekdaysProperties = WeekdaysProperties(
+      generalWeekdaysDecoration: WeekdaysDecoration(
+        weekdayTextColor:
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+                theme.colorScheme.onSurface,
+        weekdayTextStyle:
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+                const TextStyle(),
+      ),
+      sundayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.sundayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.sundayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+      mondayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.mondayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.mondayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+      tuesdayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.tuesdayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.tuesdayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+      wednesdayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.wednesdayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.wednesdayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+      thursdayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.thursdayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.thursdayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+      fridayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.fridayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.fridayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+      saturdayDecoration: WeekdaysDecoration(
+        weekdayTextColor: weekdaysProperties
+                ?.saturdayDecoration?.weekdayTextColor ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextColor ??
+            theme.colorScheme.onSurface,
+        weekdayTextStyle: weekdaysProperties
+                ?.saturdayDecoration?.weekdayTextStyle ??
+            weekdaysProperties?.generalWeekdaysDecoration?.weekdayTextStyle ??
+            const TextStyle(),
+      ),
+    );
+
     _streakDatesProperties = DatesProperties(
-      decorationProperties: DecorationProperties(
-          datesBackgroundColor: streakDatesProperties
-                  ?.decorationProperties?.datesBackgroundColor ??
-              theme.colorScheme.surfaceVariant,
+      datesDecoration: DatesDecoration(
+          datesBackgroundColor:
+              streakDatesProperties?.datesDecoration?.datesBackgroundColor ??
+                  theme.colorScheme.surfaceVariant,
           datesTextColor:
-              streakDatesProperties?.decorationProperties?.datesTextColor ??
+              streakDatesProperties?.datesDecoration?.datesTextColor ??
                   theme.colorScheme.onSurfaceVariant,
           datesTextStyle:
-              streakDatesProperties?.decorationProperties?.datesTextStyle ??
+              streakDatesProperties?.datesDecoration?.datesTextStyle ??
                   const TextStyle(),
           datesBorderColor:
-              streakDatesProperties?.decorationProperties?.datesBorderColor ??
+              streakDatesProperties?.datesDecoration?.datesBorderColor ??
                   theme.colorScheme.onSurface,
           datesBorderRadius:
-              streakDatesProperties?.decorationProperties?.datesBorderRadius ??
-                  12),
+              streakDatesProperties?.datesDecoration?.datesBorderRadius ?? 12),
       disable: streakDatesProperties?.disable ?? false,
       hide: streakDatesProperties?.hide ?? false,
     );
 
     _currentDateProperties = DatesProperties(
-      decorationProperties: DecorationProperties(
+      datesDecoration: DatesDecoration(
           datesBackgroundColor:
-              currentDateProperties?.decorationProperties?.datesBackgroundColor,
+              currentDateProperties?.datesDecoration?.datesBackgroundColor,
           datesTextColor:
-              currentDateProperties?.decorationProperties?.datesTextColor,
+              currentDateProperties?.datesDecoration?.datesTextColor,
           datesTextStyle:
-              currentDateProperties?.decorationProperties?.datesTextStyle,
+              currentDateProperties?.datesDecoration?.datesTextStyle,
           datesBorderColor:
-              currentDateProperties?.decorationProperties?.datesBorderColor ??
+              currentDateProperties?.datesDecoration?.datesBorderColor ??
                   theme.colorScheme.primary,
           datesBorderRadius:
-              currentDateProperties?.decorationProperties?.datesBorderRadius ??
-                  12),
+              currentDateProperties?.datesDecoration?.datesBorderRadius ?? 12),
       disable: currentDateProperties?.disable ?? false,
       hide: currentDateProperties?.hide ?? false,
     );
 
     _generalDatesProperties = DatesProperties(
-      decorationProperties: DecorationProperties(
-          datesBackgroundColor: generalDatesProperties
-                  ?.decorationProperties?.datesBackgroundColor ??
-              Colors.transparent,
+      datesDecoration: DatesDecoration(
+          datesBackgroundColor:
+              generalDatesProperties?.datesDecoration?.datesBackgroundColor ??
+                  Colors.transparent,
           datesTextColor:
-              generalDatesProperties?.decorationProperties?.datesTextColor ??
+              generalDatesProperties?.datesDecoration?.datesTextColor ??
                   theme.colorScheme.onSurface,
           datesTextStyle:
-              generalDatesProperties?.decorationProperties?.datesTextStyle ??
+              generalDatesProperties?.datesDecoration?.datesTextStyle ??
                   const TextStyle(),
           datesBorderColor:
-              generalDatesProperties?.decorationProperties?.datesBorderColor ??
+              generalDatesProperties?.datesDecoration?.datesBorderColor ??
                   theme.colorScheme.onSurface.withOpacity(0.5),
           datesBorderRadius:
-              generalDatesProperties?.decorationProperties?.datesBorderRadius ??
-                  12),
+              generalDatesProperties?.datesDecoration?.datesBorderRadius ?? 12),
       disable: generalDatesProperties?.disable ?? false,
       hide: generalDatesProperties?.hide ?? false,
     );
@@ -577,83 +881,83 @@ class CalendarPropertiesState extends ChangeNotifier {
     _leadingTrailingDatesProperties =
         _datePickerCalendarView == DatePickerCalendarView.monthView
             ? DatesProperties(
-                decorationProperties: DecorationProperties(
+                datesDecoration: DatesDecoration(
                     datesBackgroundColor: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesBackgroundColor ??
+                            ?.datesDecoration?.datesBackgroundColor ??
                         theme.colorScheme.surface,
                     datesTextColor: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesTextColor ??
+                            ?.datesDecoration?.datesTextColor ??
                         theme.disabledColor,
                     datesTextStyle: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesTextStyle ??
+                            ?.datesDecoration?.datesTextStyle ??
                         const TextStyle(),
                     datesBorderColor: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesBorderColor ??
+                            ?.datesDecoration?.datesBorderColor ??
                         theme.dividerColor,
                     datesBorderRadius: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesBorderRadius ??
+                            ?.datesDecoration?.datesBorderRadius ??
                         12),
                 disable: leadingTrailingDatesProperties?.disable ?? false,
                 hide: leadingTrailingDatesProperties?.hide ?? false,
               )
             : DatesProperties(
-                decorationProperties: DecorationProperties(
+                datesDecoration: DatesDecoration(
                     datesBackgroundColor: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesBackgroundColor ??
+                            ?.datesDecoration?.datesBackgroundColor ??
                         Colors.transparent,
                     datesTextColor: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesTextColor ??
+                            ?.datesDecoration?.datesTextColor ??
                         theme.colorScheme.onSurface,
                     datesTextStyle: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesTextStyle ??
+                            ?.datesDecoration?.datesTextStyle ??
                         const TextStyle(),
                     datesBorderColor: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesBorderColor ??
+                            ?.datesDecoration?.datesBorderColor ??
                         theme.colorScheme.onSurface.withOpacity(0.5),
                     datesBorderRadius: leadingTrailingDatesProperties
-                            ?.decorationProperties?.datesBorderRadius ??
+                            ?.datesDecoration?.datesBorderRadius ??
                         12),
                 disable: leadingTrailingDatesProperties?.disable ?? false,
                 hide: leadingTrailingDatesProperties?.hide ?? false,
               );
 
     _selectedDatesProperties = DatesProperties(
-      decorationProperties: DecorationProperties(
-          datesBackgroundColor: selectedDatesProperties
-                  ?.decorationProperties?.datesBackgroundColor ??
-              theme.colorScheme.primary,
+      datesDecoration: DatesDecoration(
+          datesBackgroundColor:
+              selectedDatesProperties?.datesDecoration?.datesBackgroundColor ??
+                  theme.colorScheme.primary,
           datesTextColor:
-              selectedDatesProperties?.decorationProperties?.datesTextColor ??
+              selectedDatesProperties?.datesDecoration?.datesTextColor ??
                   theme.colorScheme.onPrimary,
           datesTextStyle:
-              selectedDatesProperties?.decorationProperties?.datesTextStyle ??
+              selectedDatesProperties?.datesDecoration?.datesTextStyle ??
                   const TextStyle(),
           datesBorderColor:
-              selectedDatesProperties?.decorationProperties?.datesBorderColor ??
+              selectedDatesProperties?.datesDecoration?.datesBorderColor ??
                   theme.colorScheme.primary,
-          datesBorderRadius: selectedDatesProperties
-                  ?.decorationProperties?.datesBorderRadius ??
-              12),
+          datesBorderRadius:
+              selectedDatesProperties?.datesDecoration?.datesBorderRadius ??
+                  12),
       disable: selectedDatesProperties?.disable ?? false,
       hide: selectedDatesProperties?.hide ?? false,
     );
 
     _selectedRangeBetweenDatesProperties = DatesProperties(
-      decorationProperties: DecorationProperties(
+      datesDecoration: DatesDecoration(
           datesBackgroundColor: selectedRangeBetweenDatesProperties
-                  ?.decorationProperties?.datesBackgroundColor ??
+                  ?.datesDecoration?.datesBackgroundColor ??
               theme.colorScheme.surfaceVariant,
           datesTextColor: selectedRangeBetweenDatesProperties
-                  ?.decorationProperties?.datesTextColor ??
+                  ?.datesDecoration?.datesTextColor ??
               theme.colorScheme.onSurfaceVariant,
           datesTextStyle: selectedRangeBetweenDatesProperties
-                  ?.decorationProperties?.datesTextStyle ??
+                  ?.datesDecoration?.datesTextStyle ??
               const TextStyle(),
           datesBorderColor: selectedRangeBetweenDatesProperties
-                  ?.decorationProperties?.datesBorderColor ??
+                  ?.datesDecoration?.datesBorderColor ??
               Colors.transparent,
           datesBorderRadius: selectedRangeBetweenDatesProperties
-                  ?.decorationProperties?.datesBorderRadius ??
+                  ?.datesDecoration?.datesBorderRadius ??
               12),
       disable: selectedDatesProperties?.disable ?? false,
       hide: selectedDatesProperties?.hide ?? false,
@@ -722,9 +1026,30 @@ class CalendarPropertiesState extends ChangeNotifier {
       _startWeekday = 7;
     }
 
-    _weekdaysSymbol = weekdaysSymbol ?? listOfWeekDaysSymbol;
+    _weekdaysSymbol = weekdaysSymbol ??
+        const Weekdays(
+            sunday: "Su",
+            monday: "Mo",
+            tuesday: "Tu",
+            wednesday: "We",
+            thursday: "Th",
+            friday: "Fr",
+            saturday: "Sa");
 
-    _monthsSymbol = monthsSymbol ?? listOfMonthsSymbol;
+    _monthsSymbol = monthsSymbol ??
+        const Months(
+            january: "January",
+            february: "February",
+            march: "March",
+            april: "April",
+            may: "May",
+            june: "June",
+            july: "July",
+            august: "August",
+            september: "September",
+            october: "October",
+            november: "November",
+            december: "December");
 
     notifyListeners();
   }

@@ -1,6 +1,6 @@
 library clean_calendar;
 
-import 'package:clean_calendar/src/state/properties_state.dart';
+import 'package:clean_calendar/clean_calendar.dart';
 import 'package:clean_calendar/src/ui/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +10,7 @@ class CleanCalendar extends StatelessWidget {
   const CleanCalendar({
     Key? key,
     this.datePickerCalendarView,
+    this.weekdaysProperties,
     this.streakDatesProperties,
     this.currentDateProperties,
     this.generalDatesProperties,
@@ -31,14 +32,13 @@ class CleanCalendar extends StatelessWidget {
     this.startWeekday,
     this.weekdaysSymbol,
     this.monthsSymbol,
-  })  : assert(weekdaysSymbol == null || weekdaysSymbol.length == 7,
-            'either weekdaysSymbol should be null or its length should be 7'),
-        assert(monthsSymbol == null || monthsSymbol.length == 12,
-            'either monthsSymbol should be null or its length should be 12'),
-        super(key: key);
+  }) : super(key: key);
 
   /// - datePickerCalendarView, It takes calendar view type.
   final DatePickerCalendarView? datePickerCalendarView;
+
+  /// - weekdaysProperties, It takes customisation properties for weekdays.
+  final WeekdaysProperties? weekdaysProperties;
 
   /// - streakDatesProperties, It takes customisation properties for streak dates.
   final DatesProperties? streakDatesProperties;
@@ -98,23 +98,22 @@ class CleanCalendar extends StatelessWidget {
   /// Defaults to sunday.
   final WeekDay? startWeekday;
 
-  /// - weekdaysSymbol, It takes the weekdays symbol list.
+  /// - weekdaysSymbol, It takes the weekdays symbols.
   ///
-  /// Provide list from Monday to Sunday.
-  /// Defaults to ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
-  final List<String>? weekdaysSymbol;
+  /// Defaults symbols are Mo, Tu, We, Th, Fr, Sa, Su from monday to sunday.
+  final Weekdays? weekdaysSymbol;
 
-  /// - monthsSymbol, It takes the months symbol list.
+  /// - monthsSymbol, It takes the months symbols.
   ///
-  /// Provide list from January to December.
-  /// Defaults to ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-  final List<String>? monthsSymbol;
+  /// Defaults symbols are January, February, March, April, May, June, July, August, September, October, November, December.
+  final Months? monthsSymbol;
 
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
       child: Calendar(
           datePickerCalendarView: datePickerCalendarView,
+          weekdaysProperties: weekdaysProperties,
           streakDatesProperties: streakDatesProperties,
           currentDateProperties: currentDateProperties,
           generalDatesProperties: generalDatesProperties,

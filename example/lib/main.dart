@@ -107,21 +107,40 @@ class Home extends StatelessWidget {
                 // print(calendarViewDate);
               },
               startWeekday: WeekDay.monday,
-              weekdaysSymbol: const ["m", "t", "w", "t", "f", "s", "s"],
-              monthsSymbol: const [
-                "Jan",
-                "Feb",
-                "Mar",
-                "Apr",
-                "May",
-                "Jun",
-                "Jul",
-                "Aug",
-                "Sep",
-                "Oct",
-                "Nov",
-                "Dec"
-              ],
+              weekdaysSymbol: const Weekdays(
+                sunday: "s",
+                monday: "m",
+                tuesday: "t",
+                wednesday: "w",
+                thursday: "t",
+                friday: "f",
+                saturday: "s",
+              ),
+              monthsSymbol: const Months(
+                  january: "Jan",
+                  february: "Feb",
+                  march: "Mar",
+                  april: "Apr",
+                  may: "May",
+                  june: "Jun",
+                  july: "Jul",
+                  august: "Aug",
+                  september: "Sep",
+                  october: "Oct",
+                  november: "Nov",
+                  december: "Dec"),
+              weekdaysProperties: WeekdaysProperties(
+                generalWeekdaysDecoration:
+                    WeekdaysDecoration(weekdayTextColor: Colors.red),
+                sundayDecoration: WeekdaysDecoration(
+                    weekdayTextColor: Colors.green,
+                    weekdayTextStyle:
+                        Theme.of(context).textTheme.headlineMedium),
+                saturdayDecoration: WeekdaysDecoration(
+                    weekdayTextColor: Colors.green,
+                    weekdayTextStyle:
+                        Theme.of(context).textTheme.headlineMedium),
+              ),
             ),
           ],
         ),

@@ -1,3 +1,13 @@
+## 0.6.1
+
+* Added decoration properties for weekdays. [#1](https://github.com/chaudharydeepanshu/clean_calendar/issues/1)
+* **BREAKING:** ```DecorationProperties``` is now ```DatesDecoration```.
+* **BREAKING:** ```decorationProperties``` is now ```datesDecoration```.
+* **BREAKING:** Now ```monthsSymbol``` takes ```Months``` instead of ```List<String>```.
+* **BREAKING:** Now ```weekdaysSymbol``` takes ```Weekdays``` instead of ```List<String>```.
+* Updated documentation.
+* I know breaking can be annoying but sometimes they are important to keep the APIs clean, consistent and easy to use.
+
 ## 0.5.4
 
 * Fixes unwanted spacing in Streak Days after version 0.5.1. [#3](https://github.com/chaudharydeepanshu/clean_calendar/issues/3)
