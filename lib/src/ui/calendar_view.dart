@@ -351,6 +351,7 @@ class CalendarWeekdaySymbol extends StatelessWidget {
     return Center(
       child: Text(
         symbol.toString(),
+        style: const TextStyle(),
         maxLines: 1,
         overflow: TextOverflow.clip,
       ),
@@ -418,7 +419,7 @@ class CalendarControlSection extends StatelessWidget {
                               ),
                             ),
                           )
-                        : Expanded(child: const SizedBox()),
+                        : const Expanded(child: SizedBox()),
                     Expanded(
                       child: IconButton(
                         onPressed: () {

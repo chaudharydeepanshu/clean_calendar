@@ -1,4 +1,5 @@
 import 'package:clean_calendar/src/utils.dart';
+import 'package:clean_calendar/src/utils/get_end_weekday_from_start_weekday.dat.dart';
 import 'package:flutter/material.dart';
 
 List<String> listOfWeekDaysSymbol = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
@@ -229,6 +230,10 @@ class CalendarPropertiesState extends ChangeNotifier {
 
   late int? _startWeekday;
   int get startWeekday => _startWeekday ?? 7;
+
+  late final int _endWeekday =
+      getEndWeekdayFromStartWeekday(startWeekday: startWeekday);
+  int get endWeekday => _endWeekday;
 
   late List<String>? _weekdaysSymbol;
   List<String> get weekdaysSymbol => _weekdaysSymbol ?? listOfWeekDaysSymbol;

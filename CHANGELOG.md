@@ -1,3 +1,7 @@
+## 0.5.4
+
+* Fixes unwanted spacing in Streak Days after version 0.5.1. [#3](https://github.com/chaudharydeepanshu/clean_calendar/issues/3)
+
 ## 0.5.3
 
 * Fixes few overflow and ink issues.

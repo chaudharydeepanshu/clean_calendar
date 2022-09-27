@@ -59,6 +59,9 @@ class CalendarStreakStartDenseDate extends StatelessWidget {
         bool hide = datesProperties.hide ?? false;
         bool disable = datesProperties.disable ?? false;
 
+        final int endWeekday = ref.watch(calendarPropertiesStateProvider
+            .select((value) => value.endWeekday));
+
         return !hide
             ? InkResponse(
                 containedInkWell: true,
@@ -251,10 +254,9 @@ class CalendarStreakStartDenseDate extends StatelessWidget {
                         margin: EdgeInsets.only(
                             top: 4.0,
                             bottom: 4.0,
-                            right:
-                                pageViewElementDate.weekday == DateTime.saturday
-                                    ? 4
-                                    : 0),
+                            right: pageViewElementDate.weekday == endWeekday
+                                ? 4
+                                : 0),
                         child: Container(
                           //Replace here with Ink after this fix https://github.com/flutter/flutter/issues/73315
                           decoration: BoxDecoration(
@@ -326,6 +328,9 @@ class CalendarStreakStartDenseSplashDate extends StatelessWidget {
             datesProperties.decorationProperties?.datesBorderRadius;
         bool hide = datesProperties.hide ?? false;
         bool disable = datesProperties.disable ?? false;
+
+        final int endWeekday = ref.watch(calendarPropertiesStateProvider
+            .select((value) => value.endWeekday));
 
         return !hide
             ? InkResponse(
@@ -444,10 +449,9 @@ class CalendarStreakStartDenseSplashDate extends StatelessWidget {
                         margin: EdgeInsets.only(
                             top: 4.0,
                             bottom: 4.0,
-                            right:
-                                pageViewElementDate.weekday == DateTime.saturday
-                                    ? 4
-                                    : 0),
+                            right: pageViewElementDate.weekday == endWeekday
+                                ? 4
+                                : 0),
                         decoration: BoxDecoration(
                           border: datesBorderColor != null
                               ? Border.symmetric(
@@ -701,6 +705,9 @@ class CalendarStreakStartExpandedDate extends StatelessWidget {
         bool hide = datesProperties.hide ?? false;
         bool disable = datesProperties.disable ?? false;
 
+        final int endWeekday = ref.watch(calendarPropertiesStateProvider
+            .select((value) => value.endWeekday));
+
         return !hide
             ? InkResponse(
                 containedInkWell: true,
@@ -719,9 +726,7 @@ class CalendarStreakStartExpandedDate extends StatelessWidget {
                       top: 4,
                       bottom: 4,
                       left: 4,
-                      right: pageViewElementDate.weekday == DateTime.saturday
-                          ? 4
-                          : 0),
+                      right: pageViewElementDate.weekday == endWeekday ? 4 : 0),
                   child: Container(
                     //Replace here with Ink after this fix https://github.com/flutter/flutter/issues/73315
                     decoration: BoxDecoration(
@@ -811,6 +816,12 @@ class CalendarStreakBetweenDenseSplashDate extends StatelessWidget {
         bool hide = datesProperties.hide ?? false;
         bool disable = datesProperties.disable ?? false;
 
+        final int startWeekday = ref.watch(calendarPropertiesStateProvider
+            .select((value) => value.startWeekday));
+
+        final int endWeekday = ref.watch(calendarPropertiesStateProvider
+            .select((value) => value.endWeekday));
+
         return !hide
             ? InkResponse(
                 focusColor: Colors.transparent,
@@ -835,7 +846,7 @@ class CalendarStreakBetweenDenseSplashDate extends StatelessWidget {
                         margin: EdgeInsets.only(
                             top: 4.0,
                             bottom: 4.0,
-                            left: pageViewElementDate.weekday == DateTime.sunday
+                            left: pageViewElementDate.weekday == startWeekday
                                 ? 4
                                 : 0),
                         decoration: BoxDecoration(
@@ -918,10 +929,9 @@ class CalendarStreakBetweenDenseSplashDate extends StatelessWidget {
                         margin: EdgeInsets.only(
                             top: 4.0,
                             bottom: 4.0,
-                            right:
-                                pageViewElementDate.weekday == DateTime.saturday
-                                    ? 4
-                                    : 0),
+                            right: pageViewElementDate.weekday == endWeekday
+                                ? 4
+                                : 0),
                         decoration: BoxDecoration(
                           border: datesBorderColor != null
                               ? Border.symmetric(
@@ -1131,6 +1141,12 @@ class CalendarStreakBetweenExpandedDate extends StatelessWidget {
         bool hide = datesProperties.hide ?? false;
         bool disable = datesProperties.disable ?? false;
 
+        final int startWeekday = ref.watch(calendarPropertiesStateProvider
+            .select((value) => value.startWeekday));
+
+        final int endWeekday = ref.watch(calendarPropertiesStateProvider
+            .select((value) => value.endWeekday));
+
         return !hide
             ? InkResponse(
                 containedInkWell: true,
@@ -1144,11 +1160,8 @@ class CalendarStreakBetweenExpandedDate extends StatelessWidget {
                   margin: EdgeInsets.only(
                     top: 4,
                     bottom: 4,
-                    right: pageViewElementDate.weekday == DateTime.saturday
-                        ? 4
-                        : 0,
-                    left:
-                        pageViewElementDate.weekday == DateTime.sunday ? 4 : 0,
+                    right: pageViewElementDate.weekday == endWeekday ? 4 : 0,
+                    left: pageViewElementDate.weekday == startWeekday ? 4 : 0,
                   ),
                   child: Container(
                     //Replace here with Ink after this fix https://github.com/flutter/flutter/issues/73315
@@ -1162,12 +1175,9 @@ class CalendarStreakBetweenExpandedDate extends StatelessWidget {
                     ),
                     child: Container(
                       margin: EdgeInsets.only(
-                        right: pageViewElementDate.weekday == DateTime.sunday
-                            ? 4
-                            : 0,
-                        left: pageViewElementDate.weekday == DateTime.saturday
-                            ? 4
-                            : 0,
+                        right:
+                            pageViewElementDate.weekday == startWeekday ? 4 : 0,
+                        left: pageViewElementDate.weekday == endWeekday ? 4 : 0,
                       ),
                       child: Row(
                         children: [
@@ -1247,6 +1257,9 @@ class CalendarStreakEndDenseDate extends StatelessWidget {
         bool hide = datesProperties.hide ?? false;
         bool disable = datesProperties.disable ?? false;
 
+        final int startWeekday = ref.watch(calendarPropertiesStateProvider
+            .select((value) => value.startWeekday));
+
         return !hide
             ? InkResponse(
                 containedInkWell: true,
@@ -1268,7 +1281,7 @@ class CalendarStreakEndDenseDate extends StatelessWidget {
                         margin: EdgeInsets.only(
                             top: 4.0,
                             bottom: 4.0,
-                            left: pageViewElementDate.weekday == DateTime.sunday
+                            left: pageViewElementDate.weekday == startWeekday
                                 ? 4
                                 : 0),
                         child: Container(
@@ -1423,6 +1436,9 @@ class CalendarStreakEndDenseSplashDate extends StatelessWidget {
         bool hide = datesProperties.hide ?? false;
         bool disable = datesProperties.disable ?? false;
 
+        final int startWeekday = ref.watch(calendarPropertiesStateProvider
+            .select((value) => value.startWeekday));
+
         return !hide
             ? InkResponse(
                 focusColor: Colors.transparent,
@@ -1447,7 +1463,7 @@ class CalendarStreakEndDenseSplashDate extends StatelessWidget {
                         margin: EdgeInsets.only(
                             top: 4.0,
                             bottom: 4.0,
-                            left: pageViewElementDate.weekday == DateTime.sunday
+                            left: pageViewElementDate.weekday == startWeekday
                                 ? 4
                                 : 0),
                         decoration: BoxDecoration(
@@ -1783,6 +1799,9 @@ class CalendarStreakEndExpandedDate extends StatelessWidget {
         bool hide = datesProperties.hide ?? false;
         bool disable = datesProperties.disable ?? false;
 
+        final int startWeekday = ref.watch(calendarPropertiesStateProvider
+            .select((value) => value.startWeekday));
+
         return !hide
             ? InkResponse(
                 containedInkWell: true,
@@ -1801,9 +1820,8 @@ class CalendarStreakEndExpandedDate extends StatelessWidget {
                       top: 4,
                       bottom: 4,
                       right: 4,
-                      left: pageViewElementDate.weekday == DateTime.sunday
-                          ? 4
-                          : 0),
+                      left:
+                          pageViewElementDate.weekday == startWeekday ? 4 : 0),
                   child: Container(
                     //Replace here with Ink after this fix https://github.com/flutter/flutter/issues/73315
                     decoration: BoxDecoration(
