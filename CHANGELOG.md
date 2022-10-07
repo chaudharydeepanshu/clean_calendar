@@ -1,12 +1,17 @@
+## 0.6.2
+
+* **BREAKING:** Updated flutter_riverpod dependency to ^2.0.2
+* Updated minimum required Flutter SDK version to 3.0.0
+* Updated minimum required Dart SDK version to 2.17.0
+
 ## 0.6.1
 
-* Added decoration properties for weekdays. [#1](https://github.com/chaudharydeepanshu/clean_calendar/issues/1)
 * **BREAKING:** ```DecorationProperties``` is now ```DatesDecoration```.
 * **BREAKING:** ```decorationProperties``` is now ```datesDecoration```.
 * **BREAKING:** Now ```monthsSymbol``` takes ```Months``` instead of ```List<String>```.
 * **BREAKING:** Now ```weekdaysSymbol``` takes ```Weekdays``` instead of ```List<String>```.
+* Added decoration properties for weekdays. [#1](https://github.com/chaudharydeepanshu/clean_calendar/issues/1)
 * Updated documentation.
-* I know breaking can be annoying but sometimes they are important to keep the APIs clean, consistent and easy to use.
 
 ## 0.5.4
 
