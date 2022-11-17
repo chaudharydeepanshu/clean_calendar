@@ -7,8 +7,17 @@ import 'package:clean_calendar/src/utils.dart';
 import 'package:clean_calendar/src/utils/get_suitable_dates_properties.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+late CalendarProperties calendarProperties;
+
+void initCalendarProperties({required CalendarProperties initProperties}) {
+  calendarProperties = initProperties;
+}
+
 final calendarPropertiesStateProvider =
-    ChangeNotifierProvider.autoDispose((ref) => CalendarPropertiesState());
+    ChangeNotifierProvider.autoDispose((ref) {
+  return CalendarPropertiesState()
+    ..initializeProperties(calendarProperties: calendarProperties);
+});
 
 final pageControllerStateProvider = ChangeNotifierProvider.autoDispose((ref) {
   return PageControllerState(ref: ref)..initializePageViewVars();

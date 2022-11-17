@@ -86,43 +86,6 @@ class Calendar extends ConsumerStatefulWidget {
 
 class _CalendarState extends ConsumerState<Calendar> {
   @override
-  void initState() {
-    final CalendarPropertiesState readCalendarPropertiesStateProviderValue =
-        ref.read(calendarPropertiesStateProvider);
-    readCalendarPropertiesStateProviderValue.initializeProperties(
-      datePickerCalendarView: widget.datePickerCalendarView,
-      weekdaysProperties: widget.weekdaysProperties,
-      streakDatesProperties: widget.streakDatesProperties,
-      currentDateProperties: widget.currentDateProperties,
-      generalDatesProperties: widget.generalDatesProperties,
-      leadingTrailingDatesProperties: widget.leadingTrailingDatesProperties,
-      selectedDatesProperties: widget.selectedDatesProperties,
-      selectedRangeBetweenDatesProperties:
-          widget.selectedRangeBetweenDatesProperties,
-      enableDenseViewForDates: widget.enableDenseViewForDates,
-      enableDenseSplashForDates: widget.enableDenseSplashForDates,
-      startDateOfCalendar: widget.startDateOfCalendar,
-      endDateOfCalendar: widget.endDateOfCalendar,
-      dateSelectionMode: widget.dateSelectionMode,
-      disablePastDates: widget.disablePastDates,
-      initialViewMonthDateTime: widget.initialViewMonthDateTime,
-      currentDateOfCalendar: widget.currentDateOfCalendar,
-      datesForStreaks: widget.datesForStreaks,
-      selectedDates: widget.selectedDates,
-      onSelectedDates: widget.onSelectedDates,
-      onCalendarViewDate: widget.onCalendarViewDate,
-      startWeekday: widget.startWeekday,
-      weekdaysSymbol: widget.weekdaysSymbol,
-      monthsSymbol: widget.monthsSymbol,
-      context: widget.context,
-    );
-    // final PageControllerState readPageControllerStateProviderValue =
-    //     ref.read(pageControllerStateProvider);
-    // readPageControllerStateProviderValue.initializePageViewVars();
-    super.initState();
-  }
-
-  @override
   void didUpdateWidget(covariant Calendar oldWidget) {
     if (oldWidget != widget) {
       final CalendarPropertiesState readCalendarPropertiesStateProviderValue =
@@ -130,36 +93,35 @@ class _CalendarState extends ConsumerState<Calendar> {
 
       WidgetsBinding.instance.addPostFrameCallback((_) {
         readCalendarPropertiesStateProviderValue.updateProperties(
-          datePickerCalendarView: widget.datePickerCalendarView,
-          weekdaysProperties: widget.weekdaysProperties,
-          streakDatesProperties: widget.streakDatesProperties,
-          currentDateProperties: widget.currentDateProperties,
-          generalDatesProperties: widget.generalDatesProperties,
-          leadingTrailingDatesProperties: widget.leadingTrailingDatesProperties,
-          selectedDatesProperties: widget.selectedDatesProperties,
-          selectedRangeBetweenDatesProperties:
-              widget.selectedRangeBetweenDatesProperties,
-          enableDenseViewForDates: widget.enableDenseViewForDates,
-          enableDenseSplashForDates: widget.enableDenseSplashForDates,
-          startDateOfCalendar: widget.startDateOfCalendar,
-          endDateOfCalendar: widget.endDateOfCalendar,
-          dateSelectionMode: widget.dateSelectionMode,
-          disablePastDates: widget.disablePastDates,
-          initialViewMonthDateTime: widget.initialViewMonthDateTime,
-          currentDateOfCalendar: widget.currentDateOfCalendar,
-          datesForStreaks: widget.datesForStreaks,
-          selectedDates: widget.selectedDates,
-          onSelectedDates: widget.onSelectedDates,
-          onCalendarViewDate: widget.onCalendarViewDate,
-          startWeekday: widget.startWeekday,
-          weekdaysSymbol: widget.weekdaysSymbol,
-          monthsSymbol: widget.monthsSymbol,
-          context: widget.context,
+          calendarProperties: CalendarProperties(
+            datePickerCalendarView: widget.datePickerCalendarView,
+            weekdaysProperties: widget.weekdaysProperties,
+            streakDatesProperties: widget.streakDatesProperties,
+            currentDateProperties: widget.currentDateProperties,
+            generalDatesProperties: widget.generalDatesProperties,
+            leadingTrailingDatesProperties:
+                widget.leadingTrailingDatesProperties,
+            selectedDatesProperties: widget.selectedDatesProperties,
+            selectedRangeBetweenDatesProperties:
+                widget.selectedRangeBetweenDatesProperties,
+            enableDenseViewForDates: widget.enableDenseViewForDates,
+            enableDenseSplashForDates: widget.enableDenseSplashForDates,
+            startDateOfCalendar: widget.startDateOfCalendar,
+            endDateOfCalendar: widget.endDateOfCalendar,
+            dateSelectionMode: widget.dateSelectionMode,
+            disablePastDates: widget.disablePastDates,
+            initialViewMonthDateTime: widget.initialViewMonthDateTime,
+            currentDateOfCalendar: widget.currentDateOfCalendar,
+            datesForStreaks: widget.datesForStreaks,
+            selectedDates: widget.selectedDates,
+            onSelectedDates: widget.onSelectedDates,
+            onCalendarViewDate: widget.onCalendarViewDate,
+            startWeekday: widget.startWeekday,
+            weekdaysSymbol: widget.weekdaysSymbol,
+            monthsSymbol: widget.monthsSymbol,
+            context: widget.context,
+          ),
         );
-
-        // final PageControllerState readPageControllerStateProviderValue =
-        //     ref.read(pageControllerStateProvider);
-        // readPageControllerStateProviderValue.updatePageViewVars();
       });
     }
     super.didUpdateWidget(oldWidget);
