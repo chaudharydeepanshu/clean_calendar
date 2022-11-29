@@ -1,3 +1,14 @@
+## 1.0.0
+
+* **BREAKING:** `DatePickerSelectionMode.single` is removed as it was buggy and didn't provide the developer better control on date picking.
+
+  For easy migration to `DatePickerSelectionMode.singleOrMultiple` see documentation [date-selection](https://web.archive.org/web/20221129220956/https://github.com/chaudharydeepanshu/clean_calendar/blob/master/README.md#date-selection) section or updated example.
+
+* Fixed issue with unable to disable picking on some dates.
+* Fixed logic issue in calendar reset button which sometime not resets the month-year header correctly.
+* No longer depends on flutter_riverpod as its recent updates were causing many issues eventually delaying updates to this package.
+* Note: You can notice lags in debug mode(I will soon work on performance) but there should be no lags in release mode.
+
 ## 0.6.2
 
 * **BREAKING:** Updated flutter_riverpod dependency to ^2.0.2

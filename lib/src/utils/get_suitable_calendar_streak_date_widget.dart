@@ -1,46 +1,47 @@
-import 'package:clean_calendar/src/ui/grid_view_elements/calendar_streak_date_widgets.dart';
+import 'package:clean_calendar/src/models/calendar_properties.dart';
+import 'package:clean_calendar/src/ui/calendar_dates_section/grid_view_elements/calendar_streak_date_widgets.dart';
 import 'package:flutter/material.dart';
 
 class GetSuitableCalendarStreakDateWidget extends StatelessWidget {
   const GetSuitableCalendarStreakDateWidget(
       {Key? key,
-      required this.enableDenseViewForDates,
-      required this.enableDenseSplashForDates,
+      required this.calendarProperties,
       required this.pageViewElementDate,
-      required this.pageViewMonthDate,
-      required this.datesForStreaks})
+      required this.pageViewDate})
       : super(key: key);
 
-  final bool enableDenseViewForDates;
-  final bool enableDenseSplashForDates;
+  final CalendarProperties calendarProperties;
   final DateTime pageViewElementDate;
-  final DateTime pageViewMonthDate;
-  final List<DateTime> datesForStreaks;
+  final DateTime pageViewDate;
 
   @override
   Widget build(BuildContext context) {
     /// Called when streak date have streak date just before and just after also.
-    if (datesForStreaks
+    if (calendarProperties.datesForStreaks
             .contains(pageViewElementDate.add(const Duration(days: 1))) &&
-        datesForStreaks
+        calendarProperties.datesForStreaks
             .contains(pageViewElementDate.subtract(const Duration(days: 1))) &&
-        datesForStreaks.contains(pageViewElementDate)) {
-      if (enableDenseViewForDates && enableDenseSplashForDates) {
+        calendarProperties.datesForStreaks.contains(pageViewElementDate)) {
+      if (calendarProperties.enableDenseViewForDates &&
+          calendarProperties.enableDenseSplashForDates) {
         return CalendarStreakBetweenDenseSplashDate(
+          calendarProperties: calendarProperties,
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewDate: pageViewDate,
         );
       }
-      if (enableDenseViewForDates) {
+      if (calendarProperties.enableDenseViewForDates) {
         return CalendarStreakBetweenExpandedDate(
+          calendarProperties: calendarProperties,
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewDate: pageViewDate,
         );
       }
-      if (!enableDenseViewForDates) {
+      if (!calendarProperties.enableDenseViewForDates) {
         return CalendarStreakBetweenExpandedDate(
+          calendarProperties: calendarProperties,
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewDate: pageViewDate,
         );
       } else {
         return const SizedBox();
@@ -48,24 +49,28 @@ class GetSuitableCalendarStreakDateWidget extends StatelessWidget {
     }
 
     /// Called when streak date have a streak date just after.
-    if (datesForStreaks
+    if (calendarProperties.datesForStreaks
         .contains(pageViewElementDate.add(const Duration(days: 1)))) {
-      if (enableDenseViewForDates && enableDenseSplashForDates) {
+      if (calendarProperties.enableDenseViewForDates &&
+          calendarProperties.enableDenseSplashForDates) {
         return CalendarStreakStartDenseSplashDate(
+          calendarProperties: calendarProperties,
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewDate: pageViewDate,
         );
       }
-      if (enableDenseViewForDates) {
+      if (calendarProperties.enableDenseViewForDates) {
         return CalendarStreakStartDenseDate(
+          calendarProperties: calendarProperties,
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewDate: pageViewDate,
         );
       }
-      if (!enableDenseViewForDates) {
+      if (!calendarProperties.enableDenseViewForDates) {
         return CalendarStreakStartExpandedDate(
+          calendarProperties: calendarProperties,
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewDate: pageViewDate,
         );
       } else {
         return const SizedBox();
@@ -73,24 +78,28 @@ class GetSuitableCalendarStreakDateWidget extends StatelessWidget {
     }
 
     /// Called when streak date have a streak date just before.
-    if (datesForStreaks
+    if (calendarProperties.datesForStreaks
         .contains(pageViewElementDate.subtract(const Duration(days: 1)))) {
-      if (enableDenseViewForDates && enableDenseSplashForDates) {
+      if (calendarProperties.enableDenseViewForDates &&
+          calendarProperties.enableDenseSplashForDates) {
         return CalendarStreakEndDenseSplashDate(
+          calendarProperties: calendarProperties,
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewDate: pageViewDate,
         );
       }
-      if (enableDenseViewForDates) {
+      if (calendarProperties.enableDenseViewForDates) {
         return CalendarStreakEndDenseDate(
+          calendarProperties: calendarProperties,
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewDate: pageViewDate,
         );
       }
-      if (!enableDenseViewForDates) {
+      if (!calendarProperties.enableDenseViewForDates) {
         return CalendarStreakEndExpandedDate(
+          calendarProperties: calendarProperties,
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewDate: pageViewDate,
         );
       } else {
         return const SizedBox();
@@ -98,23 +107,27 @@ class GetSuitableCalendarStreakDateWidget extends StatelessWidget {
     }
 
     /// Called when streak date doesn't have streak date just before and just after also.
-    if (datesForStreaks.contains(pageViewElementDate)) {
-      if (enableDenseViewForDates && enableDenseSplashForDates) {
+    if (calendarProperties.datesForStreaks.contains(pageViewElementDate)) {
+      if (calendarProperties.enableDenseViewForDates &&
+          calendarProperties.enableDenseSplashForDates) {
         return CalendarStreakSingleDenseSplashDate(
+          calendarProperties: calendarProperties,
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewDate: pageViewDate,
         );
       }
-      if (enableDenseViewForDates) {
+      if (calendarProperties.enableDenseViewForDates) {
         return CalendarStreakSingleDenseDate(
+          calendarProperties: calendarProperties,
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewDate: pageViewDate,
         );
       }
-      if (!enableDenseViewForDates) {
+      if (!calendarProperties.enableDenseViewForDates) {
         return CalendarStreakSingleExpandedDate(
+          calendarProperties: calendarProperties,
           pageViewElementDate: pageViewElementDate,
-          pageViewMonthDate: pageViewMonthDate,
+          pageViewDate: pageViewDate,
         );
       } else {
         return const SizedBox();

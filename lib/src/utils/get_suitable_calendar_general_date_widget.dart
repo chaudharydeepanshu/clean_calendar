@@ -1,38 +1,41 @@
-import 'package:clean_calendar/src/ui/grid_view_elements/calendar_general_date_widgets.dart';
+import 'package:clean_calendar/src/models/calendar_properties.dart';
+import 'package:clean_calendar/src/ui/calendar_dates_section/grid_view_elements/calendar_general_date_widgets.dart';
 import 'package:flutter/material.dart';
 
 class GetSuitableCalendarGeneralDateWidget extends StatelessWidget {
   const GetSuitableCalendarGeneralDateWidget(
       {Key? key,
-      required this.enableDenseViewForDates,
-      required this.enableDenseSplashForDates,
+      required this.calendarProperties,
       required this.pageViewElementDate,
-      required this.pageViewMonthDate})
+      required this.pageViewDate})
       : super(key: key);
 
-  final bool enableDenseViewForDates;
-  final bool enableDenseSplashForDates;
+  final CalendarProperties calendarProperties;
   final DateTime pageViewElementDate;
-  final DateTime pageViewMonthDate;
+  final DateTime pageViewDate;
 
   @override
   Widget build(BuildContext context) {
-    if (enableDenseViewForDates && enableDenseSplashForDates) {
+    if (calendarProperties.enableDenseViewForDates &&
+        calendarProperties.enableDenseSplashForDates) {
       return CalendarGeneralDenseSplashDate(
+        calendarProperties: calendarProperties,
         pageViewElementDate: pageViewElementDate,
-        pageViewMonthDate: pageViewMonthDate,
+        pageViewDate: pageViewDate,
       );
     }
-    if (enableDenseViewForDates) {
+    if (calendarProperties.enableDenseViewForDates) {
       return CalendarGeneralDenseDate(
+        calendarProperties: calendarProperties,
         pageViewElementDate: pageViewElementDate,
-        pageViewMonthDate: pageViewMonthDate,
+        pageViewDate: pageViewDate,
       );
     }
-    if (!enableDenseViewForDates) {
+    if (!calendarProperties.enableDenseViewForDates) {
       return CalendarGeneralExpandedDate(
+        calendarProperties: calendarProperties,
         pageViewElementDate: pageViewElementDate,
-        pageViewMonthDate: pageViewMonthDate,
+        pageViewDate: pageViewDate,
       );
     } else {
       return const SizedBox();

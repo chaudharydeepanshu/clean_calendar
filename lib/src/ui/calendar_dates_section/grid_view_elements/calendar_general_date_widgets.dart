@@ -1,114 +1,99 @@
-import 'package:clean_calendar/src/models/date_widget_ontap_defining_property_class.dart';
-import 'package:clean_calendar/src/state/properties_state.dart';
-import 'package:clean_calendar/src/state/providers.dart';
+import 'package:clean_calendar/src/models/calendar_properties.dart';
+import 'package:clean_calendar/src/models/dates_properties.dart';
 import 'package:clean_calendar/src/utils/get_suitable_dates_on_tap.dart';
+import 'package:clean_calendar/src/utils/get_suitable_dates_properties.dart';
 import 'package:clean_calendar/src/utils/get_widget_center_offset_info.dart';
 import 'package:clean_calendar/src/utils/simulate_tap_on_an_offset.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CalendarGeneralDenseDate extends StatelessWidget {
   const CalendarGeneralDenseDate(
       {Key? key,
+      required this.calendarProperties,
       required this.pageViewElementDate,
-      required this.pageViewMonthDate})
+      required this.pageViewDate})
       : super(key: key);
 
+  final CalendarProperties calendarProperties;
   final DateTime pageViewElementDate;
-  final DateTime pageViewMonthDate;
+  final DateTime pageViewDate;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        final DateWidgetOnTapDefiningProperties
-            dateWidgetOnTapDefiningProperties =
-            ref.watch(dateSuitableDatesOnTapProvider.select((value) => value));
+    final Function()? dateSuitableDatesOnTap = getSuitableDatesOnTap(
+      calendarProperties: calendarProperties,
+      pageViewElementDate: pageViewElementDate,
+    );
 
-        final Function()? dateSuitableDatesOnTap = getSuitableDatesOnTap(
-          readCalendarPropertiesStateProviderValue:
-              dateWidgetOnTapDefiningProperties
-                  .readCalendarPropertiesStateProviderValue,
-          dateSelectionMode:
-              dateWidgetOnTapDefiningProperties.dateSelectionMode,
-          pageViewElementDate: pageViewElementDate,
-        );
+    final DatesProperties datesProperties = getSuitableDatesProperties(
+      calendarProperties: calendarProperties,
+      pageViewElementDate: pageViewElementDate,
+      pageViewDate: pageViewDate,
+    );
 
-        final DatesProperties dateSuitablePropertiesProviderValue = ref.watch(
-            dateSuitablePropertiesProvider(IndividualDateElementProperties(
-                    pageViewElementDate: pageViewElementDate,
-                    pageViewMonthDate: pageViewMonthDate))
-                .select((value) => value));
+    Color? datesBackgroundColor =
+        datesProperties.datesDecoration?.datesBackgroundColor;
+    Color? datesTextColor = datesProperties.datesDecoration?.datesTextColor;
+    TextStyle? datesTextStyle = datesProperties.datesDecoration?.datesTextStyle;
+    Color? datesBorderColor = datesProperties.datesDecoration?.datesBorderColor;
+    double? datesBorderRadius =
+        datesProperties.datesDecoration?.datesBorderRadius;
+    bool hide = datesProperties.hide ?? false;
+    bool disable = datesProperties.disable ?? false;
 
-        DatesProperties datesProperties = dateSuitablePropertiesProviderValue;
-
-        Color? datesBackgroundColor =
-            datesProperties.datesDecoration?.datesBackgroundColor;
-        Color? datesTextColor = datesProperties.datesDecoration?.datesTextColor;
-        TextStyle? datesTextStyle =
-            datesProperties.datesDecoration?.datesTextStyle;
-        Color? datesBorderColor =
-            datesProperties.datesDecoration?.datesBorderColor;
-        double? datesBorderRadius =
-            datesProperties.datesDecoration?.datesBorderRadius;
-        bool hide = datesProperties.hide ?? false;
-        bool disable = datesProperties.disable ?? false;
-
-        return !hide
-            ? InkResponse(
-                containedInkWell: true,
-                highlightShape: BoxShape.rectangle,
-                customBorder: datesBorderRadius != null
-                    ? RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(datesBorderRadius)),
-                      )
-                    : null,
-                splashFactory: InkRipple.splashFactory,
-                onTap: disable ? null : dateSuitableDatesOnTap,
-                child: Row(
-                  children: [
-                    const Expanded(
-                      child: SizedBox(),
-                    ),
-                    SizedBox(
-                      width: 40,
-                      child: Container(
-                        margin: const EdgeInsets.all(4.0),
-                        child: Container(
-                          //Replace here with Ink after this fix https://github.com/flutter/flutter/issues/73315
-                          decoration: BoxDecoration(
-                            border: datesBorderColor != null
-                                ? Border.all(color: datesBorderColor, width: 1)
-                                : null,
-                            borderRadius: datesBorderRadius != null
-                                ? BorderRadius.all(
-                                    Radius.circular(datesBorderRadius))
-                                : null,
-                            color: datesBackgroundColor,
-                          ),
-                          child: Center(
-                            child: Text(
-                              pageViewElementDate.day.toString(),
-                              style: datesTextStyle != null
-                                  ? datesTextStyle.copyWith(
-                                      color: datesTextColor,
-                                    )
-                                  : TextStyle(color: datesTextColor),
-                            ),
-                          ),
+    return !hide
+        ? InkResponse(
+            containedInkWell: true,
+            highlightShape: BoxShape.rectangle,
+            customBorder: datesBorderRadius != null
+                ? RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(datesBorderRadius)),
+                  )
+                : null,
+            splashFactory: InkRipple.splashFactory,
+            onTap: disable ? null : dateSuitableDatesOnTap,
+            child: Row(
+              children: [
+                const Expanded(
+                  child: SizedBox(),
+                ),
+                SizedBox(
+                  width: 40,
+                  child: Container(
+                    margin: const EdgeInsets.all(4.0),
+                    child: Container(
+                      //Replace here with Ink after this fix https://github.com/flutter/flutter/issues/73315
+                      decoration: BoxDecoration(
+                        border: datesBorderColor != null
+                            ? Border.all(color: datesBorderColor, width: 1)
+                            : null,
+                        borderRadius: datesBorderRadius != null
+                            ? BorderRadius.all(
+                                Radius.circular(datesBorderRadius))
+                            : null,
+                        color: datesBackgroundColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          pageViewElementDate.day.toString(),
+                          style: datesTextStyle != null
+                              ? datesTextStyle.copyWith(
+                                  color: datesTextColor,
+                                )
+                              : TextStyle(color: datesTextColor),
                         ),
                       ),
                     ),
-                    const Expanded(
-                      child: SizedBox(),
-                    ),
-                  ],
+                  ),
                 ),
-              )
-            : const SizedBox();
-      },
-    );
+                const Expanded(
+                  child: SizedBox(),
+                ),
+              ],
+            ),
+          )
+        : const SizedBox();
   }
 }
 // class CalendarGeneralDenseDate extends StatelessWidget {
@@ -207,133 +192,118 @@ class CalendarGeneralDenseDate extends StatelessWidget {
 class CalendarGeneralDenseSplashDate extends StatelessWidget {
   const CalendarGeneralDenseSplashDate(
       {Key? key,
+      required this.calendarProperties,
       required this.pageViewElementDate,
-      required this.pageViewMonthDate})
+      required this.pageViewDate})
       : super(key: key);
 
+  final CalendarProperties calendarProperties;
   final DateTime pageViewElementDate;
-  final DateTime pageViewMonthDate;
+  final DateTime pageViewDate;
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey widgetKey = GlobalKey();
 
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        final DateWidgetOnTapDefiningProperties
-            dateWidgetOnTapDefiningProperties =
-            ref.watch(dateSuitableDatesOnTapProvider.select((value) => value));
+    final Function()? dateSuitableDatesOnTap = getSuitableDatesOnTap(
+      calendarProperties: calendarProperties,
+      pageViewElementDate: pageViewElementDate,
+    );
 
-        final Function()? dateSuitableDatesOnTap = getSuitableDatesOnTap(
-          readCalendarPropertiesStateProviderValue:
-              dateWidgetOnTapDefiningProperties
-                  .readCalendarPropertiesStateProviderValue,
-          dateSelectionMode:
-              dateWidgetOnTapDefiningProperties.dateSelectionMode,
-          pageViewElementDate: pageViewElementDate,
-        );
+    final DatesProperties datesProperties = getSuitableDatesProperties(
+      calendarProperties: calendarProperties,
+      pageViewElementDate: pageViewElementDate,
+      pageViewDate: pageViewDate,
+    );
 
-        final DatesProperties dateSuitablePropertiesProviderValue = ref.watch(
-            dateSuitablePropertiesProvider(IndividualDateElementProperties(
-                    pageViewElementDate: pageViewElementDate,
-                    pageViewMonthDate: pageViewMonthDate))
-                .select((value) => value));
+    Color? datesBackgroundColor =
+        datesProperties.datesDecoration?.datesBackgroundColor;
+    Color? datesTextColor = datesProperties.datesDecoration?.datesTextColor;
+    TextStyle? datesTextStyle = datesProperties.datesDecoration?.datesTextStyle;
+    Color? datesBorderColor = datesProperties.datesDecoration?.datesBorderColor;
+    double? datesBorderRadius =
+        datesProperties.datesDecoration?.datesBorderRadius;
+    bool hide = datesProperties.hide ?? false;
+    bool disable = datesProperties.disable ?? false;
 
-        DatesProperties datesProperties = dateSuitablePropertiesProviderValue;
-
-        Color? datesBackgroundColor =
-            datesProperties.datesDecoration?.datesBackgroundColor;
-        Color? datesTextColor = datesProperties.datesDecoration?.datesTextColor;
-        TextStyle? datesTextStyle =
-            datesProperties.datesDecoration?.datesTextStyle;
-        Color? datesBorderColor =
-            datesProperties.datesDecoration?.datesBorderColor;
-        double? datesBorderRadius =
-            datesProperties.datesDecoration?.datesBorderRadius;
-        bool hide = datesProperties.hide ?? false;
-        bool disable = datesProperties.disable ?? false;
-
-        return !hide
-            ? InkResponse(
-                // clipBehavior: Clip.antiAlias,
-                // customBorder: const RoundedRectangleBorder(side: BorderSide.none),
-                // borderRadius: datesBorderRadius != null
-                //     ? BorderRadius.all(Radius.circular(datesBorderRadius))
-                //     : null,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                overlayColor: MaterialStateProperty.all(Colors.transparent),
-                splashColor: Colors.transparent,
-                splashFactory: NoSplash.splashFactory,
-                enableFeedback: false,
-                onTap: disable
-                    ? null
-                    : () {
-                        Offset widgetCenterOffset =
-                            getWidgetCenterOffsetInfo(widgetKey);
-                        // print(widgetCenterOffset);
-                        simulateTapOnAnOffset(widgetCenterOffset);
-                      },
-                child: Row(
-                  children: [
-                    const Expanded(
-                      child: SizedBox(),
-                    ),
-                    InkResponse(
-                      containedInkWell: true,
-                      // highlightColor: Colors.blue,
-                      highlightShape: BoxShape.rectangle,
-                      customBorder: datesBorderRadius != null
-                          ? RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(datesBorderRadius)),
-                            )
-                          : null,
-                      splashFactory: InkRipple.splashFactory,
-                      onTap: dateSuitableDatesOnTap,
-                      child: SizedBox(
-                        width: 40,
-                        child: Container(
-                          margin: const EdgeInsets.all(4.0),
-                          child: Container(
-                            //Replace here with Ink after this fix https://github.com/flutter/flutter/issues/73315
-                            decoration: BoxDecoration(
-                              border: datesBorderColor != null
-                                  ? Border.all(
-                                      color: datesBorderColor, width: 1)
-                                  : null,
-                              borderRadius: datesBorderRadius != null
-                                  ? BorderRadius.all(
-                                      Radius.circular(datesBorderRadius))
-                                  : null,
-                              color: datesBackgroundColor,
-                            ),
-                            child: Center(
-                              child: Text(
-                                key: widgetKey,
-                                pageViewElementDate.day.toString(),
-                                overflow: TextOverflow.ellipsis,
-                                style: datesTextStyle != null
-                                    ? datesTextStyle.copyWith(
-                                        color: datesTextColor,
-                                      )
-                                    : TextStyle(color: datesTextColor),
-                              ),
-                            ),
+    return !hide
+        ? InkResponse(
+            // clipBehavior: Clip.antiAlias,
+            // customBorder: const RoundedRectangleBorder(side: BorderSide.none),
+            // borderRadius: datesBorderRadius != null
+            //     ? BorderRadius.all(Radius.circular(datesBorderRadius))
+            //     : null,
+            focusColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            overlayColor: MaterialStateProperty.all(Colors.transparent),
+            splashColor: Colors.transparent,
+            splashFactory: NoSplash.splashFactory,
+            enableFeedback: false,
+            onTap: disable
+                ? null
+                : () {
+                    Offset widgetCenterOffset =
+                        getWidgetCenterOffsetInfo(widgetKey);
+                    // print(widgetCenterOffset);
+                    simulateTapOnAnOffset(widgetCenterOffset);
+                  },
+            child: Row(
+              children: [
+                const Expanded(
+                  child: SizedBox(),
+                ),
+                InkResponse(
+                  containedInkWell: true,
+                  // highlightColor: Colors.blue,
+                  highlightShape: BoxShape.rectangle,
+                  customBorder: datesBorderRadius != null
+                      ? RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(datesBorderRadius)),
+                        )
+                      : null,
+                  splashFactory: InkRipple.splashFactory,
+                  onTap: disable ? null : dateSuitableDatesOnTap,
+                  child: SizedBox(
+                    width: 40,
+                    child: Container(
+                      margin: const EdgeInsets.all(4.0),
+                      child: Container(
+                        //Replace here with Ink after this fix https://github.com/flutter/flutter/issues/73315
+                        decoration: BoxDecoration(
+                          border: datesBorderColor != null
+                              ? Border.all(color: datesBorderColor, width: 1)
+                              : null,
+                          borderRadius: datesBorderRadius != null
+                              ? BorderRadius.all(
+                                  Radius.circular(datesBorderRadius))
+                              : null,
+                          color: datesBackgroundColor,
+                        ),
+                        child: Center(
+                          child: Text(
+                            key: widgetKey,
+                            pageViewElementDate.day.toString(),
+                            overflow: TextOverflow.ellipsis,
+                            style: datesTextStyle != null
+                                ? datesTextStyle.copyWith(
+                                    color: datesTextColor,
+                                  )
+                                : TextStyle(color: datesTextColor),
                           ),
                         ),
                       ),
                     ),
-                    const Expanded(
-                      child: SizedBox(),
-                    ),
-                  ],
+                  ),
                 ),
-              )
-            : const SizedBox();
-      },
-    );
+                const Expanded(
+                  child: SizedBox(),
+                ),
+              ],
+            ),
+          )
+        : const SizedBox();
   }
 }
 
@@ -462,91 +432,77 @@ class CalendarGeneralDenseSplashDate extends StatelessWidget {
 class CalendarGeneralExpandedDate extends StatelessWidget {
   const CalendarGeneralExpandedDate(
       {Key? key,
+      required this.calendarProperties,
       required this.pageViewElementDate,
-      required this.pageViewMonthDate})
+      required this.pageViewDate})
       : super(key: key);
 
+  final CalendarProperties calendarProperties;
   final DateTime pageViewElementDate;
-  final DateTime pageViewMonthDate;
+  final DateTime pageViewDate;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        final DateWidgetOnTapDefiningProperties
-            dateWidgetOnTapDefiningProperties =
-            ref.watch(dateSuitableDatesOnTapProvider.select((value) => value));
+    final Function()? dateSuitableDatesOnTap = getSuitableDatesOnTap(
+      calendarProperties: calendarProperties,
+      pageViewElementDate: pageViewElementDate,
+    );
 
-        final Function()? dateSuitableDatesOnTap = getSuitableDatesOnTap(
-          readCalendarPropertiesStateProviderValue:
-              dateWidgetOnTapDefiningProperties
-                  .readCalendarPropertiesStateProviderValue,
-          dateSelectionMode:
-              dateWidgetOnTapDefiningProperties.dateSelectionMode,
-          pageViewElementDate: pageViewElementDate,
-        );
+    final DatesProperties datesProperties = getSuitableDatesProperties(
+      calendarProperties: calendarProperties,
+      pageViewElementDate: pageViewElementDate,
+      pageViewDate: pageViewDate,
+    );
 
-        final DatesProperties dateSuitablePropertiesProviderValue = ref.watch(
-            dateSuitablePropertiesProvider(IndividualDateElementProperties(
-                    pageViewElementDate: pageViewElementDate,
-                    pageViewMonthDate: pageViewMonthDate))
-                .select((value) => value));
+    Color? datesBackgroundColor =
+        datesProperties.datesDecoration?.datesBackgroundColor;
+    Color? datesTextColor = datesProperties.datesDecoration?.datesTextColor;
+    TextStyle? datesTextStyle = datesProperties.datesDecoration?.datesTextStyle;
+    Color? datesBorderColor = datesProperties.datesDecoration?.datesBorderColor;
+    double? datesBorderRadius =
+        datesProperties.datesDecoration?.datesBorderRadius;
+    bool hide = datesProperties.hide ?? false;
+    bool disable = datesProperties.disable ?? false;
 
-        DatesProperties datesProperties = dateSuitablePropertiesProviderValue;
-
-        Color? datesBackgroundColor =
-            datesProperties.datesDecoration?.datesBackgroundColor;
-        Color? datesTextColor = datesProperties.datesDecoration?.datesTextColor;
-        TextStyle? datesTextStyle =
-            datesProperties.datesDecoration?.datesTextStyle;
-        Color? datesBorderColor =
-            datesProperties.datesDecoration?.datesBorderColor;
-        double? datesBorderRadius =
-            datesProperties.datesDecoration?.datesBorderRadius;
-        bool hide = datesProperties.hide ?? false;
-        bool disable = datesProperties.disable ?? false;
-
-        return !hide
-            ? InkResponse(
-                containedInkWell: true,
-                highlightShape: BoxShape.rectangle,
-                customBorder: datesBorderRadius != null
-                    ? RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(datesBorderRadius)),
-                      )
-                    : null,
-                splashFactory: InkRipple.splashFactory,
-                onTap: disable ? null : dateSuitableDatesOnTap,
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Container(
-                    //Replace here with Ink after this fix https://github.com/flutter/flutter/issues/73315
-                    decoration: BoxDecoration(
-                      border: datesBorderColor != null
-                          ? Border.all(color: datesBorderColor, width: 1)
-                          : null,
-                      borderRadius: datesBorderRadius != null
-                          ? BorderRadius.all(Radius.circular(datesBorderRadius))
-                          : null,
-                      color: datesBackgroundColor,
-                    ),
-                    child: Center(
-                      child: Text(
-                        pageViewElementDate.day.toString(),
-                        style: datesTextStyle != null
-                            ? datesTextStyle.copyWith(
-                                color: datesTextColor,
-                              )
-                            : TextStyle(color: datesTextColor),
-                      ),
-                    ),
+    return !hide
+        ? InkResponse(
+            containedInkWell: true,
+            highlightShape: BoxShape.rectangle,
+            customBorder: datesBorderRadius != null
+                ? RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(datesBorderRadius)),
+                  )
+                : null,
+            splashFactory: InkRipple.splashFactory,
+            onTap: disable ? null : dateSuitableDatesOnTap,
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Container(
+                //Replace here with Ink after this fix https://github.com/flutter/flutter/issues/73315
+                decoration: BoxDecoration(
+                  border: datesBorderColor != null
+                      ? Border.all(color: datesBorderColor, width: 1)
+                      : null,
+                  borderRadius: datesBorderRadius != null
+                      ? BorderRadius.all(Radius.circular(datesBorderRadius))
+                      : null,
+                  color: datesBackgroundColor,
+                ),
+                child: Center(
+                  child: Text(
+                    pageViewElementDate.day.toString(),
+                    style: datesTextStyle != null
+                        ? datesTextStyle.copyWith(
+                            color: datesTextColor,
+                          )
+                        : TextStyle(color: datesTextColor),
                   ),
                 ),
-              )
-            : const SizedBox();
-      },
-    );
+              ),
+            ),
+          )
+        : const SizedBox();
   }
 }
 

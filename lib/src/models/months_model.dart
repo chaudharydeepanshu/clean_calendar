@@ -27,6 +27,23 @@ class Months {
     required this.december,
   });
 
+  Map<String, dynamic> toMap() {
+    return {
+      'january': january,
+      'february': february,
+      'march': march,
+      'april': april,
+      'may': may,
+      'june': june,
+      'july': july,
+      'august': august,
+      'september': september,
+      'october': october,
+      'november': november,
+      'december': december,
+    };
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

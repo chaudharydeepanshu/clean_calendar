@@ -1,34 +1,33 @@
 import 'package:clean_calendar/clean_calendar.dart';
-import 'package:dynamic_color/dynamic_color.dart';
-import 'package:example/Theme/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return DynamicColorBuilder(
-      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Calendar App',
-          theme: AppThemeData.lightThemeData(lightDynamic),
-          darkTheme: AppThemeData.darkThemeData(darkDynamic),
-          themeMode: ThemeMode.system,
-          home: const Home(),
-        );
-      },
+    return MaterialApp(
+      title: 'Calendar App',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(useMaterial3: true),
+      darkTheme: ThemeData.dark(useMaterial3: true),
+      themeMode: ThemeMode.system,
+      home: const Home(),
     );
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  List<DateTime> selectedDates = [];
 
   @override
   Widget build(BuildContext context) {
@@ -44,21 +43,35 @@ class Home extends StatelessWidget {
               enableDenseViewForDates: true,
               enableDenseSplashForDates: true,
               datesForStreaks: [
-                DateTime(2022, 9, 5),
-                DateTime(2022, 9, 6),
-                DateTime(2022, 9, 7),
-                DateTime(2022, 9, 9),
-                DateTime(2022, 9, 10),
-                DateTime(2022, 9, 11),
-                DateTime(2022, 9, 13),
-                DateTime(2022, 9, 20),
-                DateTime(2022, 9, 21),
-                DateTime(2022, 9, 23),
-                DateTime(2022, 9, 24),
-                DateTime(2022, 9, 25),
+                DateTime(2022, 11, 5),
+                DateTime(2022, 11, 6),
+                DateTime(2022, 11, 7),
+                DateTime(2022, 11, 9),
+                DateTime(2022, 11, 10),
+                DateTime(2022, 11, 11),
+                DateTime(2022, 11, 13),
+                DateTime(2022, 11, 20),
+                DateTime(2022, 11, 21),
+                DateTime(2022, 11, 23),
+                DateTime(2022, 11, 24),
+                DateTime(2022, 11, 25),
               ],
-              dateSelectionMode: DatePickerSelectionMode.single,
+              dateSelectionMode: DatePickerSelectionMode.singleOrMultiple,
               startWeekday: WeekDay.wednesday,
+              selectedDates: selectedDates,
+              onCalendarViewDate: (DateTime calendarViewDate) {
+                // print(calendarViewDate);
+              },
+              onSelectedDates: (List<DateTime> value) {
+                setState(() {
+                  if (selectedDates.contains(value.first)) {
+                    selectedDates.remove(value.first);
+                  } else {
+                    selectedDates.add(value.first);
+                  }
+                });
+                // print(selectedDates);
+              },
             ),
             const SizedBox(
               height: 20,
@@ -68,21 +81,32 @@ class Home extends StatelessWidget {
               enableDenseViewForDates: true,
               enableDenseSplashForDates: true,
               datesForStreaks: [
-                DateTime(2022, 8, 5),
-                DateTime(2022, 8, 6),
-                DateTime(2022, 8, 7),
-                DateTime(2022, 8, 9),
-                DateTime(2022, 8, 10),
-                DateTime(2022, 8, 11),
-                DateTime(2022, 8, 13),
-                DateTime(2022, 8, 20),
-                DateTime(2022, 8, 21),
-                DateTime(2022, 8, 23),
-                DateTime(2022, 8, 24),
+                DateTime(2022, 11, 5),
+                DateTime(2022, 11, 6),
+                DateTime(2022, 11, 7),
+                DateTime(2022, 11, 9),
+                DateTime(2022, 11, 10),
+                DateTime(2022, 11, 11),
+                DateTime(2022, 11, 13),
+                DateTime(2022, 11, 20),
+                DateTime(2022, 11, 21),
+                DateTime(2022, 11, 23),
+                DateTime(2022, 11, 24),
               ],
-              dateSelectionMode: DatePickerSelectionMode.single,
+              dateSelectionMode: DatePickerSelectionMode.singleOrMultiple,
               onCalendarViewDate: (DateTime calendarViewDate) {
                 // print(calendarViewDate);
+              },
+              selectedDates: selectedDates,
+              onSelectedDates: (List<DateTime> value) {
+                setState(() {
+                  if (selectedDates.contains(value.first)) {
+                    selectedDates.remove(value.first);
+                  } else {
+                    selectedDates.add(value.first);
+                  }
+                });
+                // print(selectedDates);
               },
             ),
             CleanCalendar(
@@ -90,19 +114,19 @@ class Home extends StatelessWidget {
               enableDenseViewForDates: true,
               enableDenseSplashForDates: true,
               datesForStreaks: [
-                DateTime(2022, 8, 5),
-                DateTime(2022, 8, 6),
-                DateTime(2022, 8, 7),
-                DateTime(2022, 8, 9),
-                DateTime(2022, 8, 10),
-                DateTime(2022, 8, 11),
-                DateTime(2022, 8, 13),
-                DateTime(2022, 8, 20),
-                DateTime(2022, 8, 21),
-                DateTime(2022, 8, 23),
-                DateTime(2022, 8, 24),
+                DateTime(2022, 11, 5),
+                DateTime(2022, 11, 6),
+                DateTime(2022, 11, 7),
+                DateTime(2022, 11, 9),
+                DateTime(2022, 11, 10),
+                DateTime(2022, 11, 11),
+                DateTime(2022, 11, 13),
+                DateTime(2022, 11, 20),
+                DateTime(2022, 11, 21),
+                DateTime(2022, 11, 23),
+                DateTime(2022, 11, 24),
               ],
-              dateSelectionMode: DatePickerSelectionMode.single,
+              dateSelectionMode: DatePickerSelectionMode.disable,
               onCalendarViewDate: (DateTime calendarViewDate) {
                 // print(calendarViewDate);
               },

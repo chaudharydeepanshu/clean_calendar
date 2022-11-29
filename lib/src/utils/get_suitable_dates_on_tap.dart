@@ -1,37 +1,16 @@
-import 'package:clean_calendar/src/state/properties_state.dart';
+import 'package:clean_calendar/src/models/calendar_properties.dart';
 
 Function()? getSuitableDatesOnTap({
-  required CalendarPropertiesState readCalendarPropertiesStateProviderValue,
-  required DatePickerSelectionMode dateSelectionMode,
+  required CalendarProperties calendarProperties,
   required DateTime pageViewElementDate,
 }) {
-  return dateSelectOnTapType(
-      readCalendarPropertiesStateProviderValue:
-          readCalendarPropertiesStateProviderValue,
-      pageViewElementDate: pageViewElementDate,
-      dateSelectionMode: dateSelectionMode);
-}
-
-Function()? dateSelectOnTapType({
-  required CalendarPropertiesState readCalendarPropertiesStateProviderValue,
-  required DatePickerSelectionMode dateSelectionMode,
-  required DateTime pageViewElementDate,
-}) {
-  if (dateSelectionMode == DatePickerSelectionMode.disable) {
+  if (calendarProperties.dateSelectionMode == DatePickerSelectionMode.disable) {
     return null;
   }
-  if (dateSelectionMode == DatePickerSelectionMode.single) {
+  if (calendarProperties.dateSelectionMode ==
+      DatePickerSelectionMode.singleOrMultiple) {
     return () {
-      List<DateTime> selectedDates =
-          readCalendarPropertiesStateProviderValue.selectedDates;
-
-      if (selectedDates.contains(pageViewElementDate)) {
-        readCalendarPropertiesStateProviderValue
-            .updateSelectedDates(selectedDates: []);
-      } else {
-        readCalendarPropertiesStateProviderValue
-            .updateSelectedDates(selectedDates: [pageViewElementDate]);
-      }
+      calendarProperties.onSelectedDates?.call([pageViewElementDate]);
     };
   } else {
     return null;

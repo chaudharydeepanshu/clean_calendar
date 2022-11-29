@@ -4,12 +4,17 @@ export 'src/models/months_model.dart' show Months;
 
 export 'src/models/weekdays_model.dart' show Weekdays;
 
-export 'src/state/properties_state.dart'
+export 'src/models/weekdays_properties.dart' show WeekdaysProperties;
+
+export 'src/models/weekdays_decoration.dart' show WeekdaysDecoration;
+
+export 'src/models/calendar_properties.dart'
     show
-        DatesProperties,
-        DatesDecoration,
-        DatePickerSelectionMode,
-        DatePickerCalendarView,
         WeekDay,
-        WeekdaysDecoration,
-        WeekdaysProperties;
+        DatePickerCalendarView,
+        DatePickerSelectionMode,
+        CalendarProperties;
+
+export 'src/models/dates_decoration.dart' show DatesDecoration;
+
+export 'src/models/dates_properties.dart' show DatesProperties;

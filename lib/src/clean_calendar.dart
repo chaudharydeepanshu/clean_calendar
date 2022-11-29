@@ -3,7 +3,6 @@ library clean_calendar;
 import 'package:clean_calendar/clean_calendar.dart';
 import 'package:clean_calendar/src/ui/calendar_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CleanCalendar extends StatelessWidget {
   /// - CleanCalendar, Shows a simple Calendar.
@@ -110,8 +109,8 @@ class CleanCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
-      child: Calendar(
+    return Calendar(
+      calendarProperties: CalendarProperties(
           datePickerCalendarView: datePickerCalendarView,
           weekdaysProperties: weekdaysProperties,
           streakDatesProperties: streakDatesProperties,
@@ -119,13 +118,11 @@ class CleanCalendar extends StatelessWidget {
           generalDatesProperties: generalDatesProperties,
           leadingTrailingDatesProperties: leadingTrailingDatesProperties,
           selectedDatesProperties: selectedDatesProperties,
-          // selectedRangeBetweenDatesProperties:  selectedRangeBetweenDatesProperties,
           enableDenseViewForDates: enableDenseViewForDates,
           enableDenseSplashForDates: enableDenseSplashForDates,
           startDateOfCalendar: startDateOfCalendar,
           endDateOfCalendar: endDateOfCalendar,
           dateSelectionMode: dateSelectionMode,
-          // disablePastDates:  disablePastDates,
           initialViewMonthDateTime: initialViewMonthDateTime,
           currentDateOfCalendar: currentDateOfCalendar,
           datesForStreaks: datesForStreaks,

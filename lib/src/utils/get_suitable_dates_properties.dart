@@ -1,31 +1,23 @@
-import 'package:clean_calendar/src/state/properties_state.dart';
+import 'package:clean_calendar/src/models/calendar_properties.dart';
+import 'package:clean_calendar/src/models/dates_properties.dart';
 
 DatesProperties getSuitableDatesProperties({
+  required CalendarProperties calendarProperties,
   required DateTime pageViewElementDate,
-  required DateTime pageViewMonthDate,
-  required DateTime currentDateOfCalendar,
-  required List<DateTime> datesForStreaks,
-  required List<DateTime> selectedDates,
-  required DatesProperties leadingTrailingDatesProperties,
-  required DatesProperties streakDatesProperties,
-  required DatesProperties generalDatesProperties,
-  required DatesProperties currentDateProperties,
-  required DatesProperties selectedDatesProperties,
+  required DateTime pageViewDate,
 }) {
-  if (selectedDates.contains(pageViewElementDate)) {
-    return selectedDatesProperties;
+  if (calendarProperties.selectedDates.contains(pageViewElementDate)) {
+    return calendarProperties.selectedDatesProperties;
   }
-  if (pageViewElementDate.month != pageViewMonthDate.month) {
-    return leadingTrailingDatesProperties;
+  if (pageViewElementDate.month != pageViewDate.month) {
+    return calendarProperties.leadingTrailingDatesProperties;
   }
-  if (pageViewElementDate ==
-      DateTime.utc(currentDateOfCalendar.year, currentDateOfCalendar.month,
-          currentDateOfCalendar.day)) {
-    return currentDateProperties;
+  if (pageViewElementDate == calendarProperties.currentDateOfCalendar) {
+    return calendarProperties.currentDateProperties;
   }
-  if (datesForStreaks.contains(pageViewElementDate)) {
-    return streakDatesProperties;
+  if (calendarProperties.datesForStreaks.contains(pageViewElementDate)) {
+    return calendarProperties.streakDatesProperties;
   } else {
-    return generalDatesProperties;
+    return calendarProperties.generalDatesProperties;
   }
 }
