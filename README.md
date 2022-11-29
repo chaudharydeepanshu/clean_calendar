@@ -124,11 +124,15 @@ Also, Available for other types of dates : -
 
 ## Date Selection
 
-- Single date selection with customization
+- Multiple date selection with customization
 
-| <pre>CleanCalendar(<br />  enableDenseViewForDates: true,<br />  enableDenseSplashForDates: true,<br />  datesForStreaks: [<br />    DateTime(2022, 8, 5),<br />    DateTime(2022, 8, 6),<br />    ...<br />  ],<br />  <br />  // Selecting single date selection mode. Defaults to disable selection.<br />  dateSelectionMode: DatePickerSelectionMode.single,<br /><br />  // Customizing selected date.<br />  selectedDatesProperties: DatesProperties(<br />    datesDecoration: DatesDecoration(<br />      datesBorderRadius: 1000,<br />    ),<br />  ),<br />)</pre> |
+| <pre>CleanCalendar(<br />  enableDenseViewForDates: true,<br />  enableDenseSplashForDates: true,<br />  datesForStreaks: [<br />    DateTime(2022, 8, 5),<br />    DateTime(2022, 8, 6),<br />    ...<br />  ],<br /><br />  // Enabling selecting single or multiple dates. Defaults to disable selection.<br />  dateSelectionMode: DatePickerSelectionMode.singleOrMultiple,<br /><br />  // Listening to selected dates.<br />  onSelectedDates: (List&lt;DateTime&gt; value) {<br />    // If selected date picked again then removing it from selected dates.<br />    if (selectedDates.contains(value.first)) {<br />      selectedDates.remove(value.first);<br />    } else {<br />      // If unselected date picked then adding it to selected dates.<br />      selectedDates.add(value.first);<br />    }<br />    // setState to update the calendar with new selected dates.<br />    setState(() {});<br />  },<br /><br />  // Providing calendar the dates to select in ui.<br />  selectedDates: selectedDates,<br /><br />  // Customizing selected date.<br />  selectedDatesProperties: DatesProperties(<br />    datesDecoration: DatesDecoration(<br />      datesBorderRadius: 1000,<br />    ),<br />  ),<br />)</pre> |
 |:---|
 | <img src="https://user-images.githubusercontent.com/85361211/185594856-e507bc09-7af0-40b7-9935-705f30f2e6e3.gif" width="400" /> |
+
+- Multiple date selection
+
+  For single date selection modify the above example code `onSelectedDates` logic to store only single latest date as selected.
 
 - Multiple, range, multiple ranges (coming soon)
 
@@ -278,7 +282,7 @@ Support is surely planned for these:
 
 - More calendar view types. (🐢)
 
-- Date selection options such as multiple, range, and multiple range selections. (🐢)
+- Date selection options such as range, and multiple range selections. (🐢)
 
 - A calendar option for choosing a view by year, month, or day. (🐢)
 
