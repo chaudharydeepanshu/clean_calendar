@@ -22,6 +22,16 @@ class CalendarControlSection extends StatelessWidget {
         calendarProperties.monthsSymbol.toMap().forEach((key, value) {
           monthsSymbolsList.add(value);
         });
+
+        bool shouldShowResetButton = calendarProperties
+                    .datePickerCalendarView ==
+                DatePickerCalendarView.weekView
+            ? DateUtils.dateOnly(calendarProperties.initialViewMonthDateTime) !=
+                DateUtils.dateOnly(pageViewDateTime)
+            : DateUtils.dateOnly(calendarProperties.initialViewMonthDateTime
+                    .copyWith(day: 1)) !=
+                DateUtils.dateOnly(pageViewDateTime.copyWith(day: 1));
+
         return Container(
           margin: const EdgeInsets.only(left: 24, right: 8),
           child: Row(
@@ -37,11 +47,7 @@ class CalendarControlSection extends StatelessWidget {
               Flexible(
                 child: Row(
                   children: [
-                    DateUtils.dateOnly(calendarProperties
-                                .initialViewMonthDateTime
-                                .copyWith(day: 1)) !=
-                            DateUtils.dateOnly(
-                                pageViewDateTime.copyWith(day: 1))
+                    shouldShowResetButton
                         ? Expanded(
                             child: IconButton(
                               onPressed: () {

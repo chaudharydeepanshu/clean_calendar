@@ -390,8 +390,9 @@ class CalendarProperties {
         /// Setting initialViewMonthDateTime value.
         initialViewMonthDateTime = initialViewMonthDateTime != null
             ? DateTime.utc(initialViewMonthDateTime.year,
-                initialViewMonthDateTime.month, 1)
-            : DateTime.utc(DateTime.now().year, DateTime.now().month, 1),
+                initialViewMonthDateTime.month, initialViewMonthDateTime.day)
+            : DateTime.utc(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day),
 
         /// Setting currentDateOfCalendar value.
         currentDateOfCalendar = currentDateOfCalendar != null

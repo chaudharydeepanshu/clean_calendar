@@ -1,9 +1,15 @@
+## 1.0.1
+
+* Fixed loading wrong initial week for weekly calendar view due to the changes made in v1.0.0.
+* Fixed calendar reset button to not becoming visible when changing from initial week.
+
 ## 1.0.0
 
 * **BREAKING:** `DatePickerSelectionMode.single` is removed as it was buggy and didn't provide the developer better control on date picking.
 
   For easy migration to `DatePickerSelectionMode.singleOrMultiple` see documentation [date-selection](https://web.archive.org/web/20221129220956/https://github.com/chaudharydeepanshu/clean_calendar/blob/master/README.md#date-selection) section or updated example.
 
+* Fixed issue of delayed update in month name when swiping calendar.
 * Fixed issue with unable to disable picking on some dates.
 * Fixed logic issue in calendar reset button which sometime not resets the month-year header correctly.
 * No longer depends on flutter_riverpod as its recent updates were causing many issues eventually delaying updates to this package.

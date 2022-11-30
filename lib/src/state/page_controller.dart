@@ -30,8 +30,7 @@ class PageControllerState extends ChangeNotifier {
   late List<int> listOfIntegersFromStartToAndEndDateWithInitialAs0;
 
   init() {
-    _pageViewDateTime =
-        calendarProperties.initialViewMonthDateTime.copyWith(day: 1);
+    _pageViewDateTime = calendarProperties.initialViewMonthDateTime;
 
     int monthsCountBeforeInitialDateToStartDate =
         DateUtils.monthDelta(startDateOfCalendar, _pageViewDateTime);
@@ -78,8 +77,9 @@ class PageControllerState extends ChangeNotifier {
   void _next(int index) {
     if (datePickerCalendarView == DatePickerCalendarView.monthView) {
       _pageViewDateTime = initialViewMonthDateTime.copyWith(
-          month: (initialViewMonthDateTime.month + (index - initialIndex))
-              .toInt());
+          month:
+              (initialViewMonthDateTime.month + (index - initialIndex)).toInt(),
+          day: 1);
 
       calendarProperties.onCalendarViewDate?.call(_pageViewDateTime);
 
@@ -102,8 +102,9 @@ class PageControllerState extends ChangeNotifier {
   void _prev(int index) {
     if (datePickerCalendarView == DatePickerCalendarView.monthView) {
       _pageViewDateTime = initialViewMonthDateTime.copyWith(
-          month: (initialViewMonthDateTime.month - (initialIndex - index))
-              .toInt());
+          month:
+              (initialViewMonthDateTime.month - (initialIndex - index)).toInt(),
+          day: 1);
 
       calendarProperties.onCalendarViewDate?.call(_pageViewDateTime);
 
