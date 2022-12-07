@@ -1,3 +1,7 @@
+## 1.0.2
+
+* Fixed 'copyWith' isn't defined for 'DateTime' error when using flutter stable channel. [#5](https://github.com/chaudharydeepanshu/clean_calendar/issues/5)
+
 ## 1.0.1
 
 * Fixed loading wrong initial week for weekly calendar view due to the changes made in v1.0.0.
