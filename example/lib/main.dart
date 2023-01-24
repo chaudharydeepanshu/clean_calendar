@@ -40,15 +40,6 @@ class _HomeState extends State<Home> {
         child: ListView(
           children: [
             CleanCalendar(
-              headerProperties: HeaderProperties(
-                monthYearDecoration: MonthYearDecoration(
-                  monthYearTextColor: Colors.red,
-                ),
-                navigatorDecoration: NavigatorDecoration(
-                  navigateLeftButtonIcon: Icon(Icons.roundabout_left),
-                  navigateRightButtonIcon: Icon(Icons.roundabout_right),
-                ),
-              ),
               enableDenseViewForDates: true,
               enableDenseSplashForDates: true,
               datesForStreaks: [
@@ -120,6 +111,26 @@ class _HomeState extends State<Home> {
               },
             ),
             CleanCalendar(
+              headerProperties: HeaderProperties(
+                monthYearDecoration: MonthYearDecoration(
+                  monthYearTextColor: Colors.amber,
+                  monthYearTextStyle: Theme.of(context).textTheme.labelMedium,
+                ),
+                navigatorDecoration: NavigatorDecoration(
+                  navigatorResetButtonIcon: const Icon(
+                    Icons.restart_alt,
+                    color: Colors.amber,
+                  ),
+                  navigateLeftButtonIcon: const Icon(
+                    Icons.arrow_circle_left,
+                    color: Colors.amber,
+                  ),
+                  navigateRightButtonIcon: const Icon(
+                    Icons.arrow_circle_right,
+                    color: Colors.amber,
+                  ),
+                ),
+              ),
               datePickerCalendarView: DatePickerCalendarView.weekView,
               enableDenseViewForDates: true,
               enableDenseSplashForDates: true,
