@@ -1,6 +1,6 @@
 ## 1.1.0
 
-* Added decoration properties for header section. [#1](https://github.com/chaudharydeepanshu/clean_calendar/issues/1)
+* Added ```headerProperties``` for changing properties of header section. [#1](https://github.com/chaudharydeepanshu/clean_calendar/issues/1)
   
   This includes customization of month and year color and text style, and customization for navigator buttons icon.
 
