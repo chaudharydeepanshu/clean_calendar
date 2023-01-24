@@ -1,8 +1,8 @@
 import 'package:clean_calendar/src/models/calendar_properties.dart';
 import 'package:clean_calendar/src/state/page_controller.dart';
-import 'package:clean_calendar/src/ui/calendar_control_section.dart';
+import 'package:clean_calendar/src/ui/calendar_navigator_header_section.dart';
 import 'package:clean_calendar/src/ui/calendar_dates_section/calendar_dates_section.dart';
-import 'package:clean_calendar/src/ui/calendar_header_section.dart';
+import 'package:clean_calendar/src/ui/calendar_weekday_header_section.dart';
 import 'package:flutter/material.dart';
 
 class Calendar extends StatelessWidget {
@@ -59,10 +59,11 @@ class _CalendarViewState extends State<CalendarView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CalendarControlSection(
+        CalendarNavigatorHeaderSection(
             calendarProperties: widget.calendarProperties,
             pageControllerState: pageControllerState),
-        CalendarHeaderSection(calendarProperties: widget.calendarProperties),
+        CalendarWeekdayHeaderSection(
+            calendarProperties: widget.calendarProperties),
         CalendarDatesSection(
             calendarProperties: widget.calendarProperties,
             pageControllerState: pageControllerState),

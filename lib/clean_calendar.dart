@@ -18,3 +18,9 @@ export 'src/models/calendar_properties.dart'
 export 'src/models/dates_decoration.dart' show DatesDecoration;
 
 export 'src/models/dates_properties.dart' show DatesProperties;
+
+export 'src/models/header_properties.dart' show HeaderProperties;
+
+export 'src/models/month_year_decoration.dart' show MonthYearDecoration;
+
+export 'src/models/navigator_decoration.dart' show NavigatorDecoration;

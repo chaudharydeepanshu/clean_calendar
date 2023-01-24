@@ -13,7 +13,21 @@ DatesProperties getSuitableDatesProperties({
     return calendarProperties.leadingTrailingDatesProperties;
   }
   if (pageViewElementDate == calendarProperties.currentDateOfCalendar) {
-    return calendarProperties.currentDateProperties;
+    if (calendarProperties.datesForStreaks.contains(pageViewElementDate)) {
+      return calendarProperties.streakDatesProperties.copyWith(
+          datesDecoration: calendarProperties
+              .streakDatesProperties.datesDecoration
+              ?.copyWith(
+        datesTextColor: calendarProperties
+            .currentDateProperties.datesDecoration?.datesTextColor,
+        datesBorderColor: calendarProperties
+            .currentDateProperties.datesDecoration?.datesBorderColor,
+        datesTextStyle: calendarProperties
+            .currentDateProperties.datesDecoration?.datesTextStyle,
+      ));
+    } else {
+      return calendarProperties.currentDateProperties;
+    }
   }
   if (calendarProperties.datesForStreaks.contains(pageViewElementDate)) {
     return calendarProperties.streakDatesProperties;

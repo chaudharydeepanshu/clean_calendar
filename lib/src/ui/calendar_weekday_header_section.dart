@@ -3,8 +3,9 @@ import 'package:clean_calendar/src/models/weekdays_decoration.dart';
 import 'package:clean_calendar/src/utils/get_weekdays_symbols_and_properties_based_on_starting_weekday.dart';
 import 'package:flutter/material.dart';
 
-class CalendarHeaderSection extends StatelessWidget {
-  const CalendarHeaderSection({Key? key, required this.calendarProperties})
+class CalendarWeekdayHeaderSection extends StatelessWidget {
+  const CalendarWeekdayHeaderSection(
+      {Key? key, required this.calendarProperties})
       : super(key: key);
 
   final CalendarProperties calendarProperties;

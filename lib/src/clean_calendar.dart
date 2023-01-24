@@ -9,6 +9,7 @@ class CleanCalendar extends StatelessWidget {
   const CleanCalendar({
     Key? key,
     this.datePickerCalendarView,
+    this.headerProperties,
     this.weekdaysProperties,
     this.streakDatesProperties,
     this.currentDateProperties,
@@ -35,6 +36,9 @@ class CleanCalendar extends StatelessWidget {
 
   /// - datePickerCalendarView, It takes calendar view type.
   final DatePickerCalendarView? datePickerCalendarView;
+
+  /// - headerProperties, It takes customisation properties for calendar header.
+  final HeaderProperties? headerProperties;
 
   /// - weekdaysProperties, It takes customisation properties for weekdays.
   final WeekdaysProperties? weekdaysProperties;
@@ -113,6 +117,7 @@ class CleanCalendar extends StatelessWidget {
       calendarProperties: CalendarProperties(
           datePickerCalendarView: datePickerCalendarView,
           weekdaysProperties: weekdaysProperties,
+          headerProperties: headerProperties,
           streakDatesProperties: streakDatesProperties,
           currentDateProperties: currentDateProperties,
           generalDatesProperties: generalDatesProperties,

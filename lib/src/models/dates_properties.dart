@@ -16,6 +16,20 @@ class DatesProperties {
     this.hide,
   });
 
+  /// Creates copy of DatesProperties object with the given
+  /// values replaced with new values.
+  DatesProperties copyWith({
+    DatesDecoration? datesDecoration,
+    bool? disable,
+    bool? hide,
+  }) {
+    return DatesProperties(
+      datesDecoration: datesDecoration ?? this.datesDecoration,
+      disable: disable ?? this.disable,
+      hide: hide ?? this.hide,
+    );
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

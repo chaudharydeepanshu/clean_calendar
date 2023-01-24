@@ -1,6 +1,9 @@
 import 'package:clean_calendar/src/models/dates_decoration.dart';
 import 'package:clean_calendar/src/models/dates_properties.dart';
+import 'package:clean_calendar/src/models/header_properties.dart';
+import 'package:clean_calendar/src/models/month_year_decoration.dart';
 import 'package:clean_calendar/src/models/months_model.dart';
+import 'package:clean_calendar/src/models/navigator_decoration.dart';
 import 'package:clean_calendar/src/models/weekdays_decoration.dart';
 import 'package:clean_calendar/src/models/weekdays_model.dart';
 import 'package:clean_calendar/src/models/weekdays_properties.dart';
@@ -66,6 +69,9 @@ enum DatePickerSelectionMode {
 }
 
 class CalendarProperties {
+  /// Header properties.
+  final HeaderProperties headerProperties;
+
   /// Weekdays properties.
   final WeekdaysProperties weekdaysProperties;
 
@@ -139,6 +145,7 @@ class CalendarProperties {
   final BuildContext context;
 
   CalendarProperties({
+    HeaderProperties? headerProperties,
     WeekdaysProperties? weekdaysProperties,
     DatesProperties? streakDatesProperties,
     DatesProperties? currentDateProperties,
@@ -164,6 +171,37 @@ class CalendarProperties {
     Months? monthsSymbol,
     required this.context,
   })  :
+
+        /// Setting header properties.
+        headerProperties = HeaderProperties(
+          monthYearDecoration: MonthYearDecoration(
+            monthYearTextColor:
+                headerProperties?.monthYearDecoration?.monthYearTextColor ??
+                    Theme.of(context).colorScheme.onSurface,
+            monthYearTextStyle:
+                headerProperties?.monthYearDecoration?.monthYearTextStyle ??
+                    const TextStyle(),
+          ),
+          navigatorDecoration: NavigatorDecoration(
+            navigateLeftButtonIcon:
+                headerProperties?.navigatorDecoration?.navigateLeftButtonIcon ??
+                    const Icon(
+                      Icons.arrow_back_ios,
+                      size: 12,
+                    ),
+            navigateRightButtonIcon: headerProperties
+                    ?.navigatorDecoration?.navigateRightButtonIcon ??
+                const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 12,
+                ),
+            navigatorResetButtonIcon: headerProperties
+                    ?.navigatorDecoration?.navigatorResetButtonIcon ??
+                const Icon(
+                  Icons.calendar_today,
+                ),
+          ),
+        ),
 
         /// Setting weekdays properties.
         weekdaysProperties = WeekdaysProperties(
@@ -261,9 +299,11 @@ class CalendarProperties {
               datesBackgroundColor:
                   currentDateProperties?.datesDecoration?.datesBackgroundColor,
               datesTextColor:
-                  currentDateProperties?.datesDecoration?.datesTextColor,
+                  currentDateProperties?.datesDecoration?.datesTextColor ??
+                      Theme.of(context).colorScheme.primary,
               datesTextStyle:
-                  currentDateProperties?.datesDecoration?.datesTextStyle,
+                  currentDateProperties?.datesDecoration?.datesTextStyle ??
+                      const TextStyle(),
               datesBorderColor:
                   currentDateProperties?.datesDecoration?.datesBorderColor ??
                       Theme.of(context).colorScheme.primary,
@@ -288,7 +328,7 @@ class CalendarProperties {
                       const TextStyle(),
               datesBorderColor:
                   generalDatesProperties?.datesDecoration?.datesBorderColor ??
-                      Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
               datesBorderRadius:
                   generalDatesProperties?.datesDecoration?.datesBorderRadius ??
                       12),
@@ -310,7 +350,7 @@ class CalendarProperties {
                   const TextStyle(),
               datesBorderColor: leadingTrailingDatesProperties
                       ?.datesDecoration?.datesBorderColor ??
-                  Theme.of(context).dividerColor,
+                  Theme.of(context).disabledColor,
               datesBorderRadius: leadingTrailingDatesProperties
                       ?.datesDecoration?.datesBorderRadius ??
                   12),

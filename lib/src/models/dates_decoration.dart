@@ -24,6 +24,24 @@ class DatesDecoration {
     this.datesBorderRadius,
   });
 
+  /// Creates copy of DatesDecoration object with the given
+  /// values replaced with new values.
+  DatesDecoration copyWith({
+    Color? datesBackgroundColor,
+    Color? datesTextColor,
+    TextStyle? datesTextStyle,
+    Color? datesBorderColor,
+    double? datesBorderRadius,
+  }) {
+    return DatesDecoration(
+      datesBackgroundColor: datesBackgroundColor ?? this.datesBackgroundColor,
+      datesTextColor: datesTextColor ?? this.datesTextColor,
+      datesTextStyle: datesTextStyle ?? this.datesTextStyle,
+      datesBorderColor: datesBorderColor ?? this.datesBorderColor,
+      datesBorderRadius: datesBorderRadius ?? this.datesBorderRadius,
+    );
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

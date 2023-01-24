@@ -1,3 +1,9 @@
+## 1.1.0
+
+* Added decoration properties for header section. [#1](https://github.com/chaudharydeepanshu/clean_calendar/issues/1)
+  
+  This includes customization of month and year color and text style, and customization for navigator buttons icon.
+
 ## 1.0.2
 
 * Fixed 'copyWith' isn't defined for 'DateTime' error when using flutter stable channel. [#5](https://github.com/chaudharydeepanshu/clean_calendar/issues/5)
