@@ -116,11 +116,17 @@ Also, Available for other types of dates : -
 |:---|:---|:---|
 | <img src="https://user-images.githubusercontent.com/85361211/185591984-0165f037-8a18-4547-be63-b60bff7de382.png" width="400" /> | <img src="https://user-images.githubusercontent.com/85361211/185591992-2f5c81ab-7db7-4fbd-b85d-9b10a4ca6c01.png" width="400" /> | <img src="https://user-images.githubusercontent.com/85361211/185591997-1fc13884-9741-47c9-af4c-264c70d96e66.png" width="400" /> |
 
-- Customise weekdays looks by changing its properties
+- Customise weekdays header by changing its properties
 
 | <pre>CleanCalendar(<br />  weekdaysProperties: WeekdaysProperties(<br />    generalWeekdaysDecoration:<br />        WeekdaysDecoration(weekdayTextColor: Colors.red),<br />    sundayDecoration: WeekdaysDecoration(<br />        weekdayTextColor: Colors.green,<br />        weekdayTextStyle:<br />            Theme.of(context).textTheme.headlineMedium),<br />    saturdayDecoration: WeekdaysDecoration(<br />        weekdayTextColor: Colors.green,<br />        weekdayTextStyle:<br />            Theme.of(context).textTheme.headlineMedium),<br />  ),<br />)</pre> |
 |:---|
 | <img src="https://user-images.githubusercontent.com/85361211/192656691-d492a13d-5f45-4bbc-ba33-28f7039b2c9f.jpeg" width="400" />  |
+
+- Customise navigator header by changing its properties
+
+| <pre>CleanCalendar(<br />  headerProperties: HeaderProperties(<br />    monthYearDecoration: MonthYearDecoration(<br />      monthYearTextColor: Colors.amber,<br />      monthYearTextStyle: Theme.of(context).textTheme.labelMedium,<br />    ),<br />    navigatorDecoration: NavigatorDecoration(<br />      navigatorResetButtonIcon: const Icon(<br />        Icons.restart_alt,<br />        color: Colors.amber,<br />      ),<br />      navigateLeftButtonIcon: const Icon(<br />        Icons.arrow_circle_left,<br />        color: Colors.amber,<br />      ),<br />      navigateRightButtonIcon: const Icon(<br />        Icons.arrow_circle_right,<br />        color: Colors.amber,<br />      ),<br />    ),<br />  ),<br />)</pre> |
+|:---|
+| <img src="https://user-images.githubusercontent.com/85361211/214251692-d8cfb076-a185-4d9d-9b6b-81700023dd78.jpeg" width="400" />  |
 
 ## Date Selection
 
