@@ -15,29 +15,29 @@ and the Flutter guide for
 
 ## Word from creator
 
-**Hello👋, Yeah I know Clean calendar is still very new, but don't be put off by it because it will be well-maintained for a very, very long time. It is in the early stages of development. And additionally, you can contact me via email, discord, or any of the other channels provided on my Github profile if you have any questions or suggestions about this package.**
+**Hello👋, Clean Calendar is in the early stages of development, but rest assured, it will be well-maintained for a long time. Also, if you have any questions or suggestions, contact me via GitHub issues, email, discord, or any of the ways listed on my GitHub profile.**
 
-**Yes, without a doubt, giving a 👍 or ⭐ will encourage me to work on this package more quickly 🐰.**
+**Yes, giving the package a 👍(Pub) or ⭐(Github) will encourage me to work on it more.**
 
 ## Package description
 
-A brand-new Flutter calendar package that enables you to make a simple, lovely, and customizable calendar. It now offers a customizable month view and the choice to display unique streaks for dates. It is actively being developed to add numerous common features, like events, date selection, and many more, so this is just the beginning.
+Get ready to enhance your Flutter app with this fantastic calendar package! With its simple yet elegant design, you can create a fully customized calendar that suits your needs. It provides a customizable month view and the ability to highlight dates with streaks. It is just the beginning, and we will add more features.
 
 ## Features
 
-- Give a list of dates so that the calendar can display them as streaks.
+- Display dates as streaks
 
 <img src="https://user-images.githubusercontent.com/85361211/183488609-8569b762-dda7-4ae4-929b-73d14ab62ac8.png" width="400" />
 
-- Calendar with custom monthly view.
+- Monthly calendar
 
-| Dark mode Gif  | Light mode Gif |
+| Dark mode  | Light mode |
 | --- | --- |
 | <img src="https://user-images.githubusercontent.com/85361211/183489719-fda17b3e-c2de-4368-b293-73e453b60fcd.gif" width="400" /> | <img src="https://user-images.githubusercontent.com/85361211/183489928-14a32db4-7d41-4b38-bf3b-7b0a6e0037aa.gif" width="400" /> |
 
-- Calendar with custom weekly view.
+- Weekly calendar
 
-| Dark mode Gif  | Light mode Gif |
+| Dark mode  | Light mode |
 | --- | --- |
 | <img src="https://user-images.githubusercontent.com/85361211/186000727-3c9f773b-5483-453c-bd61-2c0b16d1a6f2.gif" width="400" /> | <img src="https://user-images.githubusercontent.com/85361211/186000735-83d1fd93-05be-48af-8b52-0a0c949a4cdc.gif" width="400" /> |
 
@@ -136,11 +136,11 @@ Also, Available for other types of dates : -
 |:---|
 | <img src="https://user-images.githubusercontent.com/85361211/185594856-e507bc09-7af0-40b7-9935-705f30f2e6e3.gif" width="400" /> |
 
-- Multiple date selection
+- Single date selection
 
   For single date selection modify the above example code `onSelectedDates` logic to store only single latest date as selected.
 
-- Multiple, range, multiple ranges (coming soon)
+- Range, multiple ranges (coming soon)
 
 ## Changing calendar view type
 
