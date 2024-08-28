@@ -9,7 +9,7 @@ class HeaderProperties {
   final NavigatorDecoration? navigatorDecoration;
 
   /// - onTap of month-year text in header.
-  final Function(DateTime?)? onMonthYearTap;
+  final Function(DateTime? tappedDate)? onMonthYearTap;
 
   HeaderProperties({
     this.monthYearDecoration,
