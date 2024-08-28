@@ -64,10 +64,11 @@ class CalendarNavigatorHeaderSection extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              GestureDetector(
-                onTap: () => calendarProperties.headerProperties.onMonthYearTap
-                    ?.call(pageViewDateTime),
-                child: Flexible(
+              Flexible(
+                child: GestureDetector(
+                  onTap: () => calendarProperties
+                      .headerProperties.onMonthYearTap
+                      ?.call(pageViewDateTime),
                   child: Text(
                     "${monthsSymbolsList[pageViewDateTime.month - 1]} ${pageViewDateTime.year}",
                     overflow: TextOverflow.ellipsis,
