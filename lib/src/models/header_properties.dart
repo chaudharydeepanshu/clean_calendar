@@ -8,15 +8,20 @@ class HeaderProperties {
   /// - navigatorDecoration, changes the decoration of navigator.
   final NavigatorDecoration? navigatorDecoration;
 
+  /// - onTap of month-year text in header.
+  final Function(DateTime?)? onMonthYearTap;
+
   HeaderProperties({
     this.monthYearDecoration,
     this.navigatorDecoration,
+    this.onMonthYearTap,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'monthYearDecoration': monthYearDecoration,
       'navigatorDecoration': navigatorDecoration,
+      'onYearTap': onMonthYearTap,
     };
   }
 
@@ -26,16 +31,19 @@ class HeaderProperties {
       other is HeaderProperties &&
           runtimeType == other.runtimeType &&
           monthYearDecoration == other.monthYearDecoration &&
-          navigatorDecoration == other.navigatorDecoration;
+          navigatorDecoration == other.navigatorDecoration &&
+          onMonthYearTap == other.onMonthYearTap;
 
   @override
   int get hashCode =>
-      monthYearDecoration.hashCode ^ navigatorDecoration.hashCode;
+      monthYearDecoration.hashCode ^
+      navigatorDecoration.hashCode ^
+      onMonthYearTap.hashCode;
 
   // Implement toString to make it easier to see information
   // when using the print statement.
   @override
   String toString() {
-    return 'HeaderProperties{monthYearDecoration: $monthYearDecoration, navigatorDecoration: $navigatorDecoration}';
+    return 'HeaderProperties{monthYearDecoration: $monthYearDecoration, navigatorDecoration: $navigatorDecoration, onYearTap: $onMonthYearTap}';
   }
 }
