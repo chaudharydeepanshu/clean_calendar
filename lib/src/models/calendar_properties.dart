@@ -174,6 +174,7 @@ class CalendarProperties {
 
         /// Setting header properties.
         headerProperties = HeaderProperties(
+          onMonthYearTap: headerProperties?.onMonthYearTap,
           monthYearDecoration: MonthYearDecoration(
             monthYearTextColor:
                 headerProperties?.monthYearDecoration?.monthYearTextColor ??
